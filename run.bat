@@ -11,8 +11,8 @@ echo   [2] vertex-corp                - http://localhost:8081
 echo.
 
 rem ------ Detect available server tool ------
-set "SITE1=%~dp0bakrelamcharki-portfolio"
-set "SITE2=%~dp0vertex-corp"
+set "SITE1=%~dp0public\bakrelamcharki-portfolio"
+set "SITE2=%~dp0public\vertex-corp"
 set "PORT1=8080"
 set "PORT2=8081"
 
