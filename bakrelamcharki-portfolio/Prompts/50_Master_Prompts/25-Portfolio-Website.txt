@@ -1,0 +1,164 @@
+# MASTER PROMPT: Portfolio Website
+
+## Project Overview
+Build a stunning personal portfolio website with project showcase, blog, skills visualization, contact form, dark/light mode, animations, and CMS integration.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion, Three.js (3D elements), GSAP (animations)
+- **Backend:** Next.js API routes + MDX (blog)
+- **Database:** PostgreSQL (contact form), OR direct MDX files
+- **CMS:** MDX + Contentlayer or Sanity/Strapi (headless CMS)
+- **Auth:** None (public site) or NextAuth (admin)
+- **Deployment:** Vercel + Cloudflare
+- **Analytics:** Plausible or Umami (privacy-focused)
+- **Monitoring:** Sentry
+
+## Detailed Requirements
+
+### Design & UI
+- Clean, modern, minimalist design
+- Dark/light mode with smooth transition
+- Responsive: mobile-first design
+- Smooth scroll navigation
+- Intersection Observer animations (fade-in, slide-up on scroll)
+- Parallax scrolling sections
+- Custom cursor (for desktop)
+- Loading screen with animation
+- Page transitions (Framer Motion layout animations)
+- Glassmorphism cards and UI elements
+- Gradient text and accent colors
+- Custom 404 page
+
+### Hero Section
+- Full-screen hero with animated background (Three.js particle system, gradient mesh, or wave animation)
+- Name, title, short bio
+- CTA buttons: View Work, Contact Me, Download Resume
+- Animated text (typewriter effect for job titles)
+- Scroll-down indicator animation
+- Profile photo/avatar with subtle animation
+
+### About Section
+- Professional summary/bio
+- Skills visualization: interactive skill bars, radar chart, or skill cloud
+- Work experience timeline (vertical timeline with animations)
+- Education background
+- Languages (human languages with proficiency)
+- Download resume button (PDF)
+- Personal interests/hobbies section
+
+### Projects Showcase
+- Project cards with hover effects (3D tilt, scale, glow)
+- Project filter by category (web, mobile, AI, design, etc.)
+- Project detail page: description, tech stack, screenshots, live link, GitHub link
+- Project image gallery/lightbox
+- Video demo embedding (YouTube/Vimeo)
+- Featured projects section (larger, more prominent)
+- Project tags with color coding
+- Animated project counter (number of projects built)
+
+### Skills Section
+- Interactive skills grid organized by category (Frontend, Backend, DevOps, Design, AI/ML, Tools)
+- Skill proficiency bars with animation on scroll
+- Tech icons (Devicon/Simple Icons)
+- Years of experience per skill
+- Certification badges
+- Learning currently (what I'm learning now)
+
+### Experience Timeline
+- Vertical timeline with alternating left/right cards (desktop)
+- Single column timeline (mobile)
+- Company logo, role, dates, description
+- Hover/click to expand details
+- Key achievements bullet points
+- Tech stack badges per role
+
+### Blog Section
+- Blog post cards with cover image, title, excerpt, date, read time
+- Blog post categories/tags
+- Blog post page: MDX rendered with syntax highlighting
+- Table of contents (sticky sidebar)
+- Reading progress bar
+- Estimated read time
+- Related posts at bottom
+- RSS feed generation
+- Blog search
+- Newsletter subscription (optional: Mailchimp/ConvertKit integration)
+
+### Contact Section
+- Contact form: name, email, subject, message
+- Form validation (client + server side)
+- reCAPTCHA/hCaptcha spam protection
+- Send via: Resend, SendGrid, Nodemailer, or Email API
+- Success/error toast notifications
+- Quick contact links: email, phone, social profiles
+- Schedule a call (Calendly/Cal.com integration)
+- Map integration (optional: show location)
+
+### Testimonials
+- Testimonial carousel/slider
+- Testimonial cards with photo, name, role, company, quote
+- Auto-play with pause on hover
+- Animated star ratings
+
+### Social & Footer
+- Social media links: GitHub, LinkedIn, Twitter/X, Dribbble, YouTube, Dev.to, Medium
+- Footer with: copyright, quick links, social icons, back to top
+- Availability status (Open for work / Available for freelance)
+
+### Performance
+- Lighthouse score 95+ (all categories)
+- Image optimization (next/image, WebP, AVIF)
+- Font optimization (next/font, variable fonts)
+- Code splitting and lazy loading
+- Static page generation (SSG/ISR for blog)
+- Bundle size monitoring
+- CDN caching
+
+### SEO
+- Meta tags (title, description, OG image, Twitter card)
+- Structured data (JSON-LD for Person, Project, BlogPosting)
+- Sitemap generation (dynamic)
+- robots.txt
+- Canonical URLs
+- Open Graph images per page
+- Blog schema markup
+- Breadcrumb structured data
+
+### Analytics
+- Privacy-friendly analytics (Plausible/Umami)
+- Custom events (project clicks, form submissions, blog reads)
+- Dashboard for page views, top pages, referrers
+- Heatmap (optional: Clarity)
+
+### Admin Dashboard (Optional)
+- Blog post editor (markdown with preview)
+- Project management (add/edit/delete)
+- Message viewer for contact form submissions
+- Profile update
+- Site analytics overview
+- Theme customization
+
+### Accessibility
+- Semantic HTML (header, nav, main, section, article, footer)
+- ARIA labels and landmarks
+- Keyboard navigation
+- Focus management
+- Skip to content link
+- Alt text for all images
+- Color contrast compliance (WCAG 2.1 AA)
+- Reduced motion support
+- Screen reader friendly
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1) - Next.js setup, Tailwind, dark/light mode, layout
+Phase 2: Sections (Week 2-3) - Hero, About, Skills, Experience, Projects
+Phase 3: Blog (Week 4) - MDX setup, blog list, single post, syntax highlighting
+Phase 4: Contact & Social (Week 5) - Contact form, testimonials, footer, social links
+Phase 5: Animations (Week 5-6) - Framer Motion, Three.js, scroll animations, page transitions
+Phase 6: Performance & SEO (Week 6) - Lighthouse optimization, meta tags, structured data, sitemap
+Phase 7: Admin (Week 7) - Admin dashboard, blog editor, project management
+Phase 8: Polish (Week 7-8) - Accessibility audit, analytics, testing, deployment
+
+## Final Instructions
+Build a stunning personal portfolio website with modern design, smooth animations, dark/light mode, project showcase, blog with MDX, skills visualization, testimonials, contact form, and admin dashboard. The site must score 95+ Lighthouse. Use Framer Motion for scroll animations, page transitions, and interactive elements. Include Three.js for hero background animation. Blog must support MDX with syntax highlighting. Contact form must be fully functional with spam protection. Implement structured data for SEO. Design a unique, memorable, and professional portfolio that stands out. Deploy on Vercel with custom domain.

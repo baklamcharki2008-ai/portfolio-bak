@@ -1,0 +1,145 @@
+# MASTER PROMPT: Notion Clone
+
+## Project Overview
+Build a complete all-in-one workspace platform with block-based editor, databases, wikis, project management, real-time collaboration, and API integrations.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, TipTap/ProseMirror (rich text), Slate.js (custom block editor), Framer Motion, Zustand, React Query, Yjs (CRDT)
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL (primary), Redis (cache + real-time), Elasticsearch (search)
+- **Real-time:** WebSocket + Yjs CRDT (operational transform)
+- **Auth:** JWT + OAuth (Google, Microsoft, Apple)
+- **Storage:** S3-compatible for file uploads, images
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+- **Monitoring:** Sentry, DataDog, Grafana
+
+## Detailed Requirements
+
+### Authentication
+- Email/password + OAuth (Google, Microsoft, Apple, Slack)
+- SSO for enterprise (SAML, OIDC)
+- Two-factor authentication (TOTP)
+- Session management
+- Guest access (share pages with non-users)
+
+### Block-Based Editor
+- Block types: Text (heading 1-3, paragraph, callout, quote, bulleted list, numbered list, to-do, toggle), Media (image, video, audio, file, code block, equation, divider), Embed (bookmark, embed, PDF, figma, google maps, tweet, github gist), Database (table, board, gallery, list, timeline, calendar), Advanced (synced block, table of contents, breadcrumb, math block, data view)
+- Drag handle to reorder blocks
+- Block transformation (/command menu)
+- @mention pages, people, dates, reminders
+- Inline formatting: bold, italic, underline, strikethrough, code, color, highlight, link
+- Block commenting and discussions
+- Block locking (prevent editing)
+- Block colors and backgrounds
+- Block copy/paste (including inter-workspace)
+- Slash command menu with search
+- Keyboard shortcuts (Tab to indent, Shift+Tab to dedent, Enter for new line)
+- Auto-formatting (markdown shortcuts: #, *, -, [], `)
+- Latex/math block with KaTeX rendering
+- Mermaid diagrams and flowcharts
+
+### Databases
+- Database types: Table, Board (Kanban), Gallery, List, Timeline, Calendar
+- Custom properties: Text, Number, Select, Multi-select, Date, Person, File, Checkbox, URL, Email, Phone, Formula, Relation, Rollup, Created time, Created by, Last edited time, Last edited by
+- Database views (filter, sort, group, hide properties)
+- Linked database (same data, different views)
+- Database templates
+- Calculated fields (formula with functions)
+- Relation between databases (one-to-many, many-to-many)
+- Rollup aggregation (sum, average, count, etc.)
+- Database import (CSV, Airtable, Trello, Asana, Monday)
+- Gallery view with cover images
+
+### Pages & Hierarchy
+- Nested pages (pages within pages)
+- Page properties (icon, cover, status, assignee)
+- Full-width page option
+- Page lock (read-only mode)
+- Page history (version history up to 30 days)
+- Page duplicate, move to trash, restore
+- Page link (share internall copy link)
+- Page analytics (views, visitors, last edited)
+
+### Wikis & Documentation
+- Sidebar hierarchy with drag-drop reorder
+- Wiki-style linked pages
+- Table of contents auto-generation
+- Backlinks (show pages linking to current)
+- Page mentions graph
+- Quick find (CMD+P / CTRL+P)
+
+### Real-Time Collaboration
+- Multiple cursor presence (show collaborator cursors)
+- Real-time document sync via CRDT (Yjs)
+- Conflict resolution (OT/CRDT)
+- Show active collaborators in page
+- Comment on selection (highlight text + comment)
+- @mention collaborator in comments
+
+### Templates
+- Template library (meeting notes, project tracker, roadmap, OKRs, docs)
+- Custom template creation
+- Template auto-apply
+- Template sharing across workspace
+
+### Search
+- Quick find (CMD+P) for pages, databases, people
+- Full-text content search across all pages
+- Search filters (page, database, person, date range)
+- Search within specific folder/workspace
+- Recent searches
+
+### Notifications
+- In-app notification center
+- Email notifications (mentions, comments, reminders)
+- Push notifications for mobile
+- Notification preferences per workspace
+- Daily summary/reminders
+
+### Integrations & API
+- RESTful API for all CRUD operations
+- Webhook triggers (page created, updated, deleted)
+- Slack integration (notifications, create page from message)
+- GitHub integration (link PR/issues to pages)
+- Google Calendar integration (sync events)
+- Zapier/Make.com compatible triggers
+- Embed block for 20+ services
+- OAuth for third-party app connection
+
+### Admin Dashboard
+- Workspace settings (name, domain, branding)
+- User management (invite, remove, roles)
+- Member roles: admin, member, guest, read-only
+- Billing management (subscription plan)
+- Usage analytics (storage, members, API calls)
+- Security settings (SSO, 2FA, session policy)
+- Export workspace (HTML, Markdown, CSV, PDF)
+- Audit log (all workspace events)
+
+### Performance
+- Lazy loading page content (load blocks on scroll)
+- Optimistic updates for block edits
+- Debounced auto-save (with manual save fallback)
+- Virtual scrolling for long pages
+- Image lazy loading with Next.js Image
+- Block-level caching
+- Yjs sync optimization (awareness + document sync)
+
+### Testing
+- Unit: Vitest (editor, database logic)
+- Integration: SuperTest (API)
+- E2E: Playwright (editor interactions)
+- Visual: Percy
+- Sync: CRDT conflict simulation
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, workspace, basic page CRUD
+Phase 2: Block Editor (Week 3-4) - TipTap/Slate with 30+ block types
+Phase 3: Databases (Week 5-6) - Table, Board, Gallery, relations, formulas
+Phase 4: Real-Time (Week 7-8) - Yjs CRDT, cursors, collaboration, comments
+Phase 5: Search & Integrations (Week 9-10) - Quick find, full-text search, API, webhooks
+Phase 6: Admin & Polish (Week 11-12) - Admin dashboard, performance, security, templates
+
+## Final Instructions
+Build a complete Notion clone with block-based editor, databases, real-time collaboration, and workspace management. The editor must support 30+ block types with drag-and-drop reordering. Databases must support 15+ property types with relations, rollups, and formulas. Real-time sync must use Yjs CRDT with low latency. Implement quick find (CMD+P) for instant page search. Support templates, backlinks, and page analytics. Design a clean, minimal UI matching Notion's design language. Include API and webhooks for extensibility.

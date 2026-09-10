@@ -1,0 +1,137 @@
+# MASTER PROMPT: Booking Website
+
+## Project Overview
+Build a complete travel booking platform with hotel/room search, booking engine, payment processing, user accounts, property management, reviews, and multi-currency support.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion, Zustand, React Query, react-date-range
+- **Backend:** Next.js API routes + Python (ML pricing)
+- **Database:** PostgreSQL + Redis + Elasticsearch
+- **Auth:** NextAuth.js v5 (Google, Apple, Facebook)
+- **Payments:** Stripe + PayPal
+- **Maps:** Mapbox / Google Maps
+- **Email:** Resend
+- **Infrastructure:** Docker, Vercel, Railway
+
+## Detailed Requirements
+
+### Search & Discovery
+- Search bar: destination, check-in, check-out, guests
+- Date picker with rate calendar (show prices per night)
+- Guest count (adults, children, infants, pets)
+- Destination autocomplete (cities, landmarks, properties)
+- Popular destinations grid
+- Featured properties carousel
+- Recently viewed properties
+- Wishlist properties on homepage
+
+### Property Search Results
+- Map view + List view split
+- List view: property card with image, title, location, rating, price, amenities
+- Map view: markers with price, cluster on zoom
+- Filter sidebar: price range, property type, ratings, amenities, free cancellation, instant book
+- Sort by: recommended, price (low-high), price (high-low), rating, distance
+- Pagination with "Show more" button
+- Quick view (property summary on hover)
+
+### Property Detail Page
+- Image gallery: full-screen, grid, slider with thumbnails
+- Property highlights: amenities, house rules, location map, parking, Wi-Fi, pool, gym
+- Room types with pricing per night
+- Booking widget: date selection, guest count, total price, fees, taxes
+- Price breakdown: nightly rate × nights + cleaning fee + service fee + taxes
+- Cancellation policy display
+- Host info: name, photo, response time, superhost badge
+- Guest reviews: filter by language, date, rating
+- Review score breakdown (cleanliness, accuracy, communication, location, check-in, value)
+- Property location map
+- Nearby attractions
+- Save to wishlist
+- Share property
+
+### Booking Engine
+- Date range picker with minimum stay enforcement
+- Guest selector with max capacity
+- Dynamic pricing (price changes based on season, length of stay)
+- Instant Book toggle
+- Booking summary: property, dates, guests, price breakdown, cancellation policy
+- Guest info: name, email, phone, special requests
+- Payment method selection
+- Coupon/promo code entry
+- Booking confirmation with reference number
+- Email confirmation
+- Calendar sync (prevent double booking)
+
+### User Account
+- Profile management
+- Booking history (upcoming, past, cancelled)
+- Wishlist/saved properties
+- Payment methods saved
+- Reviews written
+- Communication with hosts
+- Travel credits/gift cards
+
+### Property Management (Host Dashboard)
+- Property registration: location, amenities, photos, pricing, availability, house rules
+- Calendar management: block dates, set pricing per date, minimum stay
+- Booking requests: accept, decline, instant book settings
+- Reservation management: upcoming, current, past guests
+- Review management: respond to reviews
+- Payout settings: bank account, payout schedule
+- Performance dashboard: earnings, occupancy rate, booking trends, guest satisfaction
+- Multi-property management
+
+### Admin Dashboard
+- User management (guests and hosts)
+- Property moderation (approve/reject listings)
+- Booking monitoring
+- Dispute resolution
+- Payout management
+- Platform analytics: bookings, revenue, growth, top destinations
+- Content management (pages, policies)
+- Commission/fee settings
+
+### Reviews & Ratings
+- Post-stay review (guest reviews host, host reviews guest)
+- Review requirements: written review + ratings (cleanliness, accuracy, communication, location, check-in, value)
+- Photo/video upload in reviews
+- Host response to reviews
+- Verified booking badge
+- Review moderation (report inappropriate content)
+- Average rating calculation
+
+### Payments
+- Accept payment at booking (full or deposit)
+- Host payout after guest check-in
+- Payment methods: credit card, debit card, PayPal, Apple Pay, Google Pay
+- Currency conversion (multi-currency)
+- Service fee calculation (guest + host)
+- Refund processing
+- Payout reports for hosts
+
+### Multi-Language & i18n
+- 10+ languages (English, French, Spanish, German, Italian, Portuguese, Japanese, Korean, Chinese, Arabic, Russian)
+- RTL support for Arabic
+- Currency localization
+- Date format localization
+
+### Performance & SEO
+- SSR for property pages and search results
+- ISR for frequently updated data
+- Image optimization
+- Structured data: Product, Hotel, VacationRental, Review
+- Hreflang tags for multi-language
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, user accounts, property CRUD
+Phase 2: Search (Week 2-4) - Search, filters, map, autocomplete, pagination
+Phase 3: Property Detail (Week 4-5) - Gallery, amenities, room types, reviews
+Phase 4: Booking (Week 5-7) - Date picker, pricing, booking engine, payment
+Phase 5: Host Dashboard (Week 7-8) - Calendar management, reservations, payouts
+Phase 6: Reviews (Week 8-9) - Review system, moderation, host response
+Phase 7: Admin (Week 9-10) - Admin dashboard, moderation, analytics
+Phase 8: Polish (Week 10-12) - Multi-language, SEO, performance, security
+
+## Final Instructions
+Build a complete travel booking platform like Booking.com/Expedia with hotel/property search, booking engine, payment processing, host management, reviews, and multi-language support. The search must have map/list view with filter sidebar. Property detail must have gallery, room types, booking calendar, and reviews. Booking engine must handle dynamic pricing, minimum stays, and instant book. Host dashboard must include calendar management, reservations, payouts, and multi-property support. Design a professional, travel-focused UI with blue/white branding.

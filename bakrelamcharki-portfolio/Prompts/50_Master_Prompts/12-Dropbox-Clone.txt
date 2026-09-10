@@ -1,0 +1,215 @@
+# MASTER PROMPT: Dropbox Clone
+
+## Project Overview
+Build a cloud storage and file synchronization platform with desktop sync, file sharing, team folders, version history, smart sync, and backup features optimized for business teams.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query
+- **Backend:** Go (sync engine) + Node.js + TypeScript (API)
+- **Database:** PostgreSQL (metadata), Redis (cache + real-time), ScyllaDB (file events)
+- **Storage:** S3-compatible (Cloudflare R2 / AWS S3)
+- **Sync Protocol:** Custom binary protocol over WebSocket + HTTP/2
+- **Auth:** JWT + OAuth (Google Workspace, Microsoft 365, Apple)
+- **Desktop Client:** Electron + Go native module (sync engine)
+- **Mobile:** React Native
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry
+
+## Detailed Requirements
+
+### Authentication
+- Email/password with 2FA (TOTP, SMS, hardware key)
+- Google Workspace SSO
+- Microsoft 365 SSO
+- Apple Sign-In
+- Team admin-managed accounts
+- Device approval flow
+- Session management
+- Passkeys support
+
+### File Operations
+- Drag-and-drop upload with folder structure preservation
+- File/folder CRUD with right-click context menu
+- Multi-select with Shift/Ctrl+click
+- Keyboard shortcuts for power users
+- File preview: 120+ file types
+- Batch operations (rename, move, delete selected)
+- File requests (others upload to your folder via link)
+- Folder templates
+- Smart sync (online-only vs local vs available offline)
+- Selective sync (choose which folders sync to device)
+- Bandwidth management (throttling, schedule)
+
+### Desktop Sync Engine (Electron + Go)
+- Real-time file system monitoring (fsevents, inotify, ReadDirectoryChanges)
+- Block-level sync (only changed blocks uploaded)
+- Streaming sync (start uploading before full transfer)
+- Conflict resolution: keep both (conflicted copy)
+- LAN sync (peer-to-peer discovery on local network)
+- Sync status icons in file explorer
+- Extended attributes for sync metadata
+- Differential sync for large files
+- Automatic retry with exponential backoff
+- Selective sync filters (.dropboxignore equivalent)
+
+### Smart Sync (Projected Files)
+- Online-only files (metadata only, download on open)
+- Local files (fully synced for offline)
+- On-demand hydration (open triggers download)
+- Eviction policies when local storage is full
+- Badge overlay icons for sync status
+- Cache management UI
+- Preferential syncing for recent files
+
+### Sharing & Collaboration
+- Share file/folder with email (view, edit, comment)
+- Shareable links (view only, edit, password-protected, expiry)
+- Shared folders with permissions
+- Team folders (managed by admin)
+- File requests (upload-only links)
+- Transfer file ownership
+- Dropbox Paper (collaborative documents)
+- Comments on files with @mentions
+
+### Version History & Recovery
+- 30-day version history (180-day for business)
+- Extended version history (1 year) add-on
+- File restoration (any time point)
+- Deleted file recovery (from trash)
+- Events log (who did what and when)
+- Version comparison
+- Camera uploads (auto-backup photos/videos from phone)
+
+### Backup (Computer Backup)
+- Automatic backup of designated folders (Desktop, Documents, Photos)
+- Continuous backup vs scheduled backup
+- Backup status monitoring
+- Restore files from backup
+- External drive backup
+- Backup exclusions (file types, folders)
+
+### Admin Dashboard (Dropbox Business)
+- Team management (add/remove users, groups)
+- Member usage and activity reporting
+- Admin audit log (all team events)
+- Shared link management (disable, restrict)
+- Device management (remote wipe)
+- Content compliance policies
+- IP allowlisting
+- Data governance (retention, legal hold)
+- SSO configuration
+- Domain verification
+- Third-party app integration management
+
+### Security
+- AES-256 encryption at rest
+- TLS 1.3 for all connections
+- Remote device wipe
+- Suspicious activity alerts
+- File access logging
+- Malware scanning (upload + at rest)
+- DLP (data loss prevention) policies
+- Password protection for shared links
+- Expiration dates on shared links
+- Watermarking on previewed documents
+- Trusted devices list
+
+### Search
+- Full-text content search (documents, images via OCR)
+- File name, folder, file type search
+- Search operators (type:, modified:, shared:)
+- Search within specific folders
+- Saved searches
+- Search suggestions
+- Search across team files
+- AI-powered search (natural language queries)
+
+### Performance
+- Incremental sync (only changed files)
+- Differential sync (only changed parts of files)
+- Upload acceleration (multi-part upload + parallel chunks)
+- CDN for file downloads
+- Smart caching (metadata, thumbnails, previews)
+- File system event debouncing
+- Bandwidth-aware sync scheduling
+- Thumbnails generated on server with caching
+
+### Testing
+- Unit: Vitest (API), Go test (sync engine)
+- Integration: API test suite
+- E2E: Playwright (web), Detox (mobile)
+- Sync: Custom test harness with simulated file changes
+- Performance: k6 for API and file transfers
+- Conflict: Multi-device sync scenarios
+
+### Deployment
+- Docker Compose for local development (MinIO for S3)
+- Kubernetes for production
+- GitHub Actions CI/CD
+- Blue-green for web, rolling for API
+- Canary for desktop client updates
+- Feature flags for gradual rollout
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Monorepo setup
+2. Database schema
+3. Auth system
+4. Basic file upload/download
+5. Folder structure and navigation
+
+### Phase 2: File Management (Week 3-4)
+6. Full file CRUD operations
+7. Multi-select, grid/list view
+8. Drag-and-drop, right-click menu
+9. Keyboard shortcuts
+10. Search with Elasticsearch
+
+### Phase 3: Sync Engine (Week 5-6)
+11. Go sync engine with file watcher
+12. Block-level differential sync
+13. LAN sync peer discovery
+14. Conflict resolution
+15. Bandwidth management
+
+### Phase 4: Sharing & Collaboration (Week 7-8)
+16. Share links with permissions
+17. Shared folders
+18. File requests
+19. Comments and activity
+20. Team folders
+
+### Phase 5: Smart Sync & Backup (Week 9-10)
+21. Smart sync (online-only/local)
+22. Camera uploads
+23. Computer backup
+24. Version history and recovery
+25. Event log and audit
+
+### Phase 6: Admin & Security (Week 11-12)
+26. Admin dashboard
+27. Team management
+28. Security features
+29. Data governance
+30. Performance tuning
+
+## Folder Structure
+```
+apps/
+├── web/                     # Next.js web
+├── mobile/                  # React Native
+├── desktop/                 # Electron + Go sync
+├── server/                  # Node.js API
+│   ├── src/
+│   │   ├── services/
+│   │   ├── routes/
+│   │   └── workers/
+│   └── prisma/
+├── sync-engine/             # Go sync service
+└── shared/                  # Common types
+```
+
+## Final Instructions
+Build a complete Dropbox clone with desktop sync, smart sync, sharing, and team management. The sync engine must handle real-time file changes with block-level differential sync for efficiency. Smart sync must support online-only files with on-demand hydration. Sharing system must support granular permissions, password protection, and link expiry. Admin dashboard must provide full team management and audit capabilities. Design a clean, professional UI. Include mobile apps for iOS and Android.

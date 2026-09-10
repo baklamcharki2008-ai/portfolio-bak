@@ -1,0 +1,184 @@
+# MASTER PROMPT: VS Code Browser IDE
+
+## Project Overview
+Build a browser-based code editor with VS Code-like interface, file tree, Monaco Editor (code intelligence), integrated terminal, Git integration, extensions, and cloud workspace management.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, @monaco-editor/react (code editor), Zustand, React Query, xterm.js (terminal), Framer Motion
+- **Backend:** Node.js + Express + TypeScript, WebSocket (terminal + collaboration)
+- **Database:** PostgreSQL (user data, workspace metadata), Redis (sessions)
+- **Storage:** S3-compatible for workspaces, files
+- **Execution:** Docker containers per workspace (code execution + terminal)
+- **Auth:** JWT + OAuth (GitHub, GitLab, Google, Microsoft)
+- **Git Integration:** isomorphic-git or libgit2 (via WASM)
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+- **Monitoring:** Sentry, Prometheus, Grafana
+
+## Detailed Requirements
+
+### User Interface
+- Activity bar: Explorer, Search, Source Control, Extensions, Remote Explorer, Settings
+- Sidebar: file tree, search results, Git panel, extensions panel
+- Editor tabs with drag-reorder
+- Editor groups (split editor horizontally/vertically)
+- Status bar: branch name, cursor position, encoding, language, line ending
+- Breadcrumb navigation
+- Minimap (code outline)
+- Zen mode (full-screen editor)
+- Command palette (Ctrl+Shift+P)
+- Quick open (Ctrl+P)
+- Panel: integrated terminal, output, problems, debug console
+- Customizable layout (move panels, resize)
+
+### File Explorer
+- File tree with expand/collapse
+- File and folder create, rename, delete, move
+- Drag-and-drop file organization
+- File context menu (open, rename, delete, copy path, reveal in explorer)
+- Multiple file selection
+- Working files (open files list)
+- File search (Ctrl+P fuzzy find)
+- File auto-save
+- Recent files
+- File encoding detection and selection
+
+### Code Editor (Monaco)
+- Syntax highlighting for 100+ languages
+- IntelliSense: autocomplete, parameter hints, quick info, member list
+- Go to definition, find all references, peek definition
+- Code folding, bracket matching, auto-indentation
+- Multi-cursor (Ctrl+click, Ctrl+Alt+Up/Down)
+- Find and Replace (Ctrl+F / Ctrl+H) with regex
+- Snippet support
+- Emmet abbreviation expansion
+- Incremental parsing (Tree-sitter for accurate syntax)
+- Code formatting (Prettier, ESLint integration)
+- Refactoring: rename symbol, extract function, organize imports
+- Diagnostics: errors, warnings, suggestions
+- Code lens (references, test run, etc.)
+- Inlay hints (parameter names, type hints)
+- Hover to show type info and docs
+- Signature help
+
+### Integrated Terminal (xterm.js)
+- Multiple terminal tabs
+- Split terminal panes
+- Shell: bash, zsh, sh, PowerShell, cmd
+- Terminal persistence (reconnect after page refresh)
+- Copy/paste from terminal
+- Terminal theme customization
+- Font size and family settings
+- Terminal search (Ctrl+F)
+- Terminal links (clickable URLs, file paths)
+- Environment variable configuration
+- Terminal buffer management
+
+### Git Integration
+- Source control panel with file changes view
+- Git status in file explorer (changed, added, deleted indicators)
+- Stage/unstage files
+- Commit with message
+- Branch management: create, switch, delete, merge
+- Diff view (side-by-side, inline)
+- Git history view
+- Git blame
+- Stash management
+- Pull, push, fetch operations
+- Merge conflict resolution UI
+- Git graph visualization
+- Remote repository management
+
+### Extensions System
+- Extension marketplace
+- Install/uninstall extensions
+- Extension activation events
+- VS Code API compatibility (for most existing extensions)
+- Extension hosting: built-in marketplace or OpenVSX
+- Extension categories: themes, language support, snippets, debuggers, formatters
+- Custom extension development documentation
+- Extension auto-update
+
+### Workspace Management
+- Cloud workspace creation (choose language, template)
+- Workspace from GitHub repository (clone)
+- Workspace templates (Node.js, Python, Go, Rust, etc.)
+- Multiple workspaces per user
+- Workspace sharing (collaborate in real-time)
+- Workspace storage limits
+- Workspace idle timeout and sleep
+- Workspace settings (language-specific, user, workspace, folder)
+
+### Debugging
+- Run/Debug configuration (launch.json)
+- Breakpoints: line, conditional, function, exception
+- Variable watch, call stack, step over/into/out
+- Debug console (REPL)
+- Integrated debugger: Node.js, Python, Go, Java, Rust, C/C++, .NET
+- Debug visualizations
+- Multi-session debugging
+
+### Real-Time Collaboration
+- Live share (multiple users edit same file)
+- Collaborative cursors (show others' cursors)
+- Chat within workspace
+- Workspace-level permissions (view, edit, admin)
+- Conflict resolution (operational transform)
+- Presence indicators
+
+### Language Support
+Languages with built-in IntelliSense:
+- TypeScript/JavaScript (full TS server)
+- Python (Pyright, Jupyter)
+- Go (gopls)
+- Rust (rust-analyzer)
+- Java (Eclipse JDT LS)
+- C/C++ (clangd)
+- Ruby (solargraph)
+- PHP (intelephense)
+- HTML/CSS/JSON/YAML/TOML/Markdown (built-in)
+- Dockerfile, Shell, SQL, GraphQL
+- Language server protocol (LSP) support for any LS
+
+### Settings & Customization
+- Settings UI (searchable)
+- User settings vs workspace settings
+- Settings sync across devices
+- Theme marketplace (color themes, icon themes, product icon themes)
+- Custom keybindings
+- Languages and frameworks picker
+- Auto-save options
+- Font ligatures support
+- Semantic highlighting
+
+### Security
+- Sandboxed code execution per workspace (Docker)
+- Resource limits (CPU, memory, storage)
+- Network isolation for workspace containers
+- SSL/TLS for all connections
+- File upload validation
+- Malware scanning for uploaded files
+- Session timeout and lock
+- OAuth token secure storage
+
+### Performance
+- Web Worker for Monaco editor parsing
+- Virtual file system (in-memory + sync to S3)
+- Workspace hibernation (sleep after inactivity)
+- Lazy loading language services
+- Bundle size optimization (code splitting, tree shaking)
+- Service Worker caching for IDE assets
+- Incremental file sync
+
+### Implementation Plan
+
+Phase 1: Core UI (Week 1-2) - Activity bar, sidebar, editor area, status bar
+Phase 2: Monaco Editor (Week 2-4) - Syntax highlighting, IntelliSense, file editing
+Phase 3: File System (Week 4-5) - File tree, CRUD, drag-drop, settings
+Phase 4: Terminal (Week 5-6) - xterm.js, multiple terminals, shell integration
+Phase 5: Git (Week 6-8) - Git operations, diff view, branch management
+Phase 6: Extensions (Week 8-10) - Extension system, marketplace, VS Code API
+Phase 7: Debugging (Week 10-12) - Debug adapter protocol, breakpoints, watch
+Phase 8: Collaboration (Week 12-14) - Live share, cursors, workspace sharing
+
+## Final Instructions
+Build a complete browser-based VS Code clone. The editor must have full IntelliSense, debugging, Git integration, terminal, and extension system. Use Monaco Editor for the code editing core. Implement xterm.js for integrated terminal with full shell support. The Git panel must show changes, stage files, commit, and resolve merge conflicts. Extensions system should be compatible with VS Code API. Support real-time collaboration with shared cursors. Include a Docker container per workspace for secure code execution. Design the UI to match VS Code's exact look and feel.

@@ -1,0 +1,295 @@
+# MASTER PROMPT: YouTube Clone
+
+## Project Overview
+Build a complete video-sharing platform with upload, transcoding, streaming, channels, subscriptions, recommendations, comments, live streaming, and monetization features.
+
+## Tech Stack
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS, Shadcn UI, Video.js/Shaka Player, Framer Motion, Zustand
+- **Backend:** Node.js + Express + TypeScript, GraphQL + REST hybrid
+- **Database:** PostgreSQL (primary), Redis (cache/queue), Elasticsearch (search)
+- **Video Processing:** FFmpeg, AWS Elemental MediaConvert, Mux API
+- **Storage:** AWS S3 + CloudFront with signed URLs
+- **Auth:** JWT + OAuth (Google, GitHub)
+- **Real-time:** WebSockets (Socket.io) for live chat
+- **Streaming:** HLS + DASH adaptive streaming
+- **Queue:** Bull + Redis for video processing pipeline
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions, AWS EKS
+- **Monitoring:** Grafana, Prometheus, Sentry, CloudWatch
+- **Testing:** Vitest, Playwright, k6
+
+## Detailed Requirements
+
+### Authentication & Authorization
+- Google OAuth (primary), email/password
+- Channel creation with custom URL
+- Role-based access (admin, content mod, user)
+- Creator Studio access controls
+- API keys for third-party integrations
+- Brand account management
+
+### Video Pipeline
+
+#### Upload
+- Chunked upload with resumable support (tus protocol)
+- Drag-and-drop with progress indicator
+- Multiple simultaneous uploads
+- Upload queue management
+- Automatic retry on failure
+- Upload from URL (import)
+
+#### Transcoding
+- Multiple resolution profiles (144p, 360p, 720p, 1080p, 4K, 8K)
+- HLS + DASH output with DRM support
+- Thumbnail generation (auto + custom)
+- Spatial audio (Dolby Atmos pass-through)
+- 360° video and VR support
+- HDR video support
+- Automatic caption generation (Whisper AI)
+- Content moderation pipeline (frame-by-frame analysis)
+- Blur and cut segments for copyright
+
+#### Streaming
+- HLS adaptive bitrate player
+- Quality selector with auto mode
+- Variable playback speed (0.25x - 2x)
+- Picture-in-picture mode
+- Background playback (audio-only)
+- Keyboard shortcuts
+- Chapter markers and transcripts
+- 60fps and high bitrate support
+
+### Channel Features
+- Channel branding (banner, avatar, watermark)
+- Channel trailers and featured video
+- Channel sections (playlists, videos, about)
+- Channel memberships (tiers with perks)
+- Custom channel URLs
+- Analytics dashboard for creators
+- Community posts (text, polls, images)
+- Channel subscriptions with notifications
+
+### Social Features
+- Like/dislike with animated bar
+- Comments with nested threads
+- Comment sorting (top, newest, oldest)
+- Pinned comments by creator
+- Heart from creator
+- Comment replies and mentions
+- Video sharing to social platforms
+- Clip creation and sharing
+- Playlist creation and collaboration
+- Watch later and history
+
+### Recommendation Engine
+- Collaborative filtering (Matrix Factorization)
+- Content-based recommendations
+- Trending detection algorithm
+- Session-based recommendations
+- A/B testing for recommendation strategies
+- Contextual bandits for exploration/exploitation
+- Personalized homepage sections
+
+### Live Streaming
+- Real-time streaming via RTMP/WHIP
+- Live chat with moderation
+- Super Chat and Super Stickers
+- Live stream scheduling and countdown
+- Stream health monitoring
+- DVR for live streams (rewind)
+- Stream to multiple platforms (restream)
+
+### Creator Studio
+- Video manager with filtering
+- Real-time analytics (views, watch time, revenue)
+- Audience demographics
+- Content monetization reports
+- Video publishing schedule
+- Copyright claims dashboard
+- Comment moderation queue
+- Custom thumbnails editor
+
+### Admin Dashboard
+- Content moderation queue
+- Copyright management system
+- User account management
+- Platform-wide analytics
+- Feature flag management
+- Ad server configuration
+- Trending content curation
+- System health monitoring
+
+### Database Design
+
+Core tables:
+- users, channels, channel_members
+- videos (title, description, duration, status, visibility)
+- video_files (resolution, url, format, size)
+- video_transcripts (language, segments[])
+- comments, comment_likes, comment_replies
+- likes_dislikes (video_id, user_id, type)
+- subscriptions (channel_id, user_id)
+- playlists, playlist_items
+- watch_history, watch_later
+- live_streams, live_chat_messages
+- super_chat_messages
+- reports, moderation_actions
+- ad_breaks, ad_impressions
+
+### API Structure
+
+```
+REST:
+  POST /api/upload/init         - Initialize upload session
+  POST /api/upload/:id/chunk    - Upload chunk
+  POST /api/upload/:id/complete - Finalize upload
+  GET /api/video/:id            - Get video details
+  POST /api/video/:id/process   - Trigger transcoding
+  GET /api/channel/:id/analytics - Channel analytics
+
+GraphQL:
+  Query {
+    video(id: ID!): Video
+    feed(input: FeedInput!): FeedConnection!
+    search(query: String!, filter: SearchFilter): SearchResult!
+    trending: [Video!]!
+    channel(id: ID!): Channel
+  }
+  Mutation {
+    uploadVideo(input: VideoInput!): Video!
+    deleteVideo(id: ID!): Boolean!
+    createComment(videoId: ID!, text: String!): Comment!
+    toggleLike(videoId: ID!): LikeStatus!
+    subscribe(channelId: ID!): Subscription!
+  }
+  Subscription {
+    liveChatMessage(liveStreamId: ID!): ChatMessage!
+    viewerCount(liveStreamId: ID!): Int!
+  }
+```
+
+### File Storage & CDN
+- Multi-region S3 storage with replication
+- Signed URLs with expiry for private videos
+- CDN caching with TTL based on video popularity
+- Edge compute for thumbnail generation
+- Multi-CDN strategy for global reach
+
+### Search System
+- Elasticsearch with custom analyzers
+- Search suggestions with autocomplete
+- Search filters: duration, upload date, type, features
+- Voice search support
+- Search ranking with ML model
+- Indexing pipeline with real-time updates
+
+### Performance Optimization
+- Partial Hydration (Islands architecture)
+- Video preloading (Intersection Observer)
+- Skeleton loading states
+- Bundle splitting by route
+- Image optimization pipeline
+- Database read replicas
+- Redis caching for feed and recommendations
+- Edge caching with CDN and Service Workers
+- Streaming SSR for initial load
+
+### Security
+- Signed URLs for video access
+- Content fingerprinting (hash-based)
+- Copyright detection (audio + video matching)
+- CSRF, XSS, SQL injection protection
+- Rate limiting per endpoint
+- File upload validation (magic bytes, malware scan)
+- DMCA compliance system
+
+### Testing
+- Unit: Vitest for business logic
+- Integration: Supertest for API endpoints
+- E2E: Playwright for critical user flows
+- Visual: Percy for UI regression
+- Load: k6 for video streaming and API
+- Video: FFmpeg test fixtures
+
+### Docker & CI/CD
+- Dockerfile with GPU support for transcoding
+- Docker Compose for local dev environment
+- GitHub Actions: lint, type-check, test, deploy
+- Canary deployments for frontend
+- Blue-green for backend services
+- Infrastructure as Code (Terraform)
+
+### Monitoring & Analytics
+- Real-time dashboard for video processing
+- CDN analytics and cache hit ratio
+- Error tracking with source maps
+- Business metrics: DAU, MAU, retention, revenue
+- Video performance metrics (buffering, startup time)
+- Custom Grafana dashboards for platform health
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Project setup with monorepo
+2. PostgreSQL schema with Prisma
+3. Authentication system with Google OAuth
+4. Basic video upload flow
+5. Video player integration
+
+### Phase 2: Video Pipeline (Week 3-4)
+6. Chunked upload with tus
+7. FFmpeg transcoding pipeline
+8. HLS adaptive streaming
+9. Thumbnail generation
+10. Content moderation
+
+### Phase 3: Social Features (Week 5-6)
+11. Comments and likes system
+12. Subscriptions and feed
+13. Playlists and watch later
+14. Search with Elasticsearch
+15. User channels and customization
+
+### Phase 4: Creator Tools (Week 7-8)
+16. Creator Studio dashboard
+17. Analytics for creators
+18. Video scheduling and drafts
+19. Community posts
+20. Copyright management
+
+### Phase 5: Live & Advanced (Week 9-10)
+21. Live streaming with RTMP
+22. Live chat and Super Chat
+23. Recommendation engine
+24. Trending algorithm
+25. Admin dashboard
+
+### Phase 6: Polish (Week 11-12)
+26. Performance optimization
+27. CDN setup and caching strategy
+28. DevOps and monitoring
+29. Load testing and scaling
+30. Documentation
+
+## Folder Structure
+```
+apps/
+├── web/                     # Next.js frontend
+│   └── src/
+│       ├── app/             # App Router pages
+│       ├── components/
+│       ├── hooks/
+│       └── lib/
+├── api/                     # Express backend
+│   ├── src/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── middleware/
+│   │   └── workers/
+│   └── prisma/
+├── transcoder/              # Video processing service
+├── worker/                  # Background job processor
+└── shared/                  # Common types and utilities
+```
+
+## Final Instructions
+Build this as a complete video platform with every YouTube feature replicated at production quality. Ensure the video pipeline handles thousands of concurrent uploads. Optimize the player for low-latency startup across all devices. Implement proper monetization infrastructure. Build creator tools that rival YouTube Studio. Ensure the platform scales horizontally for global audience. Make accessibility a priority with captions, keyboard navigation, and screen reader support.

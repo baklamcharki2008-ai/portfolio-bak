@@ -1,0 +1,308 @@
+/* vertex-sources.css — canonical ChatGPT-style web-sources UI.
+   Shared by the legacy chat page (style.css) and the Vertex chat page
+   (vertex.css). Every color/motion value resolves through CSS variables that
+   exist in both stacks, with per-variable fallbacks for whichever stack lacks
+   one (e.g. --shadow-xs/--dur-2 exist only in vertex.css; --radius-lg differs:
+   16px on the legacy page vs 14px on Vertex — we always use the Vertex value
+   with fallback). */
+
+/* ---- container ---- */
+.vx-sources{ display:flex; flex-direction:column; gap:14px; width:100%; max-width:100%; margin:12px 0 4px; }
+.vx-section{ display:flex; flex-direction:column; gap:8px; min-width:0; }
+.vx-section-label{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim, #9CA3AF); }
+
+/* ---- responsive card grid (2-3 cols desktop, 1 col <=640px) ---- */
+.vx-source-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
+
+/* ---- source card ---- */
+.vx-source-card{
+  position:relative;
+  display:flex; flex-direction:column; gap:7px;
+  min-width:0;
+  padding:11px 12px 10px;
+  border:1px solid var(--border, rgba(255,255,255,.08));
+  border-radius:var(--radius-lg, 14px);
+  background:color-mix(in srgb, var(--surface, rgba(255,255,255,.04)) 92%, transparent);
+  box-shadow:var(--shadow-xs, 0 1px 2px rgba(0,0,0,.05));
+  color:var(--text, #fff);
+  text-decoration:none;
+  overflow:hidden;
+  transition:border-color var(--dur-2, 0.15s) var(--ease, ease),
+             transform var(--dur-2, 0.15s) var(--ease),
+             box-shadow var(--dur-2, 0.15s) var(--ease);
+}
+.vx-source-card:hover{
+  border-color:color-mix(in srgb, var(--accent, #e0e0e0) 45%, var(--border, rgba(255,255,255,.08)));
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-sm, 0 1px 2px rgba(0,0,0,.04), 0 4px 12px -4px rgba(0,0,0,.08));
+}
+.vx-source-card-video{ padding:0 0 10px; }
+.vx-source-card-video .vx-source-title,
+.vx-source-card-video .vx-source-snippet,
+.vx-source-card-video .vx-card-actions{ margin-left:12px; margin-right:12px; }
+
+/* ---- card internals ---- */
+.vx-source-top{ display:flex; align-items:center; gap:7px; min-width:0; }
+.vx-source-avatar{
+  width:18px; height:18px; border-radius:50%; flex-shrink:0;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; line-height:1;
+}
+.vx-source-domain{
+  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  font-size:10.5px; color:var(--text-faint, #9CA3AF);
+}
+.vx-source-title{
+  font-size:13px; font-weight:600; line-height:1.4; color:var(--text, #fff);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.vx-source-snippet{
+  font-size:11.5px; line-height:1.45; color:var(--text-dim, #D1D5DB);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.vx-source-action{
+  margin-top:auto; align-self:flex-start;
+  display:inline-flex; align-items:center;
+  padding:4px 10px; border:1px solid var(--border, rgba(255,255,255,.08));
+  border-radius:var(--radius-full, 999px);
+  font-size:11px; font-weight:600; color:var(--accent, #e0e0e0);
+  transition:border-color var(--dur-2, 0.15s) var(--ease, ease),
+             background var(--dur-2, 0.15s) var(--ease);
+}
+.vx-source-card:hover .vx-source-action{
+  border-color:color-mix(in srgb, var(--accent, #e0e0e0) 55%, transparent);
+  background:color-mix(in srgb, var(--accent, #e0e0e0) 12%, transparent);
+}
+
+/* ---- youtube thumbnail ---- */
+.vx-source-thumb{
+  position:relative; aspect-ratio:16/9; margin:0 0 2px;
+  background:var(--surface-hover, rgba(255,255,255,.06));
+}
+.vx-source-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.vx-source-chip{
+  position:absolute; left:8px; bottom:8px;
+  display:inline-flex; align-items:center; gap:5px; max-width:calc(100% - 16px);
+  padding:3px 8px; border-radius:var(--radius-full, 999px);
+  background:color-mix(in srgb, var(--bg, #0d0d0d) 72%, transparent);
+  border:1px solid var(--border-light, rgba(255,255,255,.1));
+  color:var(--text, #fff);
+}
+
+/* ---- citation pills ---- */
+.vx-cite{
+  display:inline-block; padding:0 6px; margin:0 2px;
+  border:1px solid color-mix(in srgb, var(--accent, #e0e0e0) 40%, transparent);
+  border-radius:var(--radius-full, 999px);
+  background:color-mix(in srgb, var(--accent, #e0e0e0) 10%, transparent);
+  font-size:11px; line-height:1.7; white-space:nowrap;
+  color:var(--accent, #e0e0e0); text-decoration:none;
+  transition:background var(--dur-2, 0.15s) var(--ease, ease);
+}
+.vx-cite:hover{ text-decoration:underline; background:color-mix(in srgb, var(--accent, #e0e0e0) 18%, transparent); }
+
+/* ---- retained legacy sections (images / weather / project archive) ----
+   These keep the exact rich-card markup from the old renderers; the legacy
+   page's own stylesheet never shipped these rules (dead escaped blob), so we
+   re-provide them here, scoped, so both pages render them identically. */
+.vx-sources .rich-card, .rich-live-wrap .rich-card{
+  border:1px solid var(--border, rgba(255,255,255,.08));
+  background:var(--surface, rgba(255,255,255,.04));
+  border-radius:var(--radius-lg, 14px);
+  padding:10px; overflow:hidden;
+}
+.vx-sources .rich-head, .rich-live-wrap .rich-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:9px; }
+.vx-sources .rich-kicker, .rich-live-wrap .rich-kicker{ font-size:10px; font-weight:700; letter-spacing:.08em; color:var(--text-faint, #9CA3AF); }
+.vx-sources .rich-count, .rich-live-wrap .rich-count{ font-size:10px; color:var(--text-faint, #9CA3AF); }
+.vx-sources .rich-image-grid, .rich-live-wrap .rich-image-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.vx-sources .rich-image, .rich-live-wrap .rich-image{
+  display:block; color:inherit; text-decoration:none; border-radius:10px; overflow:hidden;
+  background:var(--surface-solid, #1A1A1A); border:1px solid var(--border, rgba(255,255,255,.08));
+}
+.vx-sources .rich-image img, .rich-live-wrap .rich-image img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+.vx-sources .rich-image span, .rich-live-wrap .rich-image span{ display:block; padding:7px 8px; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.vx-sources .weather-main, .rich-live-wrap .weather-main{ display:flex; justify-content:space-between; gap:18px; align-items:flex-end; padding:4px 2px 10px; }
+.vx-sources .weather-place, .rich-live-wrap .weather-place{ font-size:13px; font-weight:650; }
+.vx-sources .weather-temp, .rich-live-wrap .weather-temp{ font-size:32px; font-weight:700; line-height:1.1; margin-top:4px; }
+.vx-sources .weather-desc, .rich-live-wrap .weather-desc{ font-size:11px; color:var(--text-faint, #9CA3AF); margin-top:3px; }
+.vx-sources .weather-meta, .rich-live-wrap .weather-meta{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
+.vx-sources .weather-meta span, .rich-live-wrap .weather-meta span{
+  font-size:10px; padding:5px 7px; border:1px solid var(--border, rgba(255,255,255,.08));
+  border-radius:var(--radius-full, 999px); color:var(--text-dim, #D1D5DB);
+}
+.vx-sources .archive-files, .rich-live-wrap .archive-files{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+.vx-sources .archive-files span, .rich-live-wrap .archive-files span{
+  font-size:10.5px; padding:3px 8px; border:1px solid var(--border, rgba(255,255,255,.08));
+  border-radius:var(--radius-full, 999px); color:var(--text-dim, #D1D5DB);
+}
+.vx-sources .source-card-link, .rich-live-wrap .source-card-link{ font-size:11px; color:var(--accent, #e0e0e0); text-decoration:none; }
+.vx-sources .source-card-link:hover, .rich-live-wrap .source-card-link:hover{ text-decoration:underline; }
+
+/* ---- inline lazy youtube player ---- */
+.vx-video-thumb{
+  position:relative; aspect-ratio:16/9; overflow:hidden;
+  max-width:100%;
+  background:var(--surface-hover, rgba(255,255,255,.06));
+  border-radius:calc(var(--radius-lg, 14px) - 1px) calc(var(--radius-lg, 14px) - 1px) 0 0;
+  cursor:pointer;
+}
+.vx-video-thumb-img{ width:100%; height:100%; object-fit:cover; display:block; }
+.vx-play-btn{
+  position:absolute; inset:0; margin:auto;
+  width:48px; height:48px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  padding:0 0 0 3px;
+  border:1px solid color-mix(in srgb, var(--text, #fff) 35%, transparent);
+  background:color-mix(in srgb, var(--bg, #0d0d0d) 55%, transparent);
+  color:var(--text, #fff);
+  font-size:15px; cursor:pointer;
+  transition:transform var(--dur-2, .15s) var(--ease, ease),
+             background var(--dur-2, .15s) var(--ease);
+}
+.vx-play-btn:hover{
+  transform:scale(1.1);
+  background:color-mix(in srgb, var(--accent, #e0e0e0) 25%, transparent);
+}
+.vx-youtube-player{
+  width:100%; aspect-ratio:16/9;
+  background:var(--surface-solid, #0d0d0d);
+}
+.vx-youtube-player iframe{ width:100%; height:100%; border:0; display:block; }
+
+/* ---- card action row (watch inside vertex / open on youtube) ---- */
+.vx-card-actions{
+  display:flex; flex-wrap:wrap; gap:8px;
+  align-items:center; justify-content:space-between;
+  margin-top:2px;
+}
+.vx-play-btn-inline{
+  display:inline-flex; align-items:center; gap:4px;
+  padding:5px 10px;
+  border:1px solid color-mix(in srgb, var(--accent, #e0e0e0) 45%, transparent);
+  border-radius:var(--radius-full, 999px);
+  background:color-mix(in srgb, var(--accent, #e0e0e0) 10%, transparent);
+  color:var(--accent, #e0e0e0);
+  font-size:11px; font-weight:600; cursor:pointer;
+  transition:background var(--dur-2, .15s) var(--ease, ease);
+}
+.vx-play-btn-inline:hover{ background:color-mix(in srgb, var(--accent, #e0e0e0) 20%, transparent); }
+.vx-open-link{
+  font-size:11px; font-weight:600;
+  color:var(--accent, #e0e0e0); text-decoration:none;
+  transition:opacity var(--dur-2, .15s) var(--ease, ease);
+}
+.vx-open-link:hover{ text-decoration:underline; opacity:.85; }
+
+/* ---- source type badges (official / docs / download) ---- */
+.vx-badge{
+  display:inline-flex; align-items:center;
+  padding:2px 6px;
+  border:1px solid currentColor;
+  border-radius:var(--radius-full, 999px);
+  font-size:9px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; line-height:1;
+}
+.vx-badge-official{
+  color:var(--success, #10b981);
+  background:color-mix(in srgb, var(--success, #10b981) 14%, transparent);
+  border-color:color-mix(in srgb, var(--success, #10b981) 40%, transparent);
+}
+.vx-badge-documentation{
+  color:var(--info, #3b82f6);
+  background:color-mix(in srgb, var(--info, #3b82f6) 14%, transparent);
+  border-color:color-mix(in srgb, var(--info, #3b82f6) 40%, transparent);
+}
+.vx-badge-download{
+  color:var(--accent, #e0e0e0);
+  background:color-mix(in srgb, var(--accent, #e0e0e0) 14%, transparent);
+  border-color:color-mix(in srgb, var(--accent, #e0e0e0) 40%, transparent);
+}
+
+/* ---- citation scroll-focus flash (accent border/glow pulse, ~1.6s) ---- */
+@keyframes vx-cite-pulse{
+  0%,100%{
+    border-color:var(--border, rgba(255,255,255,.08));
+    box-shadow:0 0 0 0 color-mix(in srgb, var(--accent, #e0e0e0) 0%, transparent);
+  }
+  50%{
+    border-color:color-mix(in srgb, var(--accent, #e0e0e0) 70%, transparent);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--accent, #e0e0e0) 45%, transparent);
+  }
+}
+.vx-cite-flash{
+  border-color:color-mix(in srgb, var(--accent, #e0e0e0) 70%, transparent);
+  animation:vx-cite-pulse .8s ease 2;
+}
+
+/* ---- responsive (1 column on small screens) ---- */
+@media (max-width:640px){
+  .vx-source-grid{ grid-template-columns:1fr; }
+  .vx-sources .rich-image-grid, .rich-live-wrap .rich-image-grid{ grid-template-columns:1fr; }
+  .vx-sources .weather-main, .rich-live-wrap .weather-main{ align-items:flex-start; flex-direction:column; }
+  .vx-sources .weather-meta, .rich-live-wrap .weather-meta{ justify-content:flex-start; }
+  .vx-card-actions{ flex-direction:column; align-items:stretch; }
+  .vx-card-actions .vx-play-btn-inline{ justify-content:center; }
+  .vx-card-actions .vx-open-link{ text-align:center; }
+  .vx-music-grid{ grid-template-columns:1fr !important; }
+}
+
+/* ---- music result cards ---- */
+.vx-music-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
+.vx-source-card-music{
+  display:flex; flex-direction:row; align-items:center; gap:10px;
+  padding:8px 10px;
+  border:1px solid var(--border, rgba(255,255,255,.08));
+  border-radius:var(--radius-lg, 14px);
+  background:color-mix(in srgb, var(--surface, rgba(255,255,255,.04)) 92%, transparent);
+  box-shadow:var(--shadow-xs, 0 1px 2px rgba(0,0,0,.05));
+  text-decoration:none; color:var(--text, #fff);
+  transition:border-color var(--dur-2, 0.15s) var(--ease, ease),
+             transform var(--dur-2, 0.15s) var(--ease);
+}
+.vx-source-card-music:hover{
+  border-color:color-mix(in srgb, var(--accent, #e0e0e0) 45%, var(--border, rgba(255,255,255,.08)));
+  transform:translateY(-1px);
+}
+.vx-music-thumb-wrap{
+  position:relative; width:52px; height:52px; border-radius:8px; overflow:hidden; flex-shrink:0;
+  background:var(--surface-hover, rgba(255,255,255,.06));
+}
+.vx-music-thumb{ width:100%; height:100%; object-fit:cover; display:block; }
+.vx-music-thumb-placeholder{
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; color:var(--text-dim, #9CA3AF);
+}
+.vx-music-info{
+  flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;
+}
+.vx-music-info .vx-source-title{
+  font-size:12.5px; font-weight:600; line-height:1.3;
+  display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden;
+}
+.vx-music-artist{
+  font-size:11px; color:var(--text-dim, #D1D5DB);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.vx-music-info .vx-source-domain{ font-size:10px; margin-top:1px; }
+.vx-music-preview{
+  position:absolute; inset:0; margin:auto;
+  width:30px; height:30px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(255,255,255,.3);
+  background:color-mix(in srgb, var(--bg, #0d0d0d) 60%, transparent);
+  color:var(--text, #fff); font-size:12px; cursor:pointer;
+  opacity:0; transition:opacity .15s ease;
+}
+.vx-music-thumb-wrap:hover .vx-music-preview{ opacity:1; }
+.vx-duration{
+  position:absolute; bottom:3px; right:3px;
+  padding:1px 5px; border-radius:4px;
+  background:color-mix(in srgb, var(--bg, #0d0d0d) 75%, transparent);
+  font-size:9.5px; font-weight:600; color:var(--text, #fff); line-height:1.4;
+}
+
+/* Real-time clock card (VertexSources renderer) */
+.vx-time-card{display:grid;gap:4px;padding:10px 4px}
+.vx-time-time{font-size:40px;font-weight:800;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.vx-time-date{font-size:13px;font-weight:650}
+.vx-time-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.vx-time-meta span{font-size:10.5px;border:1px solid var(--border,#333);border-radius:99px;padding:3px 9px;color:var(--text-faint,#9CA3AF)}

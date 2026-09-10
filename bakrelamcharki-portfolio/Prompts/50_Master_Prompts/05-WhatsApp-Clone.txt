@@ -1,0 +1,314 @@
+# MASTER PROMPT: WhatsApp Clone
+
+## Project Overview
+Build a secure real-time messaging application with end-to-end encryption, voice/video calls, status updates, group chats, media sharing, and multi-device support.
+
+## Tech Stack
+- **Frontend:** React Native (Expo) for mobile, Next.js 14 for web, TypeScript, Tailwind CSS, React Native Reanimated
+- **Backend:** Node.js + TypeScript, Express
+- **Database:** PostgreSQL (metadata), ScyllaDB (messages), Redis (presence + caching)
+- **Real-time:** WebSocket cluster with custom protocol
+- **Voice/Video:** WebRTC + mediasoup SFU
+- **E2E Encryption:** Signal Protocol (libsignal-node)
+- **Auth:** Phone number verification (Twilio)
+- **Storage:** Cloudflare R2 with client-side encryption
+- **Push:** Firebase Cloud Messaging + APNs
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry, DataDog
+
+## Detailed Requirements
+
+### Authentication & Registration
+- Phone number verification (SMS + voice call fallback)
+- OTP with automatic SMS detection (Android)
+- Multi-device support (4+ linked devices)
+- Biometric authentication (fingerprint, face ID)
+- Two-step verification (PIN)
+- Device linking via QR code
+- Session management with device list
+
+### End-to-End Encryption
+- Signal Protocol implementation
+- Double Ratchet algorithm for messaging
+- X3DH key agreement protocol
+- Pre-key bundle management
+- Ephemeral key rotation
+- Perfect forward secrecy
+- Cryptographic identity verification (security code)
+- Encryption for group chats (Sender Keys)
+- E2EE for media attachments
+- E2EE for voice/video calls (SRTP)
+
+### Messaging Features
+- Text messages with formatting (bold, italic, strikethrough, monospace)
+- Message reactions (all emoji)
+- Message replies and quoting
+- Message forwarding (with limit: 5x)
+- Starred/favorited messages
+- Message delete for everyone
+- Disappearing messages (24h, 7d, 90d)
+- Voice messages with waveform visualization
+- Location sharing with live tracking
+- Contact sharing
+- Poll creation and voting in groups
+
+### Media Sharing
+- Image sharing with compression and preview
+- Video sharing with H.264 encoding
+- Document sharing (PDF, DOCX, XLSX, PPTX)
+- Smart carousel for media viewing
+- Drawing and text overlay on images
+- Document scanner integration
+- GIF and sticker support
+- Link preview generation
+
+### Voice & Video Calls
+- WebRTC peer-to-peer calls with TURN fallback
+- End-to-end encryption for calls (SRTP)
+- Group voice calls (up to 32 participants)
+- Group video calls (up to 8 participants)
+- Call waiting and switching
+- Raise hand feature in group calls
+- Screen sharing during calls
+- Call recording (with consent)
+- Noise suppression and echo cancellation
+- Adaptive bitrate for varying network quality
+
+### Groups
+- Group creation with subject and icon
+- Group admin controls
+- Group types: standard, announcement, community
+- Group invite links
+- Group description and rules
+- Admin-only messaging option
+- Temporary groups (expiring)
+- Group membership request approval
+- Group disappearing messages override
+- @all/@admin mentions
+
+### Communities
+- Multiple groups under one community
+- Community announcement group
+- Community admin management
+- Groups suggestions
+- Community description and rules
+
+### Status (Stories)
+- Text, image, video, link status updates
+- Status privacy settings (contacts, custom, exclude)
+- Status replies (E2EE)
+- Status viewing history
+- Status disappearing after 24 hours
+- Status text formatting
+- Status music sharing
+- Status link previews
+
+### Multi-Device Support
+- Primary device + 4 secondary devices
+- Independent encryption state per device
+- Message history sync on device link
+- Contact sync from device
+- Web/Desktop via QR code
+- Linked devices management screen
+- Device logout remotely
+
+### Notifications
+- Push notifications with message preview
+- Notification grouping by chat
+- Custom notification tones per chat
+- In-app notification sounds
+- Message popup on foreground
+- Priority notifications for selected contacts
+- Quiet hours scheduling
+
+### Privacy & Security
+- Last seen & online privacy (everyone, contacts, nobody)
+- Profile photo privacy
+- About privacy
+- Status privacy
+- Read receipts toggle
+- Live location privacy
+- Block list management
+- Report contact with latest messages
+- Auto-delete inactive accounts (120 days)
+- Security notifications (new device login)
+
+### Database Design
+
+Core tables:
+- users (phone, name, about, profile_pic, settings)
+- devices (device_id, public_key, last_active)
+- pre_keys (key_id, public_key, device_id)
+- signed_pre_keys (key_id, public_key, signature)
+- conversations, conversation_participants
+- messages (id_64bit, conversation_id, sender, content_type, encrypted_payload)
+- message_statuses (message_id, user_id, status: sent/delivered/read/played)
+- message_reactions, message_replies
+- groups, group_members, group_settings
+- calls (type, participants, duration, status)
+- stories, story_views
+- contacts, blocked_users
+
+Message storage:
+- Partition by conversation_id + month
+- ScyllaDB for horizontal scalability
+- Archive to cold storage after 6 months
+
+### API Structure
+
+```
+WebSocket Protocol (binary, custom framing):
+  Frame structure: [type:1][length:4][payload:variable]
+
+Types:
+  MESSAGE_SEND        - Send encrypted message
+  MESSAGE_RECEIVE     - Receive new message
+  MESSAGE_ACK         - Delivery/read acknowledgement
+  TYPING_START        - Typing indicator
+  TYPING_STOP         - Stop typing
+  PRESENCE_UPDATE     - Online/offline/last_seen
+  CALL_INITIATE       - Start voice/video call
+  CALL_SIGNAL         - WebRTC signaling (SDP/ICE)
+  KEY_EXCHANGE        - E2EE key exchange
+  DEVICE_SYNC         - Multi-device synchronization
+
+REST:
+  POST /v1/register          - Register phone number
+  POST /v1/verify            - Verify OTP
+  GET  /v1/contacts          - Sync contacts
+  POST /v1/media/upload      - Upload encrypted media
+  GET  /v1/media/:id         - Download media
+  GET  /v1/stories           - Get contact stories
+```
+
+### File Storage & Encryption
+- Media encrypted with AES-256-GCM before upload
+- Encryption key exchanged via Signal Protocol
+- Thumbnails generated server-side (blurred)
+- Chunked upload for large files
+- Automatic media compression
+- Deduplication via content hash (after decryption)
+
+### Admin Dashboard
+- User analytics (active users, growth)
+- Abuse detection and spam analysis
+- Message delivery metrics
+- Call quality monitoring
+- Server health dashboard
+- Feature flag management
+- Ban/unban user management
+
+### Performance Optimization
+- Message compression (brotli/gzip)
+- Connection multiplexing (WebSocket with streams)
+- Message batch fetching on reconnection
+- Cache recent conversations in IndexedDB (web)
+- Background sync for new messages
+- Lazy loading media
+- TinySQLite for message caching on mobile
+- Predictive message delivery (pre-send)
+
+### Security
+- End-to-end encryption by default
+- No server access to message content
+- Cryptographic key verification (safety numbers)
+- Secure enclave/TEE for key storage
+- Code obfuscation and integrity checks
+- Certificate pinning for API
+- Rate limiting on verification attempts
+- SMS pumping prevention
+- Signal Protocol library audit
+
+### Testing
+- Unit: Vitest for E2E encryption logic
+- Integration: Supertest for API
+- E2E: Detox (mobile), Playwright (web)
+- Encryption: Cryptographic test vectors
+- Call: WebRTC test framework
+- Load: k6 for message delivery throughput
+
+### Docker & CI/CD
+- Docker compose for local development
+- K8s with node affinity for real-time services
+- GitHub Actions for CI/CD pipeline
+- Blue-green deployment for REST API
+- Rolling update for WebSocket workers
+- Database migration with zero downtime
+
+### Monitoring & Analytics
+- Message delivery latency (p50, p95, p99)
+- Call quality MOS (Mean Opinion Score)
+- Push notification delivery rate
+- Active connections per gateway
+- E2EE key exchange success rate
+- Real-time dashboards (Grafana)
+- Error tracking and alerting
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Project setup with monorepo
+2. Phone verification flow
+3. WebSocket protocol design
+4. Basic messaging (unencrypted)
+5. Database schema with ScyllaDB
+
+### Phase 2: Encryption (Week 3-4)
+6. Signal Protocol integration
+7. Key exchange and pre-key bundles
+8. End-to-end encrypted messaging
+9. Media encryption pipeline
+10. Cryptographic identity verification
+
+### Phase 3: Calls & Media (Week 5-6)
+11. WebRTC voice calls
+12. WebRTC video calls
+13. Group calls with SFU
+14. Media sharing with encryption
+15. Voice messages with waveform
+
+### Phase 4: Groups & Status (Week 7-8)
+16. Group creation and management
+17. Group E2E encryption (Sender Keys)
+18. Status/stories feature
+19. Group calls and admin controls
+20. Communities feature
+
+### Phase 5: Multi-Device (Week 9-10)
+21. QR code device linking
+22. Multi-device encryption sync
+23. Message history sync
+24. Device management UI
+25. Web/Desktop client
+
+### Phase 6: Polish (Week 11-12)
+26. Performance optimization
+27. Security hardening
+28. Testing and bug fixing
+29. Deployment infrastructure
+30. Documentation and monitoring
+
+## Folder Structure
+```
+apps/
+├── mobile/                  # React Native app
+│   └── src/
+│       ├── screens/
+│       ├── components/
+│       ├── crypto/          # Signal Protocol
+│       ├── webrtc/
+│       └── stores/
+├── web/                     # Web/Desktop client
+├── server/                  # Node.js API + WebSocket
+│   ├── src/
+│   │   ├── gateway/
+│   │   ├── handlers/
+│   │   ├── crypto/
+│   │   └── services/
+│   └── prisma/
+├── sfu/                     # WebRTC Selective Forwarding Unit
+└── shared/                  # Shared types and encryption primitives
+```
+
+## Final Instructions
+Build a complete WhatsApp-like messaging platform with true end-to-end encryption. The Signal Protocol implementation must be cryptographically sound and audited. Voice/video call quality must match carrier-grade standards. Support seamless multi-device experience with message sync. Ensure all messages are encrypted and the server cannot read message content. Design the system for global scale with regional data centers. Make the UI buttery smooth with 60fps animations. Implement proper iOS/Android notification channels with rich media.

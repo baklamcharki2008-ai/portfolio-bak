@@ -1,0 +1,144 @@
+# MASTER PROMPT: Bug Bounty Platform
+
+## Project Overview
+Build a complete bug bounty and vulnerability disclosure platform connecting security researchers with organizations, featuring program management, submission workflow, triage, payments, and leaderboards.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query
+- **Backend:** Node.js + Express + TypeScript, GraphQL
+- **Database:** PostgreSQL, Redis (caching + real-time)
+- **Auth:** JWT + OAuth (Google, GitHub), MFA, PGP key
+- **Storage:** S3-compatible for attachments (POCs, screenshots)
+- **Payments:** Stripe Connect, PayPal, Crypto (USDC)
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+
+## Detailed Requirements
+
+### Authentication & Profiles
+- Email/password, OAuth (Google, GitHub, Twitter, HackerOne)
+- Security researcher profile: username, bio, skills, PGP key, GitHub/HTB/Synack links
+- Organization profile: company info, security team, programs
+- MFA (TOTP, SMS, hardware key)
+- PGP encryption for report submission
+- CVE number management
+
+### Program Management
+Program creation: name, description, scope (in-scope/out-of-scope URLs), assets (domains, IPs, mobile apps, source code)
+- Bounty range/amount (per severity or flat)
+- Program type: public, private, invite-only
+- Program rules: safe harbor, disclosure policy, response time SLAs
+- Asset version tracking (API changelog)
+- Third-party scope exclusion
+- Program templates
+
+### Report Submission
+- Report form: title, severity (Critical, High, Medium, Low, Informational), vulnerability type (OWASP/CWE), description, steps to reproduce, impact, remediation suggestion
+- Attachments: screenshots, POC videos (up to 50MB), network capture (PCAP), exploit code
+- Automated POC parsing (request/response pairs)
+- CWE/CVSS auto-suggestion based on description
+- Duplicate detection (hash-based matching)
+- PGP-encrypted submission option
+
+### Report Workflow
+- Status: New → Triaging → Validated → In Progress → Resolved → Closed
+- Sub-status: Informative, Duplicate, N/A, Spam, Out of Scope
+- Triage queue with prioritization
+- Internal comments (private between triager and researcher)
+- Request additional information
+- Re-submission on insufficient evidence
+- Time tracking (SLA breach alerts)
+- Severity escalation/revision
+
+### Communication
+- Researcher/reporter messaging system
+- Threaded comments on reports
+- @mentions, file attachments in comments
+- Email notifications (per action)
+- In-app real-time notifications
+- Automatic updates on status changes
+- Bulletin/CVE publication request
+
+### Bounty & Payments
+- Bounty amount negotiation
+- Payment methods: PayPal, Bank Transfer (Stripe), Crypto (USDC, BTC)
+- Payment history and invoicing
+- Tax information management (W-9, W-8BEN)
+- Payment dispute resolution
+- Charitable donation option
+- Bounty transparency (public bounty amounts with permission)
+- Milestone bounties (for critical chains)
+
+### Vulnerability Database
+- Categorized vulnerability reference
+- CWE/CVSS 3.1 scoring
+- Remediation guidance database
+- Searchable exploit DB (with permission)
+- Vulnerability statistics and trends
+- Machine learning severity prediction
+- Public/private disclosure management
+
+### Researcher Dashboard
+- Total bounty earned
+- Reports submitted (accepted, rejected, pending)
+- Ranking position
+- Skills heatmap
+- Active programs
+- Recent activity feed
+- Favorite programs
+- Badge achievements
+
+### Organization Dashboard
+- Program analytics (reports/month, average response time, average bounty)
+- Researcher leaderboard
+- Payment overview
+- Security posture score
+- Outstanding reports chart
+- SLA compliance
+- Team management
+
+### Leaderboard & Rankings
+- Global ranking (by points, bounty, severity)
+- Program-specific ranking
+- Quarterly/All-time/Weekly rankings
+- Badge system: Top 10, #1, First Blood, Hunter, Guardian, Legend
+- Streak bonuses (consecutive months with valid reports)
+- Hall of Fame
+
+### Disclosure Management
+- Coordinated disclosure timeline
+- Public disclosure request system
+- CVE ID request (via MITRE or DWF)
+- Vulnerability advisory publication
+- Embargo period setting
+- Vulnerability disclosure agreement (VDA) signing
+
+### Gamification
+- XP points per validated report
+- Levels (1-100): Newbie → Expert → Elite → Legend
+- Badges: First Report, Bug Hunter, Critical Finder, Quick Response, Penetration Tester, Lifetime Achievement
+- Challenges: Find X bugs this month, report critical, help other researchers
+- Weekly/Monthly/Quarterly competitions
+
+### Security
+- Two-factor authentication (TOTP, SMS)
+- PGP encryption for sensitive data
+- Session management and audit
+- API key authentication
+- Rate limiting on submission
+- IP logging and abuse detection
+- Plagiarism detection on reports
+- Same researcher duplicate detection
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, profiles, registration, basic program CRUD
+Phase 2: Report System (Week 3-4) - Submission, triage workflow, status management, messaging
+Phase 3: Payments (Week 5-6) - Stripe Connect, PayPal, Crypto, payment history, invoices
+Phase 4: Analytics (Week 7-8) - Researcher dashboard, org analytics, leaderboard, badges
+Phase 5: Vulnerability DB (Week 8-9) - CVE/CWE integration, severity prediction, disclosure management
+Phase 6: Gamification (Week 9-10) - XP, levels, challenges, competitions, hall of fame
+Phase 7: Admin & Security (Week 10-11) - Site admin, PGP, audit logs, abuse detection
+Phase 8: Polish (Week 11-12) - Performance, email templates, notifications, API for integrations
+
+## Final Instructions
+Build a complete bug bounty platform like HackerOne/Bugcrowd. The platform must support program management (scope, rules, bounties), report submission with attachments and PGP encryption, full triage workflow (status tracking, comments, severity management), payment processing (Stripe, PayPal, Crypto), researcher and organization dashboards, global leaderboard with gamification (XP, levels, badges), vulnerability database with CVE/CWEs, and coordinated disclosure management. Design a clean, professional UI with dark mode. Include API for third-party integrations.

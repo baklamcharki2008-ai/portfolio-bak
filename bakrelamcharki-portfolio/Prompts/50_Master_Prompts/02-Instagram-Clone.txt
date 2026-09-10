@@ -1,0 +1,276 @@
+# MASTER PROMPT: Instagram Clone
+
+## Project Overview
+Build a full-stack Instagram clone with photo/video sharing, stories, reels, messaging, explore feed, and social features. Production-ready with millions-scale architecture patterns.
+
+## Tech Stack
+- **Frontend:** React Native (Expo) for mobile + Next.js 14 for web, TypeScript, Tailwind CSS, React Native Reanimated
+- **Backend:** Node.js + Express + TypeScript, GraphQL (Apollo Server)
+- **Database:** PostgreSQL (relational), ScyllaDB (activity feeds), Redis (cache + sessions)
+- **Storage:** AWS S3 + CloudFront CDN for media
+- **Auth:** JWT + OAuth (Facebook, Google, Apple)
+- **Real-time:** WebSockets (Socket.io) + Redis Pub/Sub
+- **Video Processing:** FFmpeg, AWS Elemental MediaConvert
+- **Search:** Elasticsearch
+- **Queue:** Bull + Redis for background jobs
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry
+
+## Detailed Requirements
+
+### Authentication & Authorization
+- Email/password with email verification
+- OAuth: Facebook, Google, Apple Sign-In
+- Phone number verification (Twilio)
+- JWT with refresh tokens
+- Session management (multi-device)
+- Account privacy (public/private)
+- Two-factor authentication
+- Blocked users and muted users
+- Restrict mode for sensitive content
+
+### Core Social Features
+
+#### Feed
+- Algorithmic and chronological feed options
+- Infinite scroll with cursor pagination
+- Like, comment, share, save actions
+- Double-tap to like animation (Reanimated)
+- Carousel posts (multiple images)
+- Tagged users in posts
+- Location tagging
+- Sponsored posts in feed
+
+#### Stories
+- 24-hour ephemeral stories with photos/videos
+- Story reactions, replies, and polls
+- Story highlights with custom covers
+- Viewed-by list with privacy controls
+- Story music overlay with licensing
+- Story text, drawing, and sticker tools
+- Close friends story sharing
+
+#### Reels
+- Full-screen vertical video player
+- Short-form video editing (trim, effects, filters)
+- Audio library with trending sounds
+- Green screen effect
+- Text-to-speech voiceover
+- Auto-generated captions
+- Remix and duet features
+- Reels draft saving
+
+#### Messaging (Direct)
+- One-on-one and group chats
+- Message reactions, replies, and forwarding
+- Disappearing messages (vanish mode)
+- Media sharing with preview
+- Message requests filtered by type
+- Voice messages via WebRTC
+- Video calling (WebRTC + TURN/STUN)
+- End-to-end encryption
+
+#### Explore
+- Interest-based content discovery
+- Search by user, hashtag, location
+- Trending topics and hashtags
+- Machine learning recommendation engine
+- Suggested users and posts
+- Categories for browsing
+
+#### Notifications
+- Like, comment, follow, mention alerts
+- Activity digest (weekly summary)
+- Push notifications via Firebase/APNs
+- In-app notification center
+- Notification filtering and groups
+- Quiet mode scheduling
+
+### Database Design
+
+Core tables:
+- users (profile, settings, privacy)
+- posts (caption, location, tagged_users)
+- post_media (url, type, dimensions, filters)
+- stories (media, expires_at, highlights)
+- reels (video_url, audio_id, effects)
+- comments (text, mentions, replies)
+- likes (polymorphic: posts, comments, stories)
+- follows (follower_id, followee_id, status)
+- messages, message_attachments, group_chats
+- notifications (type, actor, target)
+- hashtags, post_hashtags
+- saved_posts, archive_posts
+
+### API Structure (GraphQL)
+
+```
+Query {
+  feed(first: Int, after: String): FeedConnection!
+  user(username: String!): User
+  post(id: ID!): Post
+  explore(category: String): [Post!]!
+  notifications: [Notification!]!
+  search(query: String!, type: SearchType): SearchResult
+}
+Mutation {
+  createPost(input: CreatePostInput!): Post!
+  deletePost(id: ID!): Boolean!
+  toggleLike(postId: ID!): LikeToggle!
+  createComment(postId: ID!, text: String!): Comment!
+  followUser(userId: ID!): FollowStatus!
+  uploadStory(input: StoryInput!): Story!
+  sendMessage(input: MessageInput!): Message!
+}
+Subscription {
+  newNotification: Notification!
+  messageReceived(conversationId: ID!): Message!
+  storyExpired(userId: ID!): Story!
+}
+```
+
+### File Storage & Media Processing
+- Original media → multiple resolution transcoding
+- Automatic thumbnail generation (all aspect ratios)
+- Image optimization (WebP/AVIF with quality tiers)
+- Video compression with adaptive bitrate
+- Face blurring option for privacy
+- EXIF data stripping
+- Content moderation pipeline (NSFW detection)
+- CDN with geographic edge caching
+
+### Real-time Features
+- Live notification delivery via WebSocket
+- Typing indicators in DMs
+- Online/offline presence
+- Read receipts
+- Real-time story view count updates
+
+### Admin Dashboard
+- User management (suspend, restrict, verify)
+- Content moderation queue
+- Spam detection and review
+- Analytics dashboard (DAU, MAU, retention)
+- Report center with dispute resolution
+- Hashtag and trending topic management
+- Advertisement management
+- System health monitoring
+
+### Performance Optimization
+- CDN caching with Cache-Control headers
+- Image lazy loading with blur placeholder
+- Virtualized lists (react-native-virtuoso)
+- Prefetching feed on app foreground
+- Database read replicas for feed queries
+- Redis caching for hot content
+- Message queue for async processing
+- GraphQL query complexity limiting
+- Rate limiting at multiple layers
+
+### Security
+- HTTPS everywhere with HSTS
+- Content Security Policy headers
+- CSRF protection
+- SQL injection prevention (parameterized queries)
+- XSS sanitization for user content
+- Rate limiting per endpoint
+- File upload validation (magic byte checking)
+- API abuse detection
+
+### Testing Strategy
+- Unit: Jest + React Testing Library (web), Jest + Enzyme (native)
+- Integration: Supertest for API, Apollo testing utils
+- E2E: Detox (native), Playwright (web)
+- Visual: Percy for screenshots
+- Load: Artillery for feed and messaging
+- Security: OWASP ZAP scanning
+
+### Docker & CI/CD
+- Multi-stage Docker builds for optimization
+- docker-compose for local services
+- GitHub Actions: lint, test, build, deploy
+- ECS/Kubernetes deployment
+- Blue-green for zero-downtime deployment
+- Database migration pipeline
+- Feature flags for gradual rollout
+
+### Monitoring & Analytics
+- Real user monitoring (RUM)
+- Crash reporting (Sentry/Crashlytics)
+- Custom dashboards (Grafana)
+- Business analytics (Mixpanel/Amplitude)
+- A/B testing framework
+- Funnel analysis for key flows
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Project scaffolding with monorepo (Turborepo)
+2. Database schema design and setup
+3. Authentication system (email + OAuth)
+4. User profiles and settings
+5. Basic API structure with GraphQL
+
+### Phase 2: Core Features (Week 3-4)
+6. Photo/video upload with media processing
+7. Feed with infinite scroll
+8. Like and comment system
+9. Follow/unfollow with social graph
+10. Notification system
+
+### Phase 3: Stories & Reels (Week 5-6)
+11. Stories with 24h expiry
+12. Story interactions (polls, reactions)
+13. Reels video player
+14. Reel creation with effects
+15. Music library integration
+
+### Phase 4: Messaging (Week 7-8)
+16. Real-time chat with WebSocket
+17. Message types (text, image, voice)
+18. Group chats
+19. Video calling (WebRTC)
+20. End-to-end encryption
+
+### Phase 5: Discovery (Week 9-10)
+21. Explore page with ML recommendations
+22. Search with Elasticsearch
+23. Hashtag system and trending
+24. User suggestions algorithm
+
+### Phase 6: Polish (Week 11-12)
+25. Admin dashboard and moderation
+26. Performance optimization
+27. Security audit and hardening
+28. Deployment and CI/CD pipeline
+29. Load testing and scaling
+
+## Folder Structure
+```
+packages/
+├── mobile/                 # React Native Expo app
+│   └── src/
+│       ├── screens/
+│       ├── components/
+│       ├── navigation/
+│       ├── hooks/
+│       └── utils/
+├── web/                    # Next.js web app
+│   └── src/
+│       ├── app/
+│       ├── components/
+│       └── lib/
+├── server/                 # Express + GraphQL API
+│   ├── src/
+│   │   ├── resolvers/
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── middleware/
+│   └── prisma/
+├── shared/                 # Shared types/utils
+│   └── types/
+└── worker/                 # Background job processor
+```
+
+## Final Instructions
+Build this as a complete, production-scale social media platform. Implement all features to Instagram-level quality. Prioritize performance for media-heavy content. Ensure the app works offline with local caching. Implement proper error boundaries and graceful degradation. Create a polished, pixel-perfect UI matching Instagram's design language. Make the app accessible and support multiple languages (i18n). Include comprehensive documentation for all systems.

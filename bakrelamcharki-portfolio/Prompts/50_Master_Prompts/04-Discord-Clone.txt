@@ -1,0 +1,299 @@
+# MASTER PROMPT: Discord Clone
+
+## Project Overview
+Build a real-time communication platform with servers, channels, voice/video calls, text chat, screen sharing, bots, and community management features. Production-ready for millions of concurrent users.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + Electron (desktop), TypeScript, Tailwind CSS, Framer Motion, Zustand, SWR
+- **Backend:** Go (real-time), Node.js + Express (REST API)
+- **Database:** Cassandra/ScyllaDB (messages), PostgreSQL (metadata), Redis (presence/state)
+- **Real-time:** WebSocket cluster (Go), WebRTC + SFU (mediasoup)
+- **Voice:** WebRTC with selective forwarding unit
+- **Auth:** JWT + OAuth + MFA
+- **File Storage:** S3-compatible (Cloudflare R2)
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry, Loki
+
+## Detailed Requirements
+
+### Authentication & Authorization
+- Email/password with verification
+- OAuth connections (Google, GitHub, Steam, Twitter)
+- Magic link login
+- Multi-factor authentication (TOTP, SMS backup)
+- Single sign-on (SAML for enterprise)
+- Session management across devices
+- Account switcher
+- QR code login mobile → desktop
+
+### Server & Channel Architecture
+- Server creation with categories
+- Text, voice, announcement, forum channels
+- Channel permissions with role hierarchy
+- Server folders and sorting
+- Template server creation
+- Community server features (onboarding, rules screening)
+- Server discovery and member directory
+- Welcome screen configuration
+
+### Text Chat Features
+- Real-time message delivery with WebSocket
+- Message formatting (Markdown, code blocks, mentions)
+- Message reactions, replies, and threads
+- Message editing and deletion with audit
+- Pinned messages per channel
+- Slow mode per channel
+- Message search with filters
+- File attachments with preview (images, PDF, video)
+- Link previews (Open Graph)
+- Emoji system (custom, animated, Unicode)
+- Sticker and GIF picker (Tenor integration)
+- Polls and voting
+
+### Voice & Video
+- Low-latency voice with Opus codec
+- Video calls with screen sharing
+- Go Live (streaming to channel)
+- Krisp noise suppression integration
+- Echo cancellation and gain control
+- Push-to-talk and voice activity detection
+- Multiple voice regions for low latency
+- Server-level voice quality settings
+- Stage channels for presentations
+
+### Real-time Presence
+- Online, idle, DND, invisible statuses
+- Custom status with emoji
+- Activity status (game, Spotify, custom)
+- Typing indicators per channel
+- Reading indicators (message read state)
+- Live voice channel member count
+
+### Direct Messages & Groups
+- One-on-one DMs with encryption
+- Group DMs with up to 200 users
+- Message request from non-friends
+- Friend request system
+- Privacy settings (who can DM you)
+
+### Permissions & Roles
+- Granular permission system (41+ permissions)
+- Role hierarchy with drag-and-drop
+- Permission sync across channels
+- Administrator and moderator roles
+- Default permissions for @everyone
+- Timeout and ban management
+- Member verification levels
+
+### Bots & Integrations
+- Bot API with rate limiting
+- Webhook system for external services
+- Slash commands framework
+- Button and modal interactions
+- Embed building system
+- Custom activity (together, chess, poker)
+- Discord-like OAuth2 flow for bot auth
+
+### Admin Dashboard
+- Server analytics and insights
+- Audit log viewer with filters
+- Member management and moderation
+- Ban/kick/timeout controls
+- Invite tracker and management
+- Server template creator
+- Integration management
+- Custom moderation bot framework
+
+### Notifications
+- Per-channel notification settings
+- @everyone, @here, @role mention controls
+- Server notification muting
+- Mobile push notifications (Firebase/APNs)
+- Desktop notifications with rich content
+- Notification badges and counts
+- Inbox with message history
+
+### Database Design
+
+Primary schemas:
+- users, user_sessions, user_connections
+- servers, server_members, server_roles
+- channels, channel_permissions, channel_category
+- messages, message_attachments, message_reactions
+- threads, thread_members
+- voice_states, video_streams
+- invites, invite_uses
+- friends, friend_requests
+- audit_logs, moderation_actions
+- webhooks, webhook_executions
+- emojis (custom), stickers
+
+Message storage strategy:
+- ScyllaDB/Cassandra for horizontal scalability
+- Partition by channel_id + time bucket
+- Message IDs are time-sortable (Snowflake-like)
+- Archived to S3 after 90 days
+
+### API Structure
+
+```
+REST:
+  /api/servers              - Server CRUD
+  /api/channels             - Channel CRUD
+  /api/messages             - Messages with pagination
+  /api/users                - User profiles
+  /api/invites              - Invite management
+  /api/webhooks             - Webhook CRUD
+
+WebSocket Gateway:
+  Gateway Opcodes:
+    0 - Dispatch (server event)
+    1 - Heartbeat
+    2 - Identify (auth)
+    3 - Presence Update
+    4 - Voice State Update
+    7 - Request Members
+    8 - Join Voice Channel
+    9 - Leave Voice Channel
+Events:
+    MESSAGE_CREATE
+    MESSAGE_UPDATE
+    MESSAGE_DELETE
+    VOICE_STATE_UPDATE
+    PRESENCE_UPDATE
+    TYPING_START
+    CHANNEL_CREATE
+    GUILD_MEMBER_ADD
+    GUILD_MEMBER_REMOVE
+```
+
+### Voice Infrastructure
+- SFU (Selective Forwarding Unit) with mediasoup
+- WebRTC with ICE/TURN servers
+- Voice regions: us-east, us-west, eu-west, eu-central, ap-southeast
+- Server-side audio mixing for stage channels
+- Recording pipeline (DVR for voice channels)
+- Screen sharing at 60fps 4K
+- Bandwidth estimation and adaptation
+
+### Security
+- End-to-end encryption for DMs (optional, Signal Protocol)
+- Server-side encryption at rest
+- Rate limiting on all endpoints
+- IP-based rate limiting with Redis
+- DDoS protection through Cloudflare
+- Content filtering (NSFW detection)
+- Message content scanning for phishing
+- Audit trail for moderation actions
+- Session invalidation on password change
+
+### Performance Optimization
+- Connection pooling for PostgreSQL
+- ScyllaDB for horizontal message scalability
+- Redis cluster for presence and state
+- Edge caching for static assets
+- WebSocket compression (permessage-deflate)
+- Message pagination with cursor-based
+- Virtual scrolling for message lists
+- Lazy loading for server list
+- Infinite scroll with intersection observer
+
+### Testing
+- Unit: Vitest for API logic
+- Integration: Supertest for REST
+- E2E: Playwright for UI flows
+- Voice: Custom WebRTC test harness
+- Load: k6 for WebSocket connections
+- Chaos: Simulate network partitions
+
+### Docker & CI/CD
+- Docker Compose for local dev (all services)
+- Kubernetes manifests for production
+- GitHub Actions: lint, test, type-check, build
+- Helm charts for K8s deployment
+- Progressive delivery with ArgoCD
+- Database migration pipeline
+- Feature flags with LaunchDarkly
+
+### Monitoring & Analytics
+- Prometheus metrics for WebSocket connections
+- Voice quality metrics (jitter, packet loss)
+- Grafana dashboards per service
+- Sentry for error tracking
+- Log aggregation with Loki
+- Real-time anomaly detection
+- User engagement analytics
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Monorepo setup with Go + Node.js
+2. Database schema design
+3. Auth system with JWT + OAuth
+4. WebSocket gateway in Go
+5. Basic REST API
+
+### Phase 2: Text Chat (Week 3-4)
+6. Real-time message delivery
+7. Markdown parsing and rendering
+8. Message reactions and threads
+9. File upload with preview
+10. Search system
+
+### Phase 3: Server Management (Week 5-6)
+11. Server CRUD with categories
+12. Role and permission system
+13. Member management
+14. Invite system
+15. Audit logging
+
+### Phase 4: Voice & Video (Week 7-8)
+16. WebRTC SFU with mediasoup
+17. Voice channels and state
+18. Screen sharing
+19. Noise suppression
+20. Voice region routing
+
+### Phase 5: Advanced Features (Week 9-10)
+21. Bot API and commands
+22. Webhook system
+23. Sticker and emoji management
+24. Moderation tools
+25. Admin dashboard
+
+### Phase 6: Polish (Week 11-12)
+26. Performance optimization
+27. Testing suite
+28. DevOps and deployment
+29. Mobile responsiveness
+30. Documentation
+
+## Folder Structure
+```
+apps/
+├── gateway/                 # Go WebSocket server
+│   ├── handlers/
+│   ├── session/
+│   ├── voice/
+│   └── events/
+├── api/                     # Node.js REST API
+│   ├── src/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── middleware/
+│   └── prisma/
+├── web/                     # Next.js frontend
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── stores/
+│   │   └── lib/
+│   └── public/
+├── voice/                   # WebRTC SFU (mediasoup)
+├── worker/                  # Background jobs
+└── shared/                  # Common types and protocols
+```
+
+## Final Instructions
+Build this as a complete Discord replacement at production scale. The WebSocket gateway must handle 1M+ concurrent connections with horizontal scaling. Voice quality must match Discord's Opus implementation at <50ms latency. Implement proper moderation tools and safety features. Ensure the platform supports community servers with thousands of members. Make the UI responsive and accessible. Include comprehensive bot developer documentation.

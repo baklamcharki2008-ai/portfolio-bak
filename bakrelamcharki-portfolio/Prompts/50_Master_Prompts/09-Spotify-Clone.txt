@@ -1,0 +1,325 @@
+# MASTER PROMPT: Spotify Clone
+
+## Project Overview
+Build a complete music streaming platform with millions of tracks, playlists, recommendations, podcast support, social features, offline playback, and subscription billing.
+
+## Tech Stack
+- **Frontend:** Next.js 14 (web), React Native (mobile), TypeScript, Tailwind CSS, Framer Motion, Howler.js/Expo Audio, Redux Toolkit
+- **Backend:** Node.js + Express + TypeScript, GraphQL, Apollo Server, Python (ML recommendations)
+- **Database:** PostgreSQL (metadata/users), Cassandra (streaming analytics), Redis (cache/sessions), Neo4j (social graph)
+- **Audio Processing:** FFmpeg, AAC/OGG encoding
+- **Storage:** AWS S3 + CloudFront CDN
+- **Auth:** JWT + OAuth (Google, Facebook, Apple)
+- **Search:** Elasticsearch
+- **Billing:** Stripe + PayPal
+- **Real-time:** WebSocket (collaborative playlists, friend activity)
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry, DataDog
+
+## Detailed Requirements
+
+### Authentication & Subscription
+- Email/password + OAuth (Google, Facebook, Apple)
+- Free tier with ads
+- Premium tier: offline, no ads, higher quality, unlimited skips
+- Family plan (up to 6 accounts)
+- Student discount verification
+- Duo plan (2 accounts)
+- Payment management (Stripe)
+- Gift cards and promo codes
+- Account recovery and cancellation
+
+### Music Library
+- Track: title, artist, album, duration, genres, release date, ISRC code
+- Album: title, artist, cover art, release date, tracks, label
+- Artist: name, bio, images, genres, monthly listeners, related artists
+- Audio quality: 96kbps (Free), 160kbps (Default), 320kbps (Premium), Lossless (HiFi tier)
+- Audio formats: AAC, OGG Vorbis, FLAC (HiFi)
+- Gapless playback
+- Crossfade between tracks
+- Volume normalization (ReplayGain / EBU R128)
+- Lyrics (synced + static) with Musixmatch integration
+- Track, album, artist radio
+- Music credits (writers, producers, engineers)
+- Appears on (artist compilation credits)
+
+### Playlists
+- User-created playlists (public, private, collaborative)
+- Collaborative playlists (real-time sync via WebSocket)
+- Playlist folders
+- Smart playlists: Discover Weekly, Release Radar, Daily Mixes
+- Algorithmic playlists based on listening history
+- Playlist cover art customization
+- Playlist description
+- Playlist followers and sharing
+- Playlist creation from recommendations
+- Your Library: playlists, artists, albums, podcasts
+
+### Discover & Browse
+- Homepage: recently played, made for you, trending, new releases
+- Browse by genre (pop, rock, hip-hop, electronic, etc.)
+- New releases section (weekly updated)
+- Charts: Top 50 (Global, Country, Daily, Weekly)
+- Mood and activity playlists (Workout, Chill, Focus, Party, Sleep)
+- Concerts near you integration (Ticketmaster API)
+- Music podcasts and shows
+- Video clips for select tracks
+- Canvas (looping video art on tracks)
+
+### Search
+- Full-text search: tracks, albums, artists, playlists, podcasts
+- Search categories: best result, songs, artists, albums, playlists, podcasts, profiles
+- Search suggestions with autocomplete
+- Search history
+- Voice search integration
+- Search filters
+
+### Player & Playback
+- Custom audio engine (Howler.js wrapper or native audio)
+- Cross-device sync (Web Playback SDK)
+- Now Playing bar (bottom of screen)
+- Full-screen player with album art
+- Queue management: next up, add to queue, clear queue
+- Repeat: off, repeat all, repeat one
+- Shuffle with smart algorithm
+- Seek with waveform preview
+- Volume slider with output device selection
+- Like/dislike tracks (heart icon)
+- Add to playlist from player
+- Share track directly from player
+- Lyrics view in player
+- Behind the lyrics (story + lyrics)
+- Spotify Connect: play on other devices (speakers, TV, console)
+- Sleep timer
+
+### Podcasts & Shows
+- Podcast discovery by category
+- Episode list with descriptions and duration
+- Playback speed (0.5x - 3.5x)
+- Skip silence feature
+- Episode download for offline
+- New episode notifications
+- Podcast queue
+- Video podcasts
+- Podcast chapters
+
+### Social Features
+- Friend activity sidebar (what friends are listening to)
+- Collaborative playlists
+- Share: Instagram Stories, Twitter, WhatsApp, Messenger
+- Spotify Codes (scan to share)
+- User profiles with public playlists
+- Following system (follow artists, friends, curators)
+- Listening party (listen together in sync via WebSocket)
+- Group session: multiple devices control same playback
+
+### Offline & Downloads
+- Download tracks, albums, playlists for offline (Premium)
+- Offline listening mode (airplane mode support)
+- Download management (quality, storage optimization)
+- Smart downloads: auto-download Discover Weekly
+- Offline playlist sync on Wi-Fi
+- Download progress and queue
+
+### Admin Dashboard
+- Content management: tracks, albums, artists, labels
+- Royalty reporting and analytics
+- User management and analytics
+- Platform metrics: MAU, DAU, active streams
+- Content moderation (explicit flagging, report handling)
+- A/B test configuration
+- Playlist curation tools
+- Feature flag management
+
+### Database Design
+
+Core tables:
+- users, user_devices, user_settings, user_preferences
+- subscription_plans, subscriptions, payment_methods, billing_history
+- artists, artist_genres, artist_related
+- albums, album_artists, album_genres
+- tracks, track_artists, track_audio_files (various qualities)
+- track_lyrics, track_credits
+- playlists, playlist_tracks, playlist_followers, playlist_collaborators
+- user_library (saved_tracks, saved_albums, followed_artists, followed_playlists)
+- listening_history (user_id, track_id, timestamp, context)
+- streaming_sessions, streaming_analytics
+- podcasts, podcast_episodes
+- ad_breaks, ad_impressions (for free tier)
+- search_history
+
+### API Structure
+
+```
+GraphQL (primary):
+  Query {
+    home(feedType: HomeType!): HomePage!
+    search(query: String!, type: SearchType!): SearchResult!
+    playlist(id: ID!): Playlist
+    track(id: ID!): Track
+    album(id: ID!): Album
+    artist(id: ID!): Artist
+    queue: Queue!
+    userLibrary: Library!
+    friendActivity: [FriendActivity!]!
+  }
+  Mutation {
+    playTrack(context: PlayContext!, offset: Int!): PlaybackState!
+    pause: PlaybackState!
+    next: PlaybackState!
+    previous: PlaybackState!
+    shuffle(enable: Boolean!): PlaybackState!
+    repeat(mode: RepeatMode!): PlaybackState!
+    seek(positionMs: Float!): PlaybackState!
+    setVolume(volume: Float!): Boolean!
+    addToQueue(trackId: ID!): Boolean!
+    likeTrack(trackId: ID!): Boolean!
+    unlikeTrack(trackId: ID!): Boolean!
+    createPlaylist(input: PlaylistInput!): Playlist!
+    addToPlaylist(playlistId: ID!, trackIds: [ID!]!): Playlist!
+    followPlaylist(playlistId: ID!): Boolean!
+    createCollaborativeSession(sessionInput: SessionInput!): CollaborativeSession!
+  }
+  Subscription {
+    queueChanged: Queue!
+    playbackStateChanged: PlaybackState!
+    collaborativeSessionUpdate(sessionId: ID!): SessionEvent!
+    friendActivityUpdate: FriendActivity!
+  }
+```
+
+### Audio Streaming
+- Chunked HTTP streaming with Range headers
+- Adaptive bitrate (ABR) for varying network conditions
+- Preloading next track (while current plays)
+- Audio format: OGG Vorbis for web, AAC for mobile
+- Low-latency mode for Spotify Connect
+- Server-side audio processing for normalization
+- CDN caching with geographic optimization
+- Predictive caching (next likely tracks based on user behavior)
+
+### Ads & Monetization (Free Tier)
+- Audio ads at intervals (determined by ad server)
+- Video ads on mobile
+- Banner ads in browse and search
+- Sponsored playlist placements
+- Ad targeting based on listening habits
+- Ad frequency capping
+- Ad reporting and analytics
+
+### Performance Optimization
+- Lazy loading images with blur placeholders
+- Virtual scrolling for library and playlists
+- Infinite scroll for browse pages
+- Audio context pooling
+- Local caching of metadata (IndexedDB/AsyncStorage)
+- Service Worker for offline assets
+- Bundle splitting (route-based, lazy)
+
+### Security
+- Token-based API authentication (short-lived JWT)
+- HTTPS with HSTS
+- Audiobook/DRM for restricted content
+- DMCA compliance infrastructure
+- Rate limiting on API endpoints
+- Bot detection for streaming fraud
+- Privacy controls (activity broadcasts, collaborative sessions)
+
+### Testing
+- Unit: Vitest + React Testing Library
+- Integration: Apollo testing + Supertest
+- E2E: Playwright (web), Detox (mobile)
+- Audio: Sync playback test fixtures
+- Performance: k6 for streaming endpoints
+- Visual regression: Percy
+
+### Docker & CI/CD
+- Docker Compose for local environment
+- K8s manifests for production deployment
+- GitHub Actions: lint, test, build, deploy
+- Canary deployment for playback engine updates
+- Blue-green for non-critical services
+- Automated DB migration with rollback
+
+### Monitoring & Analytics
+- Active users and concurrent streams
+- Streaming quality metrics (buffering ratio, startup time)
+- Track popularity and streaming counts
+- Churn prediction based on engagement
+- Playlist and recommendation CTR
+- Ad revenue and fill rate
+- Real-time error dashboard (Sentry + DataDog)
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Monorepo setup with Next.js + Node.js
+2. Database schema design
+3. Authentication with OAuth
+4. Basic audio player with controls
+5. Music library browsing
+
+### Phase 2: Playback (Week 3-4)
+6. Streaming with adaptive bitrate
+7. Player controls (play, pause, next, previous, seek, volume)
+8. Queue management
+9. Crossfade and gapless playback
+10. Shuffle and repeat modes
+
+### Phase 3: Library & Playlists (Week 5-6)
+11. User-created playlists
+12. Collaborative playlists with WebSocket
+13. Your Library (saved tracks, albums, playlists)
+14. Search with Elasticsearch
+15. Playlist folders and organization
+
+### Phase 4: Discovery (Week 7-8)
+16. Browse page with genre categories
+17. New releases and charts
+18. Recommendation engine (collaborative filtering)
+19. Discover Weekly and Daily Mixes
+20. Artist radio and track radio
+
+### Phase 5: Social & Offline (Week 9-10)
+21. Friend activity sidebar
+22. Collaborative sessions (listen together)
+23. Offline downloads (Premium)
+24. Podcasts and shows
+25. Social sharing features
+
+### Phase 6: Polish (Week 11-12)
+26. Premium vs Free tier logic
+27. Admin dashboard
+28. Performance optimization
+29. Security and DRM
+30. Deployment and CI/CD
+
+## Folder Structure
+```
+apps/
+├── web/                     # Next.js web app
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   │   ├── player/
+│   │   │   ├── browse/
+│   │   │   ├── library/
+│   │   │   └── search/
+│   │   └── lib/
+├── mobile/                  # React Native app
+├── server/                  # Node.js API + GraphQL
+│   ├── src/
+│   │   ├── resolvers/
+│   │   ├── services/
+│   │   │   ├── streaming/
+│   │   │   ├── recommendations/
+│   │   │   └── billing/
+│   │   └── workers/
+│   └── prisma/
+├── audio-worker/            # Audio processing service
+├── recommender/             # ML recommendation service
+└── shared/                  # Common types and utilities
+```
+
+## Final Instructions
+Build a complete Spotify clone with music streaming, recommendations, social features, and offline playback. The audio engine must deliver gapless playback with crossfade at 320kbps for premium users. Implement Spotify's key algorithmic features: Discover Weekly, Daily Mixes, Release Radar, and Radio. The recommendation engine must learn from listening habits in real-time. Collaborative playlists and group sessions must sync with WebRTC/WebSocket. Design the UI to match Spotify's dark theme with album art-focused design. Implement proper ad serving for free tier. Build podcast support with all playback controls.

@@ -1,0 +1,173 @@
+# MASTER PROMPT: Airbnb Clone
+
+## Project Overview
+Build a complete vacation rental marketplace with property search, booking, host management, experiences, reviews, messaging, and payment processing.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Mapbox/Google Maps, Zustand, React Query, react-date-range
+- **Backend:** Next.js API routes + Node.js microservices
+- **Database:** PostgreSQL + Redis + Elasticsearch + Neo4j (social graph)
+- **Auth:** NextAuth.js v5 (Google, Apple, Facebook, email)
+- **Payments:** Stripe Connect (marketplace payments)
+- **Real-time:** WebSocket (Socket.io) for messaging
+- **Maps:** Mapbox GL JS
+- **Email:** Resend
+- **Upload:** UploadThing / S3
+- **Infrastructure:** Docker, Vercel, Railway, GitHub Actions
+
+## Detailed Requirements
+
+### Airbnb Design
+- Rounded "super" style UI (large radius cards, soft shadows)
+- Pink/red branding with white background
+- Rounded search bar with pill buttons
+- Card-based layout with rounded images
+- Smooth page transitions (Framer Motion)
+- Custom map markers (Airbnb-style rounded pins)
+
+### Search & Discovery
+- Where? When? Who? Search bar (expanding)
+- Destination autocomplete (Google Places / Mapbox)
+- Date range picker with flexible dates
+- Guest count (adults, children, infants, pets)
+- Category icons row (Amazing Pools, Tiny Homes, Beachfront, Trending, Bed & Breakfasts, Lake, Cabins, Luxe, Treehouses, Countryside, Mansions, Islands, Camping, Ski-in/out, Arctic, Desert, Towers, Windmills, Shepherds Huts, Domes, Houseboats, Cycladic Homes, etc.)
+- Search results: Map view + List view
+- Filter drawer (price, type, amenities, instant book, superhost, cancellation, language, bedrooms, beds, bathrooms)
+- Saved search alerts
+- Recent searches
+
+### Property Card (Listing Card)
+- Cover image with hover slideshow (prev/next on hover)
+- Heart button (save to wishlist)
+- Superhost badge
+- Title, location, dates, price per night
+- Star rating
+- Favorite/wishlist button
+
+### Listing Detail
+- Full-screen image gallery with grid layout
+- Listing highlights: entire home, bedrooms, beds, bathrooms
+- Host avatar, name, superhost badge
+- Description with "Read more"
+- Sleeping arrangements (bedrooms with bed types)
+- Amenities list with icons (WiFi, Kitchen, Washer, Dryer, AC, Heating, Pool, Hot tub, EV charger, Gym, Breakfast, Dedicated workspace, Hair dryer, Hangers, TV, Carbon monoxide alarm, Smoke alarm, Fire extinguisher, First aid kit)
+- All amenities modal (organized by category)
+- Price breakdown with date selection
+- Booking widget (sticky on scroll): check-in, check-out, guests, total price, book button
+- Trip match (dates you've selected)
+- What this place offers
+- Neighborhood guide (map with restaurant/cafe markers)
+- Host section: response rate, response time, co-hosts
+- House rules (check-in/out times, rules)
+- Safety & property (exterior security cameras, noise monitoring)
+- Cancellation policy
+- Guest reviews: searchable, filterable, review scores breakdown (cleanliness, accuracy, communication, location, check-in, value)
+- Save/Share buttons
+- Report listing
+
+### Booking Flow
+- Step 1: Dates & guests (on listing page)
+- Step 2: Trip details (confirmation page)
+- Step 3: Payment (credit card, PayPal, Google Pay, Apple Pay, Airbnb credits)
+- Price breakdown: nightly rate + cleaning fee + service fee + occupancy tax + VAT
+- Coupon/promo code
+- Trip purpose (business, leisure)
+- Guest message to host
+- Booking confirmation with cancellation policy reminder
+- Confirmation email + in-app notification
+
+### Wishlists & Collections
+- Create wishlist (name, privacy)
+- Save listings to wishlists
+- Wishlist detail (map + list view)
+- Shared wishlists (collaborative)
+- Default wishlist: "Favorites"
+- Wishlist suggestions
+
+### Host Dashboard
+- Listings management (add, edit, photos, pricing, availability)
+- Calendar management: set availability per date, price per night, minimum nights, blocked dates
+- Reservation management: upcoming, current, completed, cancelled
+- Message inbox (guest communication)
+- Review management: write review for guest, respond to reviews
+- Payout settings: bank account, payout method, payout schedule
+- Earnings dashboard: total earnings, monthly breakdown, occupancy rate, average daily rate, booking trends
+- Listing performance: impressions, views, booking conversion rate
+- Multi-calendar (view all listings' calendars)
+- Smart pricing (dynamic pricing based on demand)
+- Cleaning fee, extra guest fee, security deposit settings
+
+### Guest Experience
+- Trip dashboard: upcoming trips, current trip, past trips
+- Trip details: booking info, directions, house manual, Wi-Fi password
+- Message host/guest
+- Change/cancel booking
+- Leave a review
+- Payment receipt
+- Emergency contact info
+- Local recommendations (host's guidebook)
+
+### Onboarding & Verification
+- Email verification
+- Phone verification
+- Government ID verification (simulated)
+- Profile photo requirement
+- Host onboarding: describe your place, set house rules, add photos, set pricing
+- Superhost status criteria dashboard
+
+### Reviews & Ratings
+- Double-blind review system (both submit or both hidden)
+- Overall rating (1-5 stars)
+- Sub-ratings: cleanliness, accuracy, communication, location, check-in, value
+- Written review with photo upload
+- Host response to review
+- Guest review of host (for hosts)
+- Review period: 14 days after checkout
+- Verified stay badge
+
+### Messaging
+- Real-time chat with WebSocket
+- Read receipts
+- Quick replies (templates for hosts)
+- Message translations
+- Share listings in messages
+- Booking request messages
+- File attachment (images, PDF)
+
+### Admin Dashboard
+- User moderation (guest, host)
+- Listing moderation (approve/reject, content violation)
+- Transaction monitoring (fraud detection)
+- Dispute resolution center
+- Platform analytics (bookings, revenue, growth, active listings, top destinations)
+- Payout management
+- Promotions management
+- Content CMS (categories, pages, policies)
+
+### Multi-Language
+- 30+ languages
+- RTL support
+- Currency conversion (50+ currencies)
+- Automatic translation for listings and reviews (AI)
+
+### Security & Trust
+- Secure payments via Stripe Connect (platform holds payment until 24h after check-in)
+- Host guarantee (damage protection)
+- $1M liability insurance
+- Verified ID badges
+- 24/7 emergency support
+- Trust & safety education
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, user profiles, listing CRUD, photo upload
+Phase 2: Search (Week 2-4) - Search UI, categories, filters, map view, list view
+Phase 3: Listing Detail (Week 4-5) - Gallery, amenities, host info, reviews, booking widget
+Phase 4: Booking (Week 5-7) - Date picker, pricing, payment, Stripe Connect, confirmation
+Phase 5: Host Dashboard (Week 7-9) - Calendar, reservations, earnings, multi-calendar, smart pricing
+Phase 6: Messaging & Reviews (Week 9-10) - Real-time chat, double-blind reviews
+Phase 7: Wishlists (Week 10-11) - Collections, save, share, favorites
+Phase 8: Admin & Polish (Week 11-13) - Admin dashboard, verification, i18n, SEO, security
+
+## Final Instructions
+Build a complete Airbnb clone with property rental marketplace, search with map/list view, booking engine with Stripe Connect payments, host dashboard with calendar management and earnings, real-time messaging, double-blind reviews, wishlists, experiences, and verification system. The design must match Airbnb's rounded, soft, and modern UI with pink branding. Search must have category rows and interactive map. Host dashboard must include multi-calendar, smart pricing, and performance analytics. Implement real-time messaging with WebSocket. Support 30+ languages and 50+ currencies. Design a trust-focused, community-driven platform.

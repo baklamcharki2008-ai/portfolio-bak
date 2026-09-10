@@ -1,0 +1,112 @@
+# MASTER PROMPT: CMS Platform
+
+## Project Overview
+Build a headless CMS platform with content modeling, rich text editing, media management, version history, API delivery, localization, and team collaboration.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, TipTap/Editor.js, TanStack Table, Zustand
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL + Redis
+- **API:** REST + GraphQL for content delivery
+- **Auth:** JWT + API keys
+- **Storage:** S3-compatible (media, assets)
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, GitHub Actions, Railway
+
+## Detailed Requirements
+
+### Content Modeling
+- Content types: create custom models (Post, Page, Product, Author, Category, etc.)
+- Field types: text, rich text, number, boolean, date/time, image, file, JSON, color, email, URL, phone, slug, select, multi-select, relation (one-to-one, one-to-many, many-to-many), component (reusable group of fields), repeatable group, block (structured content builder)
+- Field validation: required, min, max, pattern, custom validation function
+- Field defaults and placeholder text
+- Field visibility rules (show/hide based on other fields)
+- Content type versioning
+- Import/export content type schema (JSON)
+
+### Content Editor
+- Rich text editor (TipTap): headings, bold, italic, underline, strikethrough, inline code, blockquote, bullet list, ordered list, checklist, code block, table, link, image, video embed, horizontal rule, clear formatting
+- Markdown shortcut support
+- Undo/redo
+- Custom blocks: hero section, feature grid, testimonial, CTA, pricing table, FAQ accordion, team grid, logo cloud, newsletter, contact form, embed (YouTube, Twitter, CodePen, Figma)
+- Content diff view (compare two versions)
+- Auto-save (debounced, every 30s)
+- Content preview (desktop, tablet, mobile)
+- SEO section: meta title, meta description, OG image, slug, canonical URL, noindex toggle
+- Content scheduling (publish at, unpublish at)
+- Content locking (prevent concurrent edits)
+- Content comments (inline on specific sections)
+
+### Media Library
+- Upload: drag-and-drop, browse, paste, URL import
+- Image optimization: auto WebP/AVIF, resize, compress
+- Image editor: crop, rotate, flip, filters, focal point
+- Media types: image, video, audio, document (PDF, DOCX, XLSX), archive (ZIP, RAR)
+- Media organization: folders, tags, search
+- Media details: file name, dimensions, file size, format, alt text, caption, credit, copyright
+- Usage information (which entries use this media)
+- Bulk upload, download, delete
+- CDN URL generation
+
+### Content Delivery API
+- REST API: GET/POST/PUT/DELETE entries, filter, sort, paginate, include relations
+- GraphQL API: queries, mutations, subscriptions
+- Query parameters: filter (eq, neq, lt, gt, contains, in, null, range), sort, limit, skip, populate, fields, locale, status (published/draft/archived)
+- API response caching (Redis, CDN)
+- API versioning
+- API key authentication (public, read-only, full-access)
+- Rate limiting per API key
+- Webhook triggers: entry.published, entry.unpublished, entry.deleted, entry.updated
+
+### Versioning & Publishing
+- Content version history (every save creates version)
+- Version comparison (side-by-side diff)
+- Version restore
+- Publishing workflow: draft → review → published
+- Scheduled publishing
+- Content status: draft, published, archived, unpublished
+- Multilingual content (version per locale)
+
+### Localization / i18n
+- Locale management: add/remove languages
+- Content translation per field
+- Automatic translation via Google Translate / DeepL
+- Fallback language settings
+- Translation status overview (missing translations)
+- Needing translation filter
+
+### User Management & Roles
+- Roles: Super Admin, Admin, Content Manager, Editor, Reviewer, Translator, API Only
+- Granular permissions: content type (create, read, update, delete, publish), media, settings, users, API
+- Team spaces (organizations)
+
+### Admin Interface
+- Dashboard: content stats, recent activity, pending reviews, scheduled content
+- Project navigation: content types, media, settings
+- Dark/light mode
+- Keyboard shortcuts
+- Bulk content operations
+- Content import/export CSV/JSON
+- Content search (Elasticsearch)
+
+### Performance & Scaling
+- Content caching strategy (CDN + Redis)
+- Database indexing strategy
+- API response compression
+- Image CDN with transformations
+- Horizontal scaling for API servers
+- Content delivery network integration
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Content type builder, field types, admin layout
+Phase 2: Content Editor (Week 2-4) - Rich text editor, custom blocks, auto-save, preview
+Phase 3: Media Library (Week 4-5) - Upload, optimization, organization, image editor
+Phase 4: API (Week 5-7) - REST + GraphQL APIs, query params, caching, webhooks
+Phase 5: Versioning & Publishing (Week 7-8) - Version history, workflow, scheduling
+Phase 6: Localization (Week 8-9) - i18n, translation management, auto-translate
+Phase 7: Users & Security (Week 9-10) - RBAC, API keys, permissions, audit
+Phase 8: Polish (Week 10-11) - Performance, bulk operations, import/export, testing
+
+## Final Instructions
+Build a headless CMS platform with custom content modeling, rich text editing, media management, version history, content delivery APIs (REST + GraphQL), localization, and team collaboration. Content types must be fully customizable with 20+ field types including relations and custom blocks. The rich text editor must support Markdown shortcuts and custom layout blocks. API must support complex filtering, population of relations, and caching. Include full localization workflow with fallback languages and auto-translation. Design a clean, white-label admin interface ready to power any website or application.

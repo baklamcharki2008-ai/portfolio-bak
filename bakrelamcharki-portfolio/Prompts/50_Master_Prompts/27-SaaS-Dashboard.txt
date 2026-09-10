@@ -1,0 +1,150 @@
+# MASTER PROMPT: SaaS Dashboard
+
+## Project Overview
+Build a comprehensive SaaS analytics dashboard with user management, subscription billing, real-time metrics, team collaboration, role-based access, and multi-tenant architecture.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Recharts (charts), Zustand, React Query, TanStack Table
+- **Backend:** Next.js API routes + tRPC
+- **Database:** PostgreSQL (primary), Redis (real-time metrics + cache)
+- **Auth:** NextAuth.js v5 + JWT
+- **Billing:** Stripe
+- **Real-time:** WebSocket (Socket.io) for live metrics
+- **Search:** Elasticsearch (optional)
+- **Email:** Resend
+- **Infrastructure:** Docker, GitHub Actions, Vercel + Railway
+- **Monitoring:** Sentry, PostHog
+
+## Detailed Requirements
+
+### Authentication & Multi-Tenancy
+- Email/password + OAuth (Google, Microsoft, GitHub)
+- Organization/workspace creation on signup
+- Invite team members via email
+- Role-based access: Owner, Admin, Member, Viewer
+- Session management across devices
+- SSO (SAML/OIDC for enterprise plans)
+- API key management
+- Audit logs per organization
+
+### Dashboard Layout
+- Sidebar navigation: Dashboard, Analytics, Reports, Invoices, Team, Settings, Integrations
+- Top bar: org switcher, search, notifications, profile menu
+- Collapsible sidebar
+- Responsive: desktop sidebar, mobile bottom nav
+- Dark/light mode (system preference + manual toggle)
+- Customizable dashboard widgets (drag-and-drop grid)
+
+### Analytics Dashboard
+- KPI cards: MRR, ARR, Churn Rate, LTV, CAC, NPS Score
+- Revenue chart (area/line): daily, weekly, monthly, yearly
+- User growth chart
+- Active users (DAU/WAU/MAU)
+- Churn rate trend
+- Revenue by plan (stacked bar)
+- Geographic user distribution (choropleth map)
+- Feature usage heatmap
+- Conversion funnel
+- Retention cohorts table
+- Real-time metrics (active users now, current revenue today)
+- Date range picker with presets (7d, 30d, 90d, 1y, custom)
+
+### User Management
+- Users table: name, email, role, status, last active, plan, actions
+- User detail: activity log, current plan, invoices, sessions
+- User role management (admin, member, viewer)
+- Suspend/activate user
+- Invite new members (by email)
+- Team activity feed
+- User groups/segments
+
+### Subscription & Billing
+- Plan management: monthly/yearly, tiered pricing (Starter, Pro, Enterprise)
+- Customer portal (Stripe Customer Portal)
+- Invoice list with download (PDF)
+- Payment method management
+- Trial period with countdown
+- Plan upgrade/downgrade (proration)
+- Cancel subscription flow (with feedback survey)
+- Coupon/discount management
+- Revenue reporting (MRR, ARR, churn, upgrades, downgrades)
+
+### Reports
+- Report builder: select metrics, date range, grouping, visualization type
+- Pre-built reports: Usage Report, Revenue Report, User Activity Report, Conversion Report
+- Report export: CSV, PDF, XLSX
+- Scheduled reports (email delivery)
+- Report sharing (link with permissions)
+
+### Notifications
+- In-app notification center
+- Email notifications (daily digest, invoice, new user)
+- Webhook notifications (for custom integrations)
+- Notification preferences
+- Notification types: billing, team, usage alerts, system
+
+### Integrations
+- Webhook management (create, test, logs)
+- API key management (create, revoke, permissions)
+- Zapier/Make integration
+- Slack integration (notifications, reports)
+- GitHub integration
+- Custom integration via API
+- Integration status monitoring
+
+### Admin Dashboard
+- Tenant management (all organizations)
+- User management (global)
+- Plan/feature management
+- System health monitoring
+- API usage analytics
+- Support ticket viewer
+- Feature flag management
+- Global settings
+
+### Settings
+- Organization profile (name, logo, domain)
+- Security settings (password policy, 2FA, IP allowlisting)
+- Email settings (SMTP, templates)
+- Billing settings
+- Team settings
+- API settings
+- Data export (GDPR)
+- Danger zone (delete organization)
+
+### Database Design
+
+Tables:
+- organizations, organization_settings
+- users, user_organizations, user_sessions
+- roles, permissions
+- subscription_plans, subscriptions, invoices, payments
+- analytics_events (timestamp, org_id, user_id, event, properties)
+- feature_flags, flag_overrides
+- api_keys, webhooks, webhook_logs
+- audit_logs, notifications
+- integrations, integration_configs
+
+### Performance
+- Real-time metrics via Redis + WebSocket push
+- Data aggregation (pre-computed rollups by hour/day/week/month)
+- Database read replicas
+- TanStack Table with virtual scrolling for large datasets
+- Chart data caching
+- API response caching (Redis)
+- Lazy loading dashboard widgets
+- Code splitting by route
+
+### Implementation Plan
+
+Phase 1: Auth & Multi-Tenancy (Week 1-2) - Auth, org creation, team invite, RBAC
+Phase 2: Dashboard (Week 2-3) - Layout, KPI cards, charts, real-time metrics
+Phase 3: User Management (Week 3-4) - Users table, roles, activity logs
+Phase 4: Billing (Week 4-6) - Stripe integration, plans, invoices, payment methods
+Phase 5: Reports (Week 6-7) - Report builder, export, scheduled reports
+Phase 6: Integrations (Week 7-8) - Webhooks, API keys, third-party integrations
+Phase 7: Settings & Admin (Week 8-9) - Security settings, admin dashboard, feature flags
+Phase 8: Polish (Week 9-10) - Notifications, audit logs, performance, testing
+
+## Final Instructions
+Build a complete SaaS dashboard with multi-tenant architecture, real-time analytics, user management, subscription billing (Stripe), reports, team collaboration, and integrations. The dashboard must support customizable widgets, role-based access, dark/light mode, and responsive design. Include a full admin panel for tenant management. Real-time metrics must stream via WebSocket. Implement Stripe for billing with plan management, invoices, and payment methods. Include webhook system and API key management. Design a clean, professional interface with Shadcn UI.

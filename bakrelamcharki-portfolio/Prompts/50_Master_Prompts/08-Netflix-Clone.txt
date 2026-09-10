@@ -1,0 +1,302 @@
+# MASTER PROMPT: Netflix Clone
+
+## Project Overview
+Build a complete streaming platform with content catalog, user profiles, watch history, recommendations, video player, subscription billing, and admin content management.
+
+## Tech Stack
+- **Frontend:** Next.js 14 (web), React Native (mobile), TypeScript, Tailwind CSS, Framer Motion, Shaka Player (Web), react-native-video (mobile)
+- **Backend:** Node.js + Express + TypeScript, GraphQL, Apollo Server
+- **Database:** PostgreSQL (catalog/profiles), MongoDB (viewing history), Redis (cache/sessions)
+- **Video Processing:** FFmpeg, AWS Elemental MediaConvert, Mux
+- **DRM:** Widevine + FairPlay + PlayReady (multi-DRM)
+- **CDN:** AWS CloudFront + Multi-CDN
+- **Search:** Elasticsearch
+- **Auth:** JWT + OAuth + Subscription gate
+- **Billing:** Stripe + PayPal
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Datadog, Sentry, Grafana
+
+## Detailed Requirements
+
+### Authentication & Subscriptions
+- Email/password + OAuth (Google, Facebook, Apple)
+- Profile system (up to 5 profiles per account)
+- Maturity ratings (kids profile with PIN)
+- Subscription tier management (Basic, Standard, Premium)
+- Payment method management (Stripe)
+- Billing history and invoices
+- Account cancellation and reactivation
+- Gift card redemption
+- Multi-language support (30+ languages)
+- Subtitle preferences per profile
+
+### Content Catalog
+- Movies, TV series, documentaries, originals
+- Content metadata: title, synopsis, cast, crew, year, rating, genres
+- Content tags: "Trending Now", "New Releases", "Critically Acclaimed"
+- Series with seasons and episodes
+- Content maturity ratings (TV-Y, TV-G, TV-PG, TV-14, TV-MA)
+- Audio tracks: multiple languages
+- Subtitle tracks: multiple languages (CC, SDH, forced)
+- Custom artwork (hero images, card thumbnails, banners)
+- Trailer playback on hover
+- Content badges: "4K", "HDR", "Dolby Atmos", "New", "Exclusive"
+
+### User Experience
+- Hero billboard on homepage (auto-playing trailer)
+- Content rows: Continue Watching, Trending, Recommendations, New Releases, My List
+- Infinite scrolling content rows
+- Content detail page with trailer, metadata, cast, recommendations
+- My List (personalized watchlist)
+- Rating system (thumbs up/down, star ratings)
+- Viewing history with progress tracking (per profile)
+- Resume playback across devices
+- Audio & subtitle selection per session
+- Video quality selector (Auto, Low, Medium, High, 4K)
+- Dark mode (native Netflix dark theme)
+
+### Video Player
+- Custom HLS/DASH player (Shaka Player or hls.js)
+- Multi-DRM: Widevine (Chrome), FairPlay (Safari), PlayReady (Edge)
+- Adaptive bitrate streaming (auto + manual)
+- Keyboard shortcuts: space (play/pause), F (fullscreen), M (mute), arrows (seek)
+- Touch gestures: tap (controls), double-tap sides (skip 10s)
+- Picture-in-Picture mode
+- Next episode auto-play (with countdown)
+- Skip intro button (detect and skip opening credits)
+- Skip recap button for series
+- Episode selector within player
+- Audio track and subtitle selector in-player
+- Speed control (0.5x - 2x)
+- Chromecast and AirPlay support
+- Offline download (for mobile)
+
+### Search
+- Full-text search across titles, cast, crew, genres
+- Search suggestions with autocomplete
+- Search filters: genre, year, rating, language, content type
+- Trending searches
+- Search history
+- Voice search (Web Speech API)
+
+### Recommendation Engine
+- Collaborative filtering (user-item matrix)
+- Content-based filtering (metadata similarity)
+- Trending detection algorithm
+- Continue Watching ranking
+- "Because you watched X" recommendations
+- Genre-specific recommendations
+- Personalized homepage for each profile
+- A/B testing for recommendation strategies
+- Real-time feedback (rating updates recommendations)
+
+### Administration (CMS)
+- Content management: add/edit/remove titles
+- Episode management within series
+- Artwork management (upload + auto-crop)
+- Schedule content releases
+- Featured content curation
+- User management (view, suspend, cancel)
+- Subscription analytics (MRR, churn, LTV)
+- A/B test management
+- Content performance analytics
+- Licensing and rights management
+- Geo-blocking configuration
+
+### Download & Offline
+- Download for offline viewing (mobile)
+- Download quality selection (Standard, High)
+- Download expiration (after 30 days / 48 hours once started)
+- Smart downloads (auto-delete watched, download next episode)
+- Downloads management screen
+- Download progress notifications
+
+### Multi-Device Support
+- Responsive web design (mobile, tablet, desktop)
+- Smart TV apps (Samsung, LG, Android TV)
+- Console support (PlayStation, Xbox)
+- Chromecast and Apple TV
+- AV1 codec support for bandwidth efficiency
+- Device limit enforcement (per subscription tier)
+- Device management screen
+
+### Database Design
+
+Primary tables:
+- accounts, profiles, profile_pin
+- subscription_plans, subscriptions, billing_history
+- content, content_metadata, content_cast, content_crew
+- series, seasons, episodes
+- video_files (url, resolution, codec, drm_info)
+- audio_tracks, subtitle_tracks
+- genre, content_genre
+- tags, content_tags
+- viewing_history (profile_id, content_id, progress, completed, timestamp)
+- my_list (profile_id, content_id, added_at)
+- ratings (profile_id, content_id, rating, timestamp)
+- downloads (profile_id, content_id, episode_id, quality, downloaded_at)
+- content_availability (region, from_date, to_date, license_info)
+
+### API Structure
+
+```
+GraphQL:
+  Query {
+    browse(input: BrowseInput!): HomePage!
+    content(id: ID!): Content
+    search(query: String!, filters: SearchFilters): SearchResult!
+    profile(id: ID!): Profile
+    viewingHistory: [ViewingEntry!]!
+    myList: [Content!]!
+  }
+  Mutation {
+    updateProgress(contentId: ID!, episodeId: ID, progress: Float!): Boolean!
+    rateContent(contentId: ID!, rating: Int!): Boolean!
+    addToMyList(contentId: ID!): Boolean!
+    removeFromMyList(contentId: ID!): Boolean!
+    createProfile(input: ProfileInput!): Profile!
+    updateProfile(id: ID!, input: ProfileInput!): Profile!
+    downloadContent(contentId: ID!, episodeId: ID, quality: String!): Download!
+  }
+```
+
+### Video Processing Pipeline
+- Ingest: Original file → validation → analysis
+- Transcoding: H.264, H.265/HEVC, AV1
+- Resolution ladder: 360p 480p 720p 1080p 2160p (4K)
+- Bitrate ladder: per resolution (375kbps to 40Mbps)
+- HLS + DASH packaging with CMAF
+- Multi-DRM encryption
+- Thumbnail generation (sprites for scrubbing)
+- Chapter generation for skip intro/recap (ML)
+- Audio track extraction and encoding (AAC, Dolby Digital, Dolby Atmos)
+- Subtitle OCR and timing
+- Content verification (quality check)
+
+### Content Delivery
+- Multi-CDN strategy (CloudFront + Fastly + Akamai)
+- Edge caching with regional servers
+- CDN load balancing based on latency
+- Peer-assisted delivery (WebRTC, optional)
+- Fallback CDN on failure
+- Geolocation-based content availability
+
+### Performance Optimization
+- SSR with streaming for homepage
+- Image optimization (WebP/AVIF, responsive sizes)
+- Video pre-buffering on hover
+- Billboard trailer lazy loading
+- Content row virtualization (react-virtual)
+- Bundle splitting by route
+- Service worker for offline assets
+- Background data sync (viewing history)
+- Critical CSS inline
+
+### Security
+- DRM for premium content
+- Widevine L1 for Android (hardware-level)
+- Token-based video URL authentication
+- Geo-blocking enforcement
+- Concurrent stream limits
+- VPN/proxy detection
+- Account sharing detection (device count, IP analysis)
+- Credit card data handling (PCI-DSS via Stripe)
+
+### Testing
+- Unit: Vitest for business logic
+- Integration: Apollo testing utils
+- E2E: Playwright for web, Detox for mobile
+- Visual: Percy
+- Performance: Lighthouse CI for web, k6 for streaming
+- DRM: Cross-platform playback test matrix
+
+### Docker & CI/CD
+- Docker Compose for local development
+- K8s manifests for production services
+- GitHub Actions CI/CD pipeline
+- Blue-green deployments for zero-downtime
+- Canary releases for frontend
+- Database migrations automated
+
+### Monitoring & Analytics
+- Video startup time (VST)
+- Rebuffering ratio
+- Error rate (per codec, per CDN, per region)
+- QoE (Quality of Experience) score
+- User engagement (viewing hours per session)
+- Churn prediction (ML model)
+- Subscription metrics (MRR, ARPU, LTV)
+- Content performance (completion rate, popularity)
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Project setup with monorepo
+2. Database schema: catalog, users, profiles
+3. Authentication and subscription management
+4. Content management system (CMS)
+5. Basic browse page with content rows
+
+### Phase 2: Video Player (Week 3-4)
+6. Custom video player with Shaka/hls.js
+7. DRM integration (Widevine + FairPlay)
+8. Adaptive bitrate streaming
+9. Viewing history and resume playback
+10. Player controls and gesture support
+
+### Phase 3: User Experience (Week 5-6)
+11. Hero billboard with trailer
+12. My List and Continue Watching
+13. Content detail pages
+14. Search with Elasticsearch
+15. Profile management
+
+### Phase 4: Recommendations (Week 7-8)
+16. Collaborative filtering recommender
+17. Personalized homepage
+18. Trending detection
+19. Rating system and feedback loop
+20. A/B testing framework
+
+### Phase 5: Download & Offline (Week 9-10)
+21. Download system with DRM
+22. Offline playback
+23. Smart downloads
+24. Device management
+25. Chromecast/AirPlay
+
+### Phase 6: Polish (Week 11-12)
+26. Performance optimization
+27. Subtitle and audio track system
+28. Skip intro detection (ML)
+29. Security hardening
+30. Global deployment with Multi-CDN
+
+## Folder Structure
+```
+apps/
+├── web/                     # Next.js web app
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   │   ├── browse/
+│   │   │   ├── player/
+│   │   │   └── profile/
+│   │   └── lib/
+├── mobile/                  # React Native app
+├── server/                  # Node.js API
+│   ├── src/
+│   │   ├── resolvers/
+│   │   ├── services/
+│   │   │   ├── streaming/
+│   │   │   ├── recommendations/
+│   │   │   └── billing/
+│   │   └── workers/
+│   └── prisma/
+├── cms/                     # Admin content management
+├── transcoder/              # Video processing pipeline
+└── shared/                  # Common types
+```
+
+## Final Instructions
+Build a complete Netflix clone at streaming-platform scale. The video player must handle DRM across all browsers and devices with zero buffering. Implement Netflix-level recommendation algorithms with real-time personalization. The CMS must manage thousands of titles with multi-language metadata. Subscription billing must handle tier upgrades, downgrades, and cancellations seamlessly. Optimize the video pipeline for cost efficiency while maintaining 4K HDR quality. Make the UI pixel-perfect to Netflix's design with fluid animations and transitions. Implement proper security for premium content protection.

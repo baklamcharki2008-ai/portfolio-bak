@@ -1,0 +1,126 @@
+# MASTER PROMPT: Crypto Exchange
+
+## Project Overview
+Build a complete cryptocurrency exchange platform with trading engine, order book, wallet management, KYC/AML, real-time market data, and admin controls.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, TradingView Charting Library (or Lightweight Charts), Recharts, Zustand, React Query, WebSocket
+- **Backend:** Node.js + Express + TypeScript, Go (matching engine), Python (market making/analysis)
+- **Database:** PostgreSQL (users, wallets), Redis (order book, real-time data), InfluxDB (time-series market data)
+- **Auth:** JWT + OAuth + MFA (TOTP, SMS, hardware key)
+- **Real-time:** WebSocket + Socket.io (market data stream)
+- **Blockchain:** Web3.js / Ethers.js (wallet integration)
+- **KYC:** Onfido / Jumio (simulated)
+- **Infrastructure:** Docker, Kubernetes, AWS/GCP
+
+## Detailed Requirements
+
+### Authentication & Security
+- Email/password + MFA (TOTP + SMS backup + hardware key)
+- Device management and session control
+- API key management (with IP whitelisting, permissions)
+- Anti-phishing code (display on all emails)
+- Withdrawal address whitelist
+- Login history and geolocation
+- IP whitelisting for corporate accounts
+- Cold storage for majority of funds
+- Security audit log
+
+### Exchange Dashboard
+- Market overview: BTC/USDT, ETH/USDT, top gainers/losers, 24h volume
+- Price chart (TradingView): candlestick, line, depth, 1m-1M timeframes
+- Order book: bids/asks with depth visualization
+- Recent trades (public feed)
+- Trading form: limit, market, stop-limit, OCO orders
+- Current open orders
+- Order history
+- Balance summary per currency
+- Price ticker bar (horizontal scroll)
+
+### Trading Engine (Go)
+- Order matching engine: price-time priority
+- Order types: market, limit, stop-limit, stop-market, OCO, trailing stop, post-only, IOC, FOK, iceberg
+- Trade execution and settlement
+- Order book management with Redis
+- Market data broadcast via WebSocket
+- Taker/maker fee structure
+- Trading pair management (base/quote currency)
+- Trading rules (minimum order size, price precision, quantity precision)
+- Circuit breakers (price limits, volatility halts)
+
+### Wallet Management
+- Wallet types: spot, funding, trading (exchange internal)
+- Deposit: generate deposit address (per blockchain), QR code display
+- Deposit confirmation (blockchain confirmations)
+- Withdrawal: address validation, 2FA confirmation, fee display
+- Withdrawal limits (per tier, per day)
+- Internal transfer (instant, zero fee)
+- Multi-currency support: BTC, ETH, USDT (ERC-20/TRC-20), SOL, XRP, ADA, DOT, MATIC, LINK, BNB, DOGE, SHIB, USDC
+- Wallet history: deposits, withdrawals, transfers
+- Cold/hot wallet management (admin)
+
+### User Features
+- Profile management
+- KYC verification tiers (Level 0-3 with increasing limits)
+- Referral program (commission on referral trades)
+- Trading fee discount with native token
+- API key management
+- Affiliate dashboard
+- Trade history export
+- Tax reports (CSV, transaction history for tax filing)
+- Notification preferences
+
+### Market Data
+- Real-time prices via WebSocket (subscription per symbol)
+- OHLCV candlestick data (historical + real-time)
+- Order book snapshots and increments
+- 24-hour ticker (volume, high, low, open, close, change %)
+- Recent trades
+- Funding rate (for perpetual futures)
+- Market depth chart
+
+### Admin Dashboard
+- User management (approve KYC, suspend, trade restrictions)
+- Currency management (add/edit/disable trading pairs)
+- Order management (cancel orders)
+- Deposit/withdrawal approval (manual review for large amounts)
+- System settings (fees, limits, features)
+- Market surveillance (abnormal trading detection)
+- Security monitoring (failed logins, suspicious activity)
+- Financial reports (reserve audit, P&L)
+- Cold wallet management
+
+### KYC/AML
+- KYC tiers: email → phone → ID → address → video verification
+- Document upload: passport, driver's license, national ID
+- Liveness check (face matching)
+- AML screening (sanctions lists, PEP check)
+- Risk scoring
+- Transaction monitoring (AML rules)
+- Suspicious activity reporting
+- Compliance reporting
+
+### Security Features
+- Cold storage encryption (AES-256-GCM)
+- Multi-signature wallets for withdrawals
+- Withdrawal address whitelist (24h lock for new addresses)
+- API request signing (HMAC-SHA256)
+- Rate limiting per endpoint
+- DDoS protection
+- WAF (Web Application Firewall)
+- Regular security audits
+- Bug bounty program display
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, MFA, user management, currencies
+Phase 2: Trading Engine (Week 3-5) - Go matching engine, order book, order types
+Phase 3: Wallet (Week 5-7) - Deposit addresses, withdrawal flow, balance management, hot/cold wallets
+Phase 4: Market Data (Week 7-8) - WebSocket streaming, candlestick data, order book snapshots
+Phase 5: KYC/AML (Week 8-9) - KYC tiers, document upload, verification flow
+Phase 6: Admin (Week 9-10) - Admin dashboard, user management, market surveillance
+Phase 7: Security (Week 10-11) - API keys, withdrawal whitelist, audit logging, security hardening
+Phase 8: Polish (Week 11-12) - Referral program, tax reports, testing, deployment
+
+## Final Instructions
+Build a complete cryptocurrency exchange with trading engine, order book, wallet management, KYC/AML, and real-time market data. The Go matching engine must handle thousands of orders per second with price-time priority. Support 30+ trading pairs with multiple order types (market, limit, stop, OCO, trailing stop). Wallet system must manage deposits/withdrawals for 15+ blockchains with hot/cold wallet separation. KYC must include document upload with tier-based limits. Implement WebSocket streaming for real-time prices, order book, and trades. Include admin dashboard with market surveillance. Design a dark trading-themed UI with green (buy) and red (sell) accents.

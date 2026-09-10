@@ -1,0 +1,112 @@
+# MASTER PROMPT: File Sharing Platform
+
+## Project Overview
+Build a secure file sharing platform with upload, encryption, link sharing, expiry, preview, collaboration, and version management.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Dropzone
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL + Redis
+- **Storage:** S3-compatible
+- **Auth:** JWT + OAuth (Google, Microsoft, Apple)
+- **Security:** AES-256-GCM client-side encryption, SSL/TLS
+- **Infrastructure:** Docker, GitHub Actions, Railway
+
+## Detailed Requirements
+
+### File Upload
+- Drag-and-drop upload
+- Click to browse
+- Upload from URL (download + store)
+- Multi-file upload (parallel)
+- Folder upload (preserve structure)
+- Upload progress indicator
+- Pause/resume upload
+- Chunked upload for large files (up to 100GB)
+- File type validation (allowlist/blocklist)
+- File size limits
+- Upload speed throttle option
+
+### File Management
+- File/folder listing: grid, list, table view
+- Sort by name, size, date, type
+- Search files and folders
+- File/folder operations: rename, move, copy, delete, download
+- File preview: images, videos, audio, PDF, documents (DOCX, XLSX, PPTX), code (syntax highlight), archives (ZIP preview)
+- Compress files to ZIP for batch download
+- File/folder favorites/starred
+- Recent files
+- Trash with recovery (30-day retention)
+
+### Sharing
+- Generate share link (with unique token)
+- Link permissions: view, download, edit
+- Link expiry: never, 1h, 24h, 7d, 30d, custom date
+- Password protection for link
+- Download limit (max X downloads)
+- Email notification on link access
+- Send via email (pre-fill recipient)
+- QR code for share link
+- Share multiple files as bundle
+- Embedded file viewer (iframe for other sites)
+- File request (allow others to upload to you)
+
+### Security & Encryption
+- AES-256-GCM encryption at rest
+- TLS 1.3 for transit
+- Client-side encryption (zero-knowledge, optional)
+- File integrity verification (SHA-256 checksum)
+- Virus scanning on upload (ClamAV)
+- File access logging
+- IP-based access restrictions
+- Rate limiting on downloads
+
+### Collaboration
+- Shared folders (multiple users can access)
+- File comments (on specific file)
+- File activity log (who viewed, downloaded, edited)
+- Real-time presence (who's viewing)
+- @mention collaborators
+
+### Version Management
+- Version history per file (keep last 10 versions by default)
+- Upload new version (replace with history)
+- Version diff for text files
+- Restore previous version
+- Version naming
+
+### User Dashboard
+- Storage usage (pie chart: used/free)
+- Recent activity feed
+- Shared link management (view, revoke, extend)
+- Upload/download statistics
+- Storage upgrade prompt
+
+### Admin Dashboard
+- User management (storage quota, ban, delete)
+- File management (view any file, delete, transfer)
+- Sharing management (view all links, revoke)
+- System usage analytics (total storage, active users, popular file types)
+- Storage configuration
+- Security settings
+
+### Integration API
+- REST API for file CRUD
+- Webhooks: file.uploaded, file.deleted, file.shared, link.accessed
+- OAuth 2.0 for third-party apps
+- API key management
+- SDK examples (curl, Python, Node.js)
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1) - Auth, upload, file listing, basic preview
+Phase 2: File Management (Week 2) - Operations, search, favorites, trash, grid/list view
+Phase 3: Sharing (Week 3-4) - Share links, password, expiry, email, QR code
+Phase 4: Security (Week 4-5) - Encryption, virus scan, access logging, rate limiting
+Phase 5: Collaboration (Week 5-6) - Shared folders, comments, activity log, presence
+Phase 6: Versioning (Week 6-7) - Version history, upload new version, restore
+Phase 7: API & Webhooks (Week 7-8) - REST API, webhooks, SDKs
+Phase 8: Polish (Week 8-9) - Admin dashboard, analytics, performance, testing
+
+## Final Instructions
+Build a secure file sharing platform with drag-and-drop upload, preview for 30+ file types, encrypted sharing links with password protection and expiry, file versioning, collaboration features, and admin controls. Support files up to 100GB with chunked upload. Implement AES-256 encryption at rest with optional client-side encryption. Include virus scanning on upload. Provide share links with granular permissions and QR codes. Design a clean, professional UI with clear file preview capabilities.

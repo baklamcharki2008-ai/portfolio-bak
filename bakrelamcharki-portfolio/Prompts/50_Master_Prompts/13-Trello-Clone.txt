@@ -1,0 +1,167 @@
+# MASTER PROMPT: Trello Clone
+
+## Project Overview
+Build a complete project management platform with Kanban boards, lists, cards, drag-and-drop, team collaboration, automation, power-ups, and timeline views.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, @dnd-kit (drag-and-drop), Zustand, React Query
+- **Backend:** Node.js + Express + TypeScript, tRPC, GraphQL
+- **Database:** PostgreSQL (primary), Redis (cache + real-time)
+- **Real-time:** WebSocket (Socket.io) for live updates
+- **Auth:** JWT + OAuth (Google, Microsoft, Slack, Atlassian)
+- **Storage:** S3-compatible for attachments
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+- **Monitoring:** Sentry, DataDog, Grafana
+
+## Detailed Requirements
+
+### Authentication
+- Email/password + OAuth (Google, Microsoft, Apple, Slack, Atlassian)
+- Atlassian SSO for enterprise
+- Two-factor authentication
+- Session management across devices
+- SAML/SCIM for organization accounts
+
+### Boards & Workspaces
+- Workspace/organization creation
+- Board creation with templates
+- Board visibility: private, workspace, public
+- Board background customization (colors, photos, gradients)
+- Board stickers and labels
+- Board description and archived items
+- Board members and permissions
+- Starred and recent boards
+- Collection/grouping of boards
+
+### Lists & Cards
+- List creation, rename, archive, reorder, move
+- Card creation with title, description, members, labels, due date
+- Card detail view: full description, checklist, attachment, activity
+- Checklist with progress tracking
+- Due dates with reminders (notification + email)
+- Card cover images
+- Card custom fields (text, number, date, dropdown, checkbox)
+- Card voting and reactions
+- Card location (GEO coordinates)
+- Card time tracking (start, stop, log time)
+- Card templates
+- Card archive and send to archive
+
+### Drag & Drop
+- Drag cards between lists (with animation)
+- Drag lists to reorder
+- Drag cards to reorder within list
+- Drop zones with hover indicators
+- Multi-select drag (batch move)
+- Keyboard accessible drag-and-drop
+- Touch support for mobile drag-and-drop
+- Undo after drag action
+
+### Team Collaboration
+- Board members with roles (admin, normal, observer)
+- Card assignment to members
+- Comments on cards with @mentions
+- Activity log (who did what, when)
+- Notifications (in-app, email, push)
+- Watch/unwatch cards, lists, boards
+- Card sharing (copy link, share with team)
+- @mention members in comments
+
+### Automation (Butler-like)
+- Rule-based triggers: when card added to list, when due date passes, when label added
+- Actions: move card, assign member, set due date, add label, send notification
+- Scheduled automations (daily, weekly, monthly)
+- Custom button actions on cards
+- Automation templates
+- Automation log (execution history)
+- Approve/reject automated actions
+
+### Power-ups & Integrations
+- Calendar view (Card due dates on calendar)
+- Timeline/Gantt view
+- Dashboard view (burndown, velocity charts)
+- Slack integration (notifications, create card from message)
+- GitHub/GitLab integration (link PRs to cards)
+- Jira integration
+- Google Drive attachment integration
+- Dropbox attachment integration
+- Email-to-board (create cards via email)
+- Custom power-up framework (API-based)
+
+### Views
+- Board view (Kanban)
+- Calendar view (drag to reschedule)
+- Timeline/Gantt view (start date + duration)
+- Table view (spreadsheet-like)
+- Dashboard view (charts and metrics)
+- Map view (location-based cards)
+- Workspace table view (all board cards in one table)
+
+### Search & Filtering
+- Full-text search across all boards, cards, comments
+- Search filters: board, list, label, member, due date
+- Saved searches
+- Card filters: labels, members, due date, checklists
+- Filter by custom field values
+- Board-level card filtering
+
+### Notifications
+- In-app notification center
+- Email notifications (real-time or digest)
+- Push notifications (web + mobile)
+- Notification preferences per board
+- Notification types: due dates, mentions, card changes, comments
+
+### Admin Dashboard
+- Workspace/org management
+- User management (invite, remove, role change)
+- Billing and plan management
+- Usage analytics (boards, cards, members, storage)
+- Audit log (all actions across workspace)
+- Security settings (SSO, 2FA enforcement, IP allowlist)
+- Integration management
+
+### Database Design
+
+Tables:
+- workspaces, workspace_members, workspace_settings
+- boards, board_members, board_labels, board_backgrounds
+- lists (board_id, name, position, archived)
+- cards (list_id, title, description, position, due_date, start_date, completed, archived)
+- card_members, card_labels, card_checklists
+- checklist_items (checklist_id, name, completed, position)
+- comments (card_id, user_id, text, created_at)
+- attachments (card_id, filename, url, size, type, uploaded_by)
+- activities (card_id, user_id, action, details, timestamp)
+- notifications (user_id, type, data, read, created_at)
+- custom_fields, card_custom_field_values
+- power_ups, power_up_configurations
+
+### Performance
+- Virtual scrolling for boards with many cards
+- Optimistic updates for drag-and-drop
+- Debounced save for card editing
+- Local state management (Zustand) with server sync
+- Lazy loading card detail data
+- CDN for board backgrounds and attachments
+- Database indexing on position, board_id, list_id
+
+### Testing
+- Unit: Vitest for business logic
+- Integration: SuperTest for API
+- E2E: Playwright for drag-and-drop flows
+- Visual: Percy for UI regression
+- Performance: k6 for API
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, boards, lists CRUD
+Phase 2: Cards & Drag-Drop (Week 3-4) - Full card system with @dnd-kit
+Phase 3: Collaboration (Week 5-6) - Comments, activity, notifications
+Phase 4: Views & Automation (Week 7-8) - Calendar, timeline, Butler automation
+Phase 5: Power-ups (Week 9-10) - Integrations, custom fields, search
+Phase 6: Admin & Polish (Week 11-12) - Admin dashboard, performance, security
+
+## Final Instructions
+Build a complete Trello clone with smooth drag-and-drop, real-time collaboration, automation engine, and multiple views. The drag-and-drop must support both mouse and touch with 60fps animations. Implement Butler-style automation with triggers and actions. Support Kanban, Calendar, Timeline, Table, and Dashboard views. Include power-ups framework for extensibility. Design a clean, intuitive UI matching Trello's simplicity.

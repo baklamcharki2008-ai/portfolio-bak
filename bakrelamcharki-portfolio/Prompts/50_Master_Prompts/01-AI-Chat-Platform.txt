@@ -1,0 +1,232 @@
+# MASTER PROMPT: AI Chat Platform
+
+## Project Overview
+Build a production-ready AI chat application with multi-model support (GPT-4, Claude, Gemini, Llama), conversation management, real-time streaming, and team collaboration features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 (App Router), TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, SWR
+- **Backend:** Next.js API Routes + tRPC, Python FastAPI (for ML inference)
+- **Database:** PostgreSQL (primary), Redis (caching + sessions + message queue)
+- **ORM:** Prisma
+- **Auth:** NextAuth.js v5 with JWT + OAuth (Google, GitHub, Microsoft)
+- **Real-time:** WebSockets (Socket.io), Server-Sent Events for streaming
+- **AI Integration:** LangChain, OpenAI SDK, Anthropic SDK, Hugging Face
+- **Storage:** AWS S3 / Cloudflare R2 for file attachments
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions, Vercel + Railway
+- **Monitoring:** Sentry, DataDog, LogRocket
+- **Testing:** Jest, Playwright, Cypress
+
+## Detailed Requirements
+
+### Authentication & Authorization
+- Multi-provider OAuth (Google, GitHub, Microsoft)
+- Email/password with magic link support
+- JWT-based session management with refresh tokens
+- Role-based access control (admin, moderator, user, guest)
+- Workspace/team-based permissions
+- API key management for developers
+- Rate limiting per user tier
+
+### Frontend Architecture
+- Server Components with client islands for interactivity
+- Streaming UI with Suspense boundaries
+- Virtualized message list (react-virtuoso) for performance
+- Markdown rendering with syntax highlighting (react-markdown + rehype)
+- Code block copy, edit, and run capabilities
+- Dark/light mode with system preference detection
+- Responsive design: desktop sidebar, mobile bottom sheet navigation
+- PWA support with offline message caching
+- Drag-and-drop file upload
+- Voice input recording and transcription
+
+### Core Features
+- Multi-model chat (GPT-4, Claude 3, Gemini Pro, Llama 3, Mistral)
+- Conversation threading and branching
+- Message search with full-text search (PostgreSQL tsvector)
+- Prompt templates and saved snippets
+- A/B comparison of model responses
+- Temperature, top-p, and system prompt controls
+- Token usage tracking and cost estimation
+- Conversation export (PDF, Markdown, JSON, TXT)
+- Shared conversation links (public/private)
+- Collaborative editing of prompts in real-time
+- Conversation folders and tags
+
+### Real-time Features
+- Server-Sent Events for token-by-token streaming
+- WebSocket presence indicators
+- Collaborative document editing (Yjs + CRDT)
+- Typing indicators in shared conversations
+- Real-time conversation list updates
+
+### Database Design
+Detailed schema with tables for:
+- users, accounts, sessions, verification_tokens
+- workspaces, workspace_members, workspace_invitations
+- conversations, conversation_messages, conversation_participants
+- message_attachments, message_reactions, message_edits
+- prompts, prompt_categories, prompt_templates
+- api_keys, usage_logs, billing_plans
+- Indexes on created_at, user_id, conversation_id, search_vector
+
+### API Structure
+```
+POST /api/auth/*           - Authentication endpoints
+GET/POST /api/conversations - CRUD conversations
+POST /api/chat             - Send message (with streaming)
+GET /api/models            - Available AI models
+POST /api/prompts          - Prompt templates
+GET /api/usage             - Token usage analytics
+```
+
+### File Storage
+- Max 25MB per upload
+- Image preview with zoom
+- PDF viewer built-in
+- File type validation
+- Virus scanning
+- CDN caching with Cloudflare
+
+### Admin Dashboard
+- User management (ban, role change, quota)
+- System usage analytics dashboard
+- Model configuration and routing
+- Rate limit management
+- Billing plan management
+- Audit log viewer
+- System health monitoring
+
+### Notifications
+- In-app notification center
+- Email notifications (daily digest, mentions)
+- Push notifications (Web Push API)
+- Desktop notification support
+- Notification preferences per channel
+
+### Search System
+- Full-text search across conversations
+- Vector search for semantic similarity
+- Search filters by date, model, participant
+- Saved searches and search history
+- Real-time search indexing
+
+### Performance Optimization
+- Incremental Static Regeneration for public pages
+- Edge caching with Vercel Edge Config
+- Database connection pooling (PgBouncer)
+- Message pagination with cursor-based pagination
+- Image optimization (next/image, WebP, AVIF)
+- Bundle analysis and code splitting
+- Lazy loading for heavy components
+- Redis caching for frequent queries
+
+### SEO & Accessibility
+- Semantic HTML with ARIA labels
+- Keyboard navigation throughout
+- Screen reader support
+- Focus management in modal dialogs
+- WCAG 2.1 AA compliance target
+- Dynamic meta tags for shared conversations
+- Sitemap generation for public content
+
+### Testing Strategy
+- Unit tests: Jest + React Testing Library
+- Integration tests: Supertest for API
+- E2E tests: Playwright for critical paths
+- Visual regression: Percy or Chromatic
+- Load testing: k6 for streaming endpoints
+- Accessibility tests: axe-core
+
+### Docker & CI/CD
+- Multi-stage Dockerfile for frontend + backend
+- docker-compose for local development
+- GitHub Actions: lint, test, build, deploy
+- Preview deployments for PRs
+- Blue-green deployment strategy
+- Automated database migrations
+- Health check endpoints
+
+### Deployment
+- Frontend: Vercel (serverless + edge functions)
+- Backend API: Railway / Fly.io
+- Database: Supabase / Neon (PostgreSQL)
+- Redis: Upstash / Redis Cloud
+- File storage: Cloudflare R2
+- CDN: Cloudflare
+- Domain: Vercel domains with custom DNS
+
+### Monitoring & Analytics
+- Real-time error tracking (Sentry)
+- Performance monitoring (DataDog RUM)
+- User analytics (PostHog / Plausible)
+- API usage metrics (custom dashboard)
+- Server health monitoring (Uptime Robot)
+- Log aggregation (Logtail / Axiom)
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Initialize Next.js project with TypeScript, Tailwind, ESLint
+2. Set up Prisma schema and database migrations
+3. Implement authentication with NextAuth.js
+4. Create basic layout with responsive sidebar
+5. Set up WebSocket server infrastructure
+6. Implement basic chat UI with message sending
+
+### Phase 2: AI Integration (Week 3-4)
+7. Integrate OpenAI SDK with streaming
+8. Add Anthropic Claude support
+9. Implement model routing and fallback logic
+10. Build prompt template system
+11. Add token counting and usage tracking
+12. Implement conversation persistence and history
+
+### Phase 3: Collaboration (Week 5-6)
+13. Add workspace/team management
+14. Implement real-time collaborative features
+15. Build shared conversation functionality
+16. Add commenting and feedback system
+17. Implement role-based permissions
+
+### Phase 4: Advanced Features (Week 7-8)
+18. Build admin dashboard
+19. Implement file upload and preview
+20. Add search system (full-text + vector)
+21. Notification system
+22. Dark/light mode with persistence
+23. PWA and offline support
+
+### Phase 5: Polish & Launch (Week 9-10)
+24. Performance optimization and caching
+25. Comprehensive testing
+26. Docker and CI/CD pipeline
+27. Documentation
+28. Deployment and monitoring setup
+29. Load testing and scaling
+
+## Folder Structure
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── (auth)/             # Auth pages
+│   ├── (dashboard)/        # Main app pages
+│   ├── api/                # API routes
+│   └── admin/              # Admin pages
+├── components/
+│   ├── ui/                 # Reusable UI components
+│   ├── chat/               # Chat-specific components
+│   ├── workspace/          # Workspace components
+│   └── admin/              # Admin components
+├── lib/
+│   ├── ai/                 # AI model integrations
+│   ├── auth/               # Auth utilities
+│   ├── db/                 # Database client
+│   └── utils/              # Utility functions
+├── hooks/                  # Custom React hooks
+├── stores/                 # Zustand stores
+├── types/                  # TypeScript types
+└── styles/                 # Global styles
+```
+
+## Final Instructions
+Build this as a complete, production-ready application. Ensure all code is type-safe, tested, and follows best practices. Implement monitoring, error handling, and logging from day one. Optimize for performance at every layer. Document all API endpoints and components. Make the UI polished with smooth animations and transitions. Ensure the platform scales from hobby to enterprise usage with appropriate tiering.

@@ -1,0 +1,124 @@
+# MASTER PROMPT: Creative Agency Website
+
+## Project Overview
+Build a professional creative agency website with portfolio showcase, services, team section, blog, client testimonials, contact/quote system, and project management portal.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion, Three.js, GSAP, Locomotive Scroll
+- **Backend:** Next.js API routes + Prisma (CMS)
+- **Database:** PostgreSQL + Prisma
+- **CMS:** Custom headless CMS (or Strapi/Sanity)
+- **Auth:** NextAuth.js (admin + client portal)
+- **Storage:** S3-compatible (project assets)
+- **Email:** Resend / SendGrid
+- **Deployment:** Vercel + Cloudflare
+
+## Detailed Requirements
+
+### Design
+- Bold, creative, and modern agency aesthetic
+- Award-winning design feel
+- Full dark mode with accent color branding
+- Custom typography (variable fonts)
+- Fluid typography (clamp-based responsive text)
+- Advanced animations: parallax, reveal, marquee, magnetic buttons
+- Custom cursors
+- Loading screen with agency logo animation
+- Horizontal scroll sections
+- Immersive full-screen experiences
+
+### Hero Section
+- Full-screen immersive hero
+- Video background or animated 3D scene
+- Agency name and tagline with split-text animation
+- Animated counter (years, projects, clients)
+- CTA: Start a Project, View Our Work
+- Scroll indicator
+- Mouse-follow gradient
+
+### Services Section
+- Services grid with expandable cards: Web Development, Mobile Apps, UI/UX Design, Branding, Digital Marketing, SEO, Cloud, AI/ML
+- Service detail with icon, description, process
+- Hover effects with icon morphing
+- Pricing tier display
+- Service to portfolio linking
+
+### Portfolio/Work Showcase
+- Masonry grid with category filter (all, web, mobile, design, branding)
+- Project card: thumbnail, title, category, client, tech tags
+- Project detail page: hero image/video, overview, challenge, solution, results, tech stack, live link
+- Case study format with metrics (increased traffic X%, conversion Y%)
+- Award badges
+- Client testimonial alongside project
+- Before/after sliders (for design work)
+
+### Process Section
+- 4-6 step process visualization
+- Animated process flow (horizontal timeline)
+- Step detail: icon, title, description, duration
+- Hover/click to expand
+- Client journey map
+
+### Team Section
+- Team member cards with photo, name, role, social links
+- Hover: role reveal, bio tooltip
+- Team member detail: skills, experience, projects worked, fun fact
+- Expanded team view (detail page per member)
+- "We're hiring" CTA
+
+### Client Portal
+- Client login (OAuth)
+- Project dashboard: active projects, milestones, deadlines, deliverables
+- File sharing (drag-and-drop upload/download)
+- Project timeline with progress bar
+- Client feedback system (comments on deliverables)
+- Invoice view and payment history
+- Meeting scheduler (Calendly)
+
+### Blog/Insights
+- Blog list with categories (Design, Development, Business, Technology, Culture)
+- Featured posts hero
+- Article detail with table of contents
+- Estimated read time
+- Author bio
+- Social share buttons
+- Related posts
+- Newsletter signup
+
+### Contact & Quote
+- Contact form: name, email, phone, company, project type, budget, timeline, message
+- File upload for brief
+- Quote request form (detailed)
+- Interactive map (office locations)
+- Office hours, phone, email, social links
+- Live chat widget (optional: Tidio/Crisp)
+- FAQ accordion
+
+### Admin Dashboard
+- Website content editor (pages, services, team, testimonials, blog)
+- Portfolio project manager
+- Client management
+- Contact/quote inbox
+- Analytics dashboard
+- Team member management
+
+### SEO & Performance
+- 95+ Lighthouse score
+- Structured data (Organization, LocalBusiness, Service, CreativeWork)
+- Dynamic sitemap + robots.txt
+- OG images for all pages
+- Blog SEO (meta, schema, breadcrumbs)
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Setup, design system, layout, navigation, dark mode
+Phase 2: Homepage (Week 2-3) - Hero, services, portfolio grid, process, team, testimonials
+Phase 3: Portfolio Detail (Week 3-4) - Project detail pages, case study format, before/after
+Phase 4: CMS & Admin (Week 4-5) - Headless CMS, admin dashboard, content management
+Phase 5: Client Portal (Week 5-6) - Authentication, project dashboard, file sharing, feedback
+Phase 6: Blog & Contact (Week 6-7) - Blog with MDX, contact form, quote system
+Phase 7: Animations (Week 7-8) - Framer Motion, GSAP, Three.js, horizontal scroll, parallax
+Phase 8: Polish (Week 8-9) - Performance, SEO, accessibility, testing, deployment
+
+## Final Instructions
+Build a premium creative agency website with award-winning design, immersive animations, portfolio showcase with case studies, services section, team profiles, client portal, blog, and contact/quote system. The design must feel cutting-edge with horizontal scroll sections, smooth scroll (Locomotive), and 3D elements (Three.js). Include a full CMS for content management and a client portal for project collaboration. Achieve 95+ Lighthouse score. Design a dark-themed, immersive, and luxurious agency website.

@@ -1,0 +1,141 @@
+# MASTER PROMPT: Uber Clone
+
+## Project Overview
+Build a complete ride-sharing platform with real-time tracking, driver/rider apps, trip pricing, payment processing, driver onboarding, and admin dashboard.
+
+## Tech Stack
+- **Frontend:** Next.js 14 (web), React Native (mobile), TypeScript, Tailwind CSS, Mapbox/Google Maps, Zustand
+- **Backend:** Node.js + Express + TypeScript, Go (geospatial matching engine)
+- **Database:** PostgreSQL + PostGIS (geospatial), Redis (real-time + queues), MongoDB (trip history)
+- **Real-time:** WebSocket (Socket.io), gRPC (driver-rider matching)
+- **Auth:** JWT + OAuth (Google, Apple, Facebook)
+- **Payments:** Stripe Connect
+- **Maps:** Mapbox GL JS + Mapbox Directions API, Google Maps
+- **Notifications:** Firebase Cloud Messaging (push), Twilio (SMS)
+- **Infrastructure:** Docker, Kubernetes, AWS/GCP
+
+## Detailed Requirements
+
+### Rider App (Mobile-First)
+- Sign up/login with phone + OTP
+- Home screen: Map view with current location, destination input, ride type selector
+- Destination search with autocomplete (Mapbox/Google)
+- Ride type selection: UberX, UberXL, Uber Black, Uber Comfort, Uber Pool/Share
+- Each ride type: estimated price range, estimated duration, car type, passenger count
+- Fare estimate with surge pricing indicator
+- Request ride → find nearby driver
+- Real-time driver tracking on map
+- Driver info: name, photo, rating, car model, license plate
+- Emergency sharing (share trip status with contacts)
+- SOS button
+- Trip timeline: driver accepted → arriving → picked up → en route → dropped off
+- In-app chat with driver (pre-canned messages)
+- Split fare with friends
+- Rating driver (1-5 stars + feedback categories)
+- Trip history
+- Favorite places (Home, Work, etc.)
+- Scheduled rides
+
+### Driver App (Mobile-First)
+- Driver dashboard: online/offline toggle
+- Heat map (high demand areas)
+- Incoming ride request: pickup location, destination, estimated earnings, distance, time
+- Accept/reject ride
+- Navigate to pickup
+- Rider info: name, rating, pickup note
+- Start trip / End trip
+- Earnings: per trip, daily, weekly
+- Driver rating from riders
+- Trip history
+- Weekly payout summary
+- Driver incentives/challenges
+- Earnings breakdown (fares, tips, bonuses, surge pricing)
+- Vehicle management
+- Account: documents, insurance, vehicle info
+
+### Real-Time Matching Engine
+- Geospatial indexing (PostGIS + Redis Geo)
+- Driver location heartbeat (every 3 seconds via WebSocket)
+- Ride request dissemination: find nearest available drivers
+- Surge pricing algorithm (demand/supply heat map)
+- Estimated time of arrival (ETA) calculation
+- Route optimization (avoid tolls, traffic-aware)
+- Pricing model: base fare + distance + time + surge multiplier
+- Cancellation fee logic
+- Driver dispatch optimization (batch matching for Uber Pool)
+
+### Trip Pricing
+- Distance-based pricing
+- Time-based pricing (slow traffic)
+- Surge pricing (dynamic multiplier based on demand/supply)
+- Minimum fare
+- Cancellation fee
+- Waiting time charges
+- Tolls, airport fees
+- Price estimation before booking
+- Receipt after trip: breakdown of all charges
+- Tips
+
+### Payments (Stripe Connect)
+- Rider: credit/debit card, PayPal, Apple Pay, Google Pay, Uber Cash (wallet)
+- Split payment with friends
+- Corporate billing
+- Driver: weekly payouts to bank account
+- Instant pay (cash out immediately for fee)
+- Payment hold and release
+- Dispute resolution
+- Tax information collection for drivers
+
+### Safety Features
+- SOS/Emergency button (connects to local emergency services)
+- Ride sharing (share trip status with trusted contacts)
+- Driver/rider phone number anonymization (Uber's masked calling)
+- Real-time trip monitoring (route deviation detection)
+- Driver face verification (periodic selfie check)
+- Emergency contact notification
+- Safety toolkit: audio recording (simulated), emergency assist, safety status check
+- Driver background check integration
+
+### Driver Onboarding
+- Registration: personal info, driver's license, vehicle registration, insurance
+- Vehicle inspection checklist
+- Background check (simulated)
+- Document upload and verification
+- Driver training videos (onboarding course)
+- Activation process review
+- Driver profile setup
+
+### Admin Dashboard
+- Real-time operations map (all active trips)
+- Driver management: approve, suspend, review documents
+- Rider management: review complaints, manage accounts
+- Trip monitoring: view ongoing/completed trips
+- Pricing configuration: base fares, per-km, per-minute, surge thresholds
+- Geofence management: airport, event zones
+- Promotion management: referral bonuses, ride discounts
+- Revenue analytics: total revenue, commission, driver payouts
+- Safety monitoring: incident reports, emergency alerts
+- Support ticket management
+
+### Promotions & Referrals
+- Referral program: rider invites friend (+) both get credit
+- First ride discount
+- Promo codes
+- Targeted promotions (by location, time, user segment)
+- Driver referral bonus
+- Surge pricing notifications
+- Ride pass (monthly subscription for discounts)
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth (phone OTP), user profiles, map integration
+Phase 2: Rider App (Week 3-4) - Ride request flow, fare estimate, location search
+Phase 3: Driver App (Week 4-6) - Online/offline, ride request accept, navigation, trip flow
+Phase 4: Matching Engine (Week 6-7) - Geospatial matching, ETA, surge pricing, dispatch
+Phase 5: Payments (Week 7-8) - Stripe Connect, rider payment, driver payouts
+Phase 6: Safety (Week 8-9) - SOS, ride tracking, emergency contacts, anonymized calls
+Phase 7: Admin (Week 9-10) - Operations dashboard, driver management, analytics
+Phase 8: Polish (Week 10-12) - Promotions, driver onboarding, testing, deployment
+
+## Final Instructions
+Build a complete Uber clone with rider and driver mobile apps, real-time GPS tracking, ride matching engine, surge pricing, Stripe Connect payments, safety features, and admin operations dashboard. The matching engine must use PostGIS + Redis Geo for real-time driver discovery. Implement surge pricing with demand heat maps. Include safety features: SOS, ride sharing, route deviation alerts. Driver onboarding must include document upload and verification. The admin dashboard must show all active trips on a map with real-time updates. Design a clean, professional UI with Uber's black/green brand colors.

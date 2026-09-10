@@ -1,0 +1,157 @@
+# MASTER PROMPT: Windows 11 Simulator
+
+## Project Overview
+Build a fully interactive Windows 11 desktop simulator in the browser with start menu, taskbar, window management, file explorer, settings, apps, and games.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion (animations), Zustand (state), react-window (virtualization)
+- **Backend:** Node.js + Express (for file operations and persistence)
+- **Database:** None (localStorage/IndexedDB for persistence)
+- **Storage:** S3-compatible for saving desktop states
+- **Auth:** Optional (for cloud saves)
+- **Infrastructure:** Vercel/Netlify deployment
+
+## Detailed Requirements
+
+### Desktop Environment
+- Desktop with wallpaper (preloaded + custom upload)
+- Desktop icons (My Computer, Recycle Bin, Folders, Files)
+- Right-click context menu (refresh, view, sort, new folder, paste)
+- Desktop icon drag and arrangement
+- Desktop icon auto-arrange and grid alignment
+- Multiple virtual desktops (Task View)
+- Desktop widgets (weather, clock, calendar, news)
+- Snap Layouts (hover maximize to show layouts)
+- Snap Assist (snap windows to zones)
+- Window management: minimize, maximize, close, resize, drag, shake to minimize, Aero Shake
+
+### Taskbar
+- Centered taskbar icons
+- Start button with Windows logo animation
+- Search bar on taskbar
+- Task View button (virtual desktops)
+- System tray: clock, date, volume, network, battery, notifications
+- Running app icons with underline indicator
+- Taskbar context menu
+- Taskbar auto-hide
+- Taskbar corner overflow
+- Notification badge count
+
+### Start Menu
+- Pinned apps section
+- Recommended/recent apps section
+- All apps list (alphabetical)
+- Start menu power button (Sleep, Shut Down, Restart)
+- Start menu user account button
+- Search in Start menu
+- Start menu resize
+- Folder groups in Start menu
+- Animated open/close
+
+### File Explorer
+- Ribbon/toolbar with commands (New Folder, Copy, Paste, Delete, Rename, Properties, Share)
+- Navigation pane: Quick Access, This PC, Network, OneDrive
+- File and folder display: list view, details view, icons, tiles, content
+- Column headers with sort (Name, Date modified, Type, Size)
+- File preview pane (select file shows preview)
+- Detail pane (file info: size, type, date, dimensions)
+- Address bar with breadcrumb navigation
+- Search box in File Explorer
+- File context menu (Copy, Paste, Delete, Rename, Properties, Share, Open with)
+- Drag-drop files between folders
+- Multi-select (Ctrl+click, Shift+click, Ctrl+A)
+- File explorer tabs (like Windows 11 22H2)
+- This PC: Drives (C:, D:), Devices, Network locations
+- Recycle Bin: restore, empty, properties
+
+### Window Management
+- Smooth window animations (open, close, minimize, maximize, restore)
+- Window snap: drag to corners/edges for quarter/half/full snap
+- Snap layouts grid (hover maximize button)
+- Snap groups (remember snapped window layouts)
+- Alt+Tab switcher with thumbnail previews
+- Win+Tab Task View
+- Keyboard shortcuts (Win+D desktop, Win+E explorer, Win+I settings, etc.)
+- Cascade, stack, and side-by-side window arrangements
+- Window opacity/transparency effects (mica, acrylic)
+
+### Built-in Apps
+- Calculator: standard, scientific, programmer, date calculation, converter
+- Notepad: text editing, word wrap, zoom, encoding, auto-save
+- Paint: drawing, shapes, text, brushes, color picker, fill, eraser, zoom
+- Clock: alarm, timer, stopwatch, world clock
+- Calendar: month view, day view, event creation
+- Weather: current weather, 7-day forecast, location search
+- Settings: System, Display, Personalization, Bluetooth, Network, Accounts, Time, Accessibility, Privacy, Update
+- Camera (webcam access): photo capture, video recording
+- Photos: image gallery, zoom, slideshow, delete, share
+- Media Player: audio playback with visualizer, playlist
+- Maps: OpenStreetMap integration, search, directions
+- Sound Recorder: record, playback, save audio
+
+### Widgets Panel
+- Slide-out from left (Win+W)
+- Widgets: Weather, Calendar, Photos, News, Sports, Stocks, Traffic
+- Widget customization and layout
+- Widget add/remove
+- News feed with categories
+
+### Notifications & Action Center
+- Notification slide-out from right (Win+N)
+- Notification grouping by app
+- Action buttons: Wi-Fi, Bluetooth, Airplane mode, Focus assist, Night light, Accessibility, VPN, Brightness slider, Volume slider
+- Do Not Disturb / Focus assist
+- Notification settings per app
+- Clear all notifications
+
+### Accessibility
+- Narrator (screen reader)
+- Magnifier (Win++)
+- High contrast themes
+- Closed captions
+- Keyboard navigation (Tab, arrow keys, Enter, Space)
+- Sticky keys, Filter keys, Toggle keys
+- Mouse keys
+- Color filters (grayscale, inverted, deuteranopia, protanopia, tritanopia)
+- Text size and cursor thickness settings
+
+### Personalization
+- Wallpaper: preloaded images, solid colors, custom upload, slideshow
+- Themes: dark, light, custom, high contrast
+- Colors: accent color, transparency effects, Start/taskbar color
+- Lock screen: background, status apps, screen timeout
+- Fonts: view installed, download new
+- Start menu layout customization
+- Taskbar alignment (left, center)
+- Taskbar items show/hide
+
+### Gaming
+- Solitaire (Klondike, Spider, FreeCell)
+- Minesweeper
+- Chess
+- Snake game
+- Game bar (Win+G): screenshot, recording, audio mixer, performance monitor
+- Xbox integration (simplified)
+
+### Performance & Security
+- Fast boot and app loading
+- Smooth 60fps animations (Framer Motion)
+- Memory management (unload unused apps)
+- Virtual memory simulation
+- Windows Security: Firewall, Virus & threat protection (simulated), Account protection
+- User Account Control (UAC) simulation
+- Windows Update (simulate updates, restart)
+
+### Implementation Plan
+
+Phase 1: Desktop Base (Week 1) - Desktop, taskbar, start menu, window manager
+Phase 2: File Explorer (Week 2) - Complete file system, navigation, context menus
+Phase 3: Windows & Apps (Week 3-4) - Window management, calculator, notepad, paint
+Phase 4: Settings & Personalization (Week 5) - Settings app, themes, wallpapers, accessibility
+Phase 5: Advanced Apps (Week 6) - Clock, calendar, weather, media player, maps
+Phase 6: Notifications & Widgets (Week 7) - Action center, taskbar system tray, widgets panel
+Phase 7: Games (Week 8) - Solitaire, minesweeper, chess, snake, game bar
+Phase 8: Polish (Week 9-10) - Performance, security center, multi-user, cloud saves
+
+## Final Instructions
+Build a fully interactive Windows 11 desktop simulator in the browser. Implement the complete desktop environment: start menu, taskbar (centered), window management with snap layouts, and file explorer with ribbon UI. Include built-in apps: calculator, notepad, paint, clock, calendar, weather, media player, settings, and camera. Support personalization: wallpapers, themes, dark/light mode, colors. Include widgets panel, action center, notifications, and accessibility features. Add games: solitaire, minesweeper, chess, snake. All animations must be smooth (60fps). The UI must be pixel-perfect to Windows 11 design.

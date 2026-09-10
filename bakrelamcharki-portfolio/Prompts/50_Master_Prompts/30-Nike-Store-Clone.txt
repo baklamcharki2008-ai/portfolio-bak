@@ -1,0 +1,122 @@
+# MASTER PROMPT: Nike Store Clone
+
+## Project Overview
+Build a premium sportswear e-commerce store with Nike's design language, product catalog, customization (Nike By You), AR try-on, launch calendar, and membership features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion, Three.js (3D), Shopify Storefront API (or custom)
+- **Backend:** Node.js + Express + TypeScript
+- **Database:** PostgreSQL + Redis
+- **Payments:** Stripe + Apple Pay
+- **Auth:** NextAuth.js + Nike Membership
+- **AR:** WebXR / Three.js + model-viewer
+- **Storage:** S3-compatible
+- **Search:** Elasticsearch
+- **Infrastructure:** Vercel + Cloudflare
+
+## Detailed Requirements
+
+### Brand Design
+- Nike's exact design language: bold typography (Futura/Helvetica Now), dynamic imagery, athletic aesthetic
+- Black/white minimalism with accent colors (volt, orange, red)
+- Full-screen hero imagery with parallax
+- Dynamic typography (huge display text, overlapping layouts)
+- Video backgrounds (athletes in action)
+- Product hero with 360° spin
+
+### Product Catalog
+- Categories: Men, Women, Kids, Jordan, Nike By You, Sale
+- Subcategories: Shoes, Clothing, Accessories, Equipment
+- Product types: Running, Training, Basketball, Soccer, Golf, Skateboarding, Tennis, Yoga, Lifestyle
+- Product detail: 360° rotation, image gallery, zoom, video, size guide
+- Colorway selection with swatches
+- Size selector (US, UK, EU, CM)
+- Stock availability per size/color
+- "Why we made this" brand story section
+- Technology features (Air Max, ZoomX, Dri-FIT, Flyknit)
+
+### Nike By You (Customization)
+- 3D product configurator (Three.js)
+- Color picker for each shoe part (upper, swoosh, sole, lace, lining)
+- Material selection (leather, mesh, suede, knit)
+- Text/personalization embroidery
+- Preview: 3D model rotates with customizations in real-time
+- Price breakdown (base + custom options)
+- Save design, share design, buy custom
+- Estimated delivery date
+
+### AR Try-On (Sneakers)
+- WebXR AR experience
+- Camera access with markerless tracking
+- Shoe 3D model overlays on feet
+- Try different colorways in AR
+- Switch between left/right shoe
+- Screenshot capture in AR
+- Add to cart from AR view
+
+### Launch Calendar (SNKRS)
+- Launch grid: upcoming releases with countdown
+- Launch types: First Come First Serve, Draw (LEO), Shock Drop
+- Remind me (push/email notification)
+- Past launches with "View" or "Sold Out" status
+- Product detail with launch rules
+- Draw entry: select size, payment method, submit
+- Entry confirmation and result notification
+
+### Membership (Nike Member)
+- Registration with profile
+- Member perks: free shipping, early access, birthday reward
+- Order history and tracking
+- Saved items (wishlist)
+- Saved payment methods
+- Address book
+- Member profile: size preferences, sport preferences
+- Nike Training Club integration
+- Nike Run Club integration
+
+### Shopping Experience
+- Quick add with size selector popup
+- Cart: slide-out drawer with item preview
+- Checkout: express (Shopify/PayPal) or full checkout
+- Guest checkout available
+- Estimated delivery date on product page
+- Free shipping progress bar
+- Buy now / Add to bag split CTA
+
+### Store Locator
+- Find nearby stores
+- Map view (Google Maps / Mapbox)
+- Store list with distance, address, hours, phone
+- In-store availability check per product
+- Book appointment (fitting, customization)
+
+### Admin Dashboard
+- Product management (CRUD)
+- Inventory management by size/color
+- Order management
+- Customer management
+- Launch calendar management
+- CMS for homepage, banners, stories
+- Analytics dashboard
+
+### Performance
+- Core Web Vitals optimization
+- Image optimization with modern formats
+- 3D model lazy loading
+- Critical CSS inline
+- CDN for all assets
+- SSR for product pages
+
+### Implementation Plan
+
+Phase 1: Brand Foundation (Week 1-2) - Design system, layout, navigation, auth
+Phase 2: Product Catalog (Week 2-4) - Product pages, filtering, search, 360° view
+Phase 3: Cart & Checkout (Week 4-5) - Shopping bag, checkout, payment
+Phase 4: Nike By You (Week 5-7) - 3D configurator, color/material selector
+Phase 5: AR Try-On (Week 7-8) - WebXR, 3D model rendering, camera tracking
+Phase 6: SNKRS (Week 8-9) - Launch calendar, draw system, notifications
+Phase 7: Membership (Week 9-10) - Member profile, perks, order history
+Phase 8: Polish (Week 10-11) - Store locator, admin, performance, testing
+
+## Final Instructions
+Build a premium Nike-inspired e-commerce store with full product catalog, Nike By You 3D customization, AR try-on for sneakers, SNKRS launch calendar with draw system, and Nike Membership features. The design must match Nike's bold athletic aesthetic with huge typography and dynamic imagery. 3D configurator must allow real-time customization of shoe parts. AR try-on must overlay shoes on user's feet via WebXR. Launch calendar must include countdown and draw entry system. Optimize for Core Web Vitals and mobile shopping experience.

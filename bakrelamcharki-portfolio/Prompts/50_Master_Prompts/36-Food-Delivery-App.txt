@@ -1,0 +1,144 @@
+# MASTER PROMPT: Food Delivery App
+
+## Project Overview
+Build a complete food delivery platform with restaurant discovery, menu browsing, ordering, real-time tracking, payment processing, restaurant/partner dashboard, and delivery fleet management.
+
+## Tech Stack
+- **Frontend:** Next.js 14 (web) + React Native (mobile), TypeScript, Tailwind CSS, Framer Motion, Mapbox/Google Maps, Zustand, React Query
+- **Backend:** Node.js + Express + TypeScript, Go (order dispatch engine)
+- **Database:** PostgreSQL + PostGIS, Redis (real-time), MongoDB (orders)
+- **Auth:** JWT + OAuth (Google, Apple, Facebook), phone OTP
+- **Payments:** Stripe Connect + wallet
+- **Maps:** Google Maps / Mapbox
+- **Real-time:** WebSocket (Socket.io), FCM (push)
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+
+## Detailed Requirements
+
+### Customer App
+- Sign up/login with phone + OTP or email + OAuth
+- Location detection (automatic or manual address entry)
+- Restaurant discovery: grid/list, categories (Pizza, Burgers, Sushi, Chinese, Indian, Mexican, Italian, Healthy, Desserts, Drinks)
+- Featured restaurants, popular near you, top rated, fastest delivery
+- Search restaurant or food item (Elasticsearch)
+- Filters: cuisine, price, rating, delivery time, dietary (vegan, gluten-free, halal, keto)
+- Sort: recommended, rating, delivery time, distance
+- Restaurant detail: info, rating, delivery time, minimum order, distance, hours
+- Menu: categories with expandable items
+- Menu item: name, description, price, add-ons, options, quantity, image
+- Dietary badges (Veg, Vegan, Gluten-Free, Spicy)
+- Customization: size, extras, special instructions
+- Cart: items, add-ons, restaurant name, subtotal, delivery fee, tax, total, minimum order indicator
+- Checkout: delivery address, scheduled time, payment method, coupon entry
+- Payment: credit card, wallet, cash on delivery, Apple Pay, Google Pay
+- Order tracking: received → confirmed → prepared → picked up → en route → delivered
+- Real-time delivery tracking on map
+- Live ETA updates
+- Contact driver (anonymized call/chat)
+- Rate order: food rating, delivery rating, tip driver
+- Reorder easily
+- Saved addresses: home, work, custom tags
+- Favorite restaurants
+- Order history and details
+- Push notifications: order confirmed, preparing, out for delivery, delivered
+- In-app chat with restaurant
+
+### Restaurant Dashboard
+- Menu management: add/edit items, categories, pricing, images, availability
+- Modifier groups: size, extras, add-ons
+- Daily specials
+- Order management: incoming orders with sound alert
+- Order timeline: accept, prepare (timer), ready, hand to driver
+- Out-of-stock item management
+- Operating hours and holidays
+- Restaurant profile: logo, cover, description, cuisines, dietary badges
+- Analytics: orders, revenue, popular items, customer ratings
+- Payout settings and earnings
+- Customer reviews and responses
+- Printer integration (thermal printer for orders)
+- Multiple location management
+
+### Delivery Driver App
+- Online/offline status
+- Order request: pickup location, dropoff location, distance, estimated earnings
+- Accept/reject delivery request
+- Navigate to restaurant (in-app map)
+- Mark arrived at restaurant
+- Pickup order (confirm items)
+- Navigate to customer
+- Mark delivered
+- Earnings: per delivery, daily, weekly
+- Tips received
+- Delivery history
+- Performance rating
+- Heat map of busy areas
+- Shift scheduling
+- Vehicle management
+
+### Order Dispatch Engine
+- Assign driver algorithm: nearest available, rating-based, load-balanced
+- Batch orders (driver picks up multiple orders from same restaurant)
+- ETA calculation with traffic
+- Automatic reassignment if driver rejects
+- Rush order priority
+- Estimated preparation time tracking
+- Route optimization for batching
+
+### Admin Dashboard
+- Real-time operations center (all orders, drivers, restaurants on map)
+- Restaurant approval and management
+- Driver approval and management
+- Customer management
+- Commission/fee configuration
+- Promotions and discount management
+- Analytics: orders, revenue, growth, customer retention, average delivery time
+- Dispute resolution
+- Fraud detection (fake orders, refund abuse)
+- Content management (categories, banners, featured items)
+- Platform fee settings
+
+### Features
+- Scheduled ordering (order for later)
+- Recurring orders (weekly meal prep)
+- Group ordering (multiple people order together, split payment)
+- Restaurant subscriptions (meal plans)
+- Promotions: free delivery, first order discount, referral bonus, coupon codes
+- Loyalty program (points per order, redeem for discounts)
+- Tip driver before/after delivery
+- Dietary preferences saved to profile
+- Multi-language support
+- Dark mode
+- Accessibility
+
+### Security & Trust
+- Restaurant hygiene rating display
+- Driver identity verification
+- Customer delivery instructions (gate code, leave at door)
+- Contactless delivery option
+- Order issue reporting (missing item, wrong item, quality issue)
+- Refund processing
+- Secured payments
+
+### Performance
+- 90+ Lighthouse on web
+- Fast app startup (cold start < 2s on mobile)
+- Image optimization (progressive, WebP)
+- Lazy loading restaurant list
+- Map marker clustering
+- Apollo/URQL caching
+- Background location updates for drivers
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, location, restaurant listing, categories
+Phase 2: Menu & Cart (Week 3-4) - Menu browsing, cart system, item customization
+Phase 3: Checkout & Payment (Week 4-6) - Checkout flow, Stripe, wallet, coupons
+Phase 4: Order Tracking (Week 6-7) - Real-time tracking map, status updates, push notifications
+Phase 5: Restaurant Dashboard (Week 7-9) - Menu management, orders, analytics, payouts
+Phase 6: Driver App (Week 9-10) - Driver onboarding, order acceptance, navigation, earnings
+Phase 7: Dispatch Engine (Week 10-11) - Driver assignment, batching, ETA, route optimization
+Phase 8: Admin & Polish (Week 11-13) - Admin dashboard, promotions, loyalty, i18n, deployment
+
+## Final Instructions
+Build a complete food delivery platform with customer mobile app, restaurant dashboard, driver app, and real-time order tracking. The customer app must have restaurant/menu discovery, cart with item customization, checkout with multiple payment methods, and live delivery tracking on map. The restaurant dashboard must handle menu management, incoming orders with sound alerts, and analytics. Driver app must support order acceptance, navigation, and earnings tracking. The dispatch engine must assign nearest driver with batch optimization. Admin dashboard must have real-time operations map. Design a vibrant, food-focused UI with warm colors and mouth-watering imagery.
