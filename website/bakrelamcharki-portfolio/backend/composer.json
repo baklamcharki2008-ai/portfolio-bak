@@ -1,8 +1,0 @@
-{
-    "name": "shelbyx1/portfolio-backend",
-    "description": "Contact form email sender for Shelby__x1 portfolio",
-    "require": {
-        "php": ">=7.4",
-        "phpmailer/phpmailer": "^6.9"
-    }
-}

@@ -1,5 +1,0 @@
-Order Deny,Allow
-Deny from all
-<Files "send-email.php">
-    Allow from all
-</Files>
