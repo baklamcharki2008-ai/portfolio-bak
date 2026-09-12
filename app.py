@@ -28,6 +28,11 @@ def favicon():
     return send_from_directory(SITES["bakrelamcharki-portfolio"], "favicon.svg")
 
 
+@app.get("/google7aa7265463ab1fc9.html")
+def google_verification():
+    return send_from_directory(BASE / "public", "google7aa7265463ab1fc9.html")
+
+
 @app.get("/<site>")
 @app.get("/<site>/")
 def site_index(site):
