@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Download Vertex AI — Vertex Corp</title>
+<meta name="description" content="Download Vertex AI Platform 1.0 for Windows. Free installer from Vertex Corp — AI chat, agents, memory, web search and more.">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="assets/vertex-darkmode.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="company.css">
+<style>
+  .download-section{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px}
+  .download-wrap{max-width:780px;margin:auto;text-align:center}
+  .platform-sep{display:flex;align-items:center;gap:14px;margin:38px 0 22px;color:var(--faint);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  .platform-sep::before,.platform-sep::after{content:"";flex:1;height:1px;background:var(--line)}
+  .pp-note{margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg);text-align:left;font-size:13px;color:var(--muted);line-height:1.6}
+  .pp-note b{color:var(--text)}
+  .pp-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+  .pp-shots figure{margin:0}
+  .pp-shots img{width:100%;border:1px solid var(--line);border-radius:12px}
+  .pp-shots figcaption{font-size:11px;color:var(--faint);margin-top:8px}
+  @media (max-width:640px){.pp-shots{grid-template-columns:1fr}}
+  .download-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .download-eyebrow .live-dot{width:7px;height:7px;border-radius:50%;background:#6ef7b0;box-shadow:0 0 0 4px rgba(110,247,176,.15);animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+  .download-title{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.08;letter-spacing:-.02em;margin:0 0 14px}
+  .download-title em{font-style:normal;background:linear-gradient(120deg,var(--text),var(--muted));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .download-sub{color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 44px}
+  .download-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:34px 30px;text-align:left;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+  .app-row{display:flex;align-items:center;gap:18px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .app-badge{width:56px;height:56px;border-radius:14px;background:var(--glass);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+  .app-badge img{width:34px;height:34px;object-fit:contain}
+  .app-meta{flex:1;min-width:0}
+  .app-meta h2{margin:0;font-size:18px;font-weight:700}
+  .app-title-row{display:flex;align-items:center;gap:10px}
+  .os-icon{width:34px;height:34px;border-radius:10px;border:1px solid var(--line2);display:inline-flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0}
+  .os-icon svg{width:20px;height:20px;fill:currentColor}
+  .app-meta p{margin:3px 0 0;font-size:13px;color:var(--muted)}
+  .dl-zone{padding:26px 0;border-bottom:1px solid var(--line);text-align:center}
+  .dl-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 20px;font-size:15px;font-weight:600;border-radius:14px;background:var(--text);color:var(--bg);border:1px solid var(--text);transition:.3s var(--ease)}
+  .dl-btn:hover{opacity:.86;transform:translateY(-2px)}
+  .dl-info{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--faint)}
+  .dl-info span{display:inline-flex;align-items:center;gap:6px}
+  .hash-box{margin:22px 0 0;padding:14px 16px;border:1px dashed var(--line2);border-radius:12px;background:var(--bg);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;line-height:1.6;color:var(--muted);word-break:break-all;text-align:center}
+  .hash-box b{display:block;font-family:inherit;color:var(--faint);text-transform:uppercase;letter-spacing:.14em;font-size:9px;margin-bottom:8px}
+  .notes{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px}
+  .notes li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.5}
+  .notes li i{font-style:normal;color:var(--text);flex-shrink:0}
+  .alt-link{margin-top:24px;text-align:center}
+  .alt-link a{font-size:13px;color:var(--muted);border-bottom:1px solid var(--line2);padding-bottom:2px;transition:.3s}
+  .alt-link a:hover{color:var(--text);border-color:var(--text)}
+</style>
+</head>
+<body>
+<div id="page-loader" aria-hidden="true"><div class="loader-mark"><img data-logo src="assets/vertex-white.png" alt=""><span></span></div><div class="loader-caption">VERTEX / DOWNLOAD</div></div>
+<div class="noise"></div>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<div id="progress"></div>
+
+<header class="site-header" id="header">
+  <a class="brand" href="index.html" aria-label="Vertex home">
+    <img data-logo src="assets/vertex-white.png" alt="Vertex">
+    <span>VERTEX</span>
+  </a>
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    <a href="index.html#research">Research</a><a href="index.html#platform">Platform</a><a href="index.html#developers">Developers</a><a href="index.html#company">Company</a><a href="index.html#roadmap">Roadmap</a><a href="download.html">Download</a><a href="../bakrelamcharki-portfolio/">Portfolio</a>
+  </nav>
+  <div class="header-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode"><span class="sun">☼</span><span class="moon">◐</span></button>
+    <a class="pill pill-solid" href="download.html">Download</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i></i><i></i></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#research">Research</a><a href="index.html#platform">Platform</a><a href="index.html#developers">Developers</a><a href="index.html#company">Company</a><a href="index.html#roadmap">Roadmap</a><a href="download.html">Download</a><a href="../bakrelamcharki-portfolio/">Portfolio</a><a href="index.html#contact">Contact Vertex</a>
+</div>
+
+<main class="download-section">
+  <div class="container">
+    <div class="download-wrap reveal">
+      <div class="download-eyebrow"><span class="live-dot"></span> Vertex AI Platform · Desktop</div>
+      <h1 class="download-title">Vertex AI <em>for Windows &amp; Android.</em></h1>
+      <p class="download-sub">Get the native desktop app for Windows or the APK for Android and open your Vertex workspace in a dedicated app — designed for real AI work on your device.</p>
+
+      <div class="download-card">
+        <div class="app-row">
+          <div class="app-badge"><img data-logo src="assets/vertex-white.png" alt="Vertex"></div>
+          <div class="app-meta">
+            <div class="app-title-row"><h2>Vertex for Windows</h2><span class="os-icon" title="Windows"><svg viewBox="0 0 88 88" aria-hidden="true"><path d="M0 12.402 35.687 4.558v35.225H0zm39.77-8.523L88 0v39.56H39.77zM88 48.05H39.77v39.5L88 79.985zm-88 0h35.687v33.94L0 74.349z"/></svg></span></div>
+            <p>Version 1.0.0 · MVP 1.0 · Windows 10 / 11 (64-bit)</p>
+          </div>
+        </div>
+        <div class="dl-zone">
+          <a class="dl-btn" href="Vertex-AI-Setup-1.0.0.exe" download="Vertex-AI-Setup-1.0.0.exe">⬇ Download Vertex AI — 77.6 MB</a>
+          <div class="dl-info"><span>✓ Free</span><span>✓ x64 installer</span><span>✓ No ads</span></div>
+          <div class="hash-box"><b>SHA-256 · integrity check</b>B38850457700C1B45F7B4AFE8E99FEB7A32E290AD23210B7058FF752E34C1254</div>
+        </div>
+        <ul class="notes">
+          <li><i>!</i> <span><b>Windows SmartScreen:</b> the installer is unsigned, so Windows may show “Windows protected your PC”. Click <em>More info</em> → <em>Run anyway</em>. It’s safe.</span></li>
+          <li><i>!</i> <span><b>Needs internet:</b> the app is a wrapper that opens your live Vertex workspace online — it is not a standalone offline copy.</span></li>
+        </ul>
+      </div>
+
+      <div class="platform-sep">Android · APK</div>
+
+      <div class="download-card">
+        <div class="app-row">
+          <div class="app-badge"><img data-logo src="assets/vertex-white.png" alt="Vertex"></div>
+          <div class="app-meta">
+            <div class="app-title-row"><h2>Vertex for Android</h2><span class="os-icon" title="Android"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></span></div>
+            <p>Version 1.0.0 · MVP 1.0 · Android 7.0+ · APK</p>
+          </div>
+        </div>
+        <div class="dl-zone">
+          <a class="dl-btn" href="Vertex-AI-1.0.0.apk" download="Vertex-AI-1.0.0.apk">⬇ Download Vertex AI — 982 KB</a>
+          <div class="dl-info"><span>✓ Free</span><span>✓ Small APK</span><span>✓ No ads</span></div>
+          <div class="hash-box" id="hash-box"><b>SHA-256 · integrity check</b>C871D780BD9B74B581DE45F60C59D5D3915C9CE2509E35FAAD8D318C04F41ACB</div>
+        </div>
+        <ul class="notes">
+          <li><i>!</i> <span><b>Install from unknown sources:</b> this APK is not on the Play Store, so Android will ask you to allow installs from your browser or file manager. Tap <em>Settings</em> → <em>Allow from this source</em> → install.</span></li>
+          <li><i>!</i> <span><b>Google Play Protect:</b> your phone scans the APK automatically. It passes the scan and is safe. If Play Protect blocks it, tap <em>More details</em> → <em>Install anyway</em>, or run a manual scan in <em>Play Protect</em>.</span></li>
+          <li><i>!</i> <span><b>Needs internet:</b> the app opens your live Vertex workspace online — it is not a standalone offline copy.</span></li>
+        </ul>
+        <div class="pp-note">
+          <b>Google Play Protect has already analysed this app.</b>
+          <p>The screenshots below show Play Protect scanning Vertex AI and confirming it is safe to install.</p>
+          <div class="pp-shots">
+            <figure><img src="assets/play-protect/WhatsApp Image 2026-09-13 at 12.04.56.jpeg" alt="Google Play Protect analysis of Vertex AI — step 1"><figcaption>Play Protect analysing the app</figcaption></figure>
+            <figure><img src="assets/play-protect/WhatsApp Image 2026-09-13 at 12.04.57.jpeg" alt="Google Play Protect analysis of Vertex AI — step 2"><figcaption>Scan in progress</figcaption></figure>
+            <figure><img src="assets/play-protect/WhatsApp Image 2026-09-13 at 12.04.58.jpeg" alt="Google Play Protect confirms Vertex AI is safe"><figcaption>Result — safe</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <p class="alt-link">Prefer the browser?<a href="https://vertex-ai-platform-1-0-e97b.onbelmo.uk/" target="_blank" rel="noopener noreferrer">&nbsp;Open Vertex AI online&nbsp;↗</a></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-top"><div class="footer-brand"><a class="brand" href="index.html"><img data-logo src="assets/vertex-white.png" alt="Vertex"><span>VERTEX</span></a><p>Independent AI systems, software and experiments from Morocco.</p></div>
+  <div class="footer-col"><b>Explore</b><a href="https://vertex-ai-platform-1-0-e97b.onbelmo.uk/" target="_blank" rel="noopener noreferrer">Vertex AI Platform</a><a href="../bakrelamcharki-portfolio/">Portfolio</a><a href="index.html#platform">Platform</a><a href="index.html#capabilities">Capabilities</a><a href="index.html#roadmap">Roadmap</a></div>
+  <div class="footer-col"><b>Download</b><a href="download.html">Vertex AI for Windows</a><a href="download.html#hash-box">Vertex AI for Android</a><a href="download.html#hash-box">SHA-256 checksum</a><a href="index.html#contact">Support</a></div>
+  <div class="footer-col"><b>Connect</b><a href="mailto:vertexcorp101@gmail.com">Email</a><a href="index.html#developers">Developers</a><a href="index.html#contact">Contact</a></div></div>
+  <div class="container footer-bottom"><span>© 2026 Vertex · Independent AI company</span><span>Built by Bakre Lamcharki · Shelby__x1</span><button id="backTop">Back to top ↑</button></div>
+</footer>
+<script>
+(() => {
+  const root = document.documentElement;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  window.addEventListener('load', () => setTimeout(() => $('#page-loader')?.classList.add('done'), 450));
+  setTimeout(() => $('#page-loader')?.classList.add('done'), 2200);
+  const saved = localStorage.getItem('vertex-company-theme') || 'dark';
+  root.dataset.theme = saved;
+  function applyTheme(theme) {
+    root.dataset.theme = theme;
+    localStorage.setItem('vertex-company-theme', theme);
+    const light = theme === 'light';
+    $$('[data-logo]').forEach(img => img.src = light ? 'assets/vertex-black.png' : 'assets/vertex-white.png');
+    const toggle = $('#themeToggle');
+    if (toggle) { $('.sun', toggle).style.display = light ? 'block' : 'none'; $('.moon', toggle).style.display = light ? 'none' : 'block'; }
+  }
+  applyTheme(saved);
+  $('#themeToggle')?.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+  $('#menuToggle')?.addEventListener('click', () => $('#mobileMenu')?.classList.toggle('open'));
+  $$('#mobileMenu a').forEach(a => a.addEventListener('click', () => $('#mobileMenu').classList.remove('open')));
+  const header = $('#header'), progress = $('#progress');
+  addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', scrollY > 30);
+    const h = document.documentElement.scrollHeight - innerHeight;
+    if (progress) progress.style.width = (h > 0 ? (scrollY / h * 100) : 0) + '%';
+  }, { passive: true });
+  $('#backTop')?.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: .12 });
+  $$('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
+</body>
+</html>
