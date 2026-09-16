@@ -431,7 +431,7 @@ header.hidden{ transform:translateY(-120%); }
   width:18px; font-size:0.75rem; color:var(--text-faint);
   text-align:center; flex-shrink:0;
 }
-.featured-actions{ display:flex; gap:12px; margin-top:4px; }
+.featured-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
 .featured-btn{ position:relative; overflow:hidden; }
 .featured-btn.btn-primary::after{
   content:''; position:absolute; inset:0;
@@ -716,6 +716,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   .model-container{ max-width:280px; }
   .featured-showcase{ padding:24px; gap:32px; }
   .featured-features{ grid-template-columns:1fr; }
+  .featured-actions{ flex-direction:column; }
+  .featured-actions .btn{ width:100%; justify-content:center; }
 }
 @media(max-width:480px){
   .container{ padding:0 16px; }

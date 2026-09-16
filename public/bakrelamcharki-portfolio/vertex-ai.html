@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertex AI Platform — Shelby__x1</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    [data-theme="dark"]{--bg:#0b0b0f;--bg-elevated:#111118;--bg-subtle:#16161f;--text:#eee;--text-muted:#aaa;--text-faint:#666;--border:rgba(255,255,255,.07);--border-strong:rgba(255,255,255,.12);--border-hover:rgba(255,255,255,.2);--glass:rgba(255,255,255,.04);--shadow-sm:0 2px 8px rgba(0,0,0,.3);--shadow-md:0 8px 32px rgba(0,0,0,.4);--shadow-glow:0 0 30px rgba(255,255,255,.03)}
+    [data-theme="light"]{--bg:#f5f5f7;--bg-elevated:#fff;--bg-subtle:#eee;--text:#111;--text-muted:#555;--text-faint:#999;--border:rgba(0,0,0,.08);--border-strong:rgba(0,0,0,.14);--border-hover:rgba(0,0,0,.25);--glass:rgba(0,0,0,.03);--shadow-sm:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 8px 32px rgba(0,0,0,.08);--shadow-glow:0 0 30px rgba(0,0,0,.04)}
+
+    .logo-dark{ display:none; }
+    [data-theme="light"] .logo-dark{ display:block; }
+    [data-theme="light"] .logo-light{ display:none; }
+
+    .project-hero{ padding:140px 0 60px; }
+    .project-hero-inner{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+    .project-hero-logo{ width:52px; height:52px; border-radius:14px; display:grid; place-items:center; background:var(--bg-subtle); border:1px solid var(--border); flex-shrink:0; overflow:hidden; }
+    .project-hero-logo img{ width:100%; height:100%; object-fit:contain; }
+    .project-hero-info h1{ font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-.04em; margin-bottom:6px; }
+    .project-hero-info .version{ font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--text-faint); letter-spacing:.06em; text-transform:uppercase; }
+
+    .project-hero-desc{ color:var(--text-muted); font-size:1rem; line-height:1.7; max-width:680px; margin-top:20px; }
+
+    .project-hero-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .project-hero-actions .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:12px 24px;
+      border-radius:999px; font-size:.86rem; font-weight:600; text-decoration:none;
+      border:1px solid var(--border-strong); color:var(--text-muted);
+      transition:all .3s; white-space:nowrap;
+    }
+    .project-hero-actions .btn:hover{ border-color:var(--border-hover); color:var(--text); background:var(--glass); }
+    .project-hero-actions .btn-primary{ background:var(--text); color:var(--bg); border-color:var(--text); }
+    .project-hero-actions .btn-primary:hover{ opacity:.88; transform:scale(.97); }
+    .project-hero-actions .btn i{ font-size:.8rem; }
+
+    .tech-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+    .tech-tag{ font-family:'JetBrains Mono',monospace; font-size:.65rem; padding:4px 10px; border-radius:999px; border:1px solid var(--border); color:var(--text-faint); }
+
+    .features-section{ padding:60px 0; }
+    .features-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+    .feature-card{
+      background:var(--bg-elevated); border:1px solid var(--border); border-radius:16px;
+      padding:24px; transition:border-color .3s,transform .3s;
+    }
+    .feature-card:hover{ border-color:var(--border-hover); transform:translateY(-2px); }
+    .feature-card i{ font-size:1.1rem; color:var(--text-faint); margin-bottom:10px; display:block; }
+    .feature-card h3{ font-size:.92rem; font-weight:700; margin-bottom:6px; }
+    .feature-card p{ font-size:.8rem; color:var(--text-muted); line-height:1.6; }
+
+    .back-link{ display:inline-flex; align-items:center; gap:6px; color:var(--text-faint); text-decoration:none; font-size:.82rem; font-weight:500; margin-bottom:8px; transition:color .3s; }
+    .back-link:hover{ color:var(--text); }
+    .back-link i{ font-size:.7rem; }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div id="noise"></div>
+<div class="vignette"></div>
+<div id="loader"><div class="loader-inner"><div class="loader-ring"></div><div class="loader-text">Initializing</div></div></div>
+<div id="scroll-progress"></div>
+
+<header>
+  <div class="navbar">
+    <a href="index.html" class="logo">
+      <img id="theme-logo" src="images/logo-light.png" alt="Vertex"><span class="logo-name">Shelby__x1 <span>/ Portfolio</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="index.html#about" data-i18n="nav_about">About</a>
+      <a href="index.html#skills" data-i18n="nav_skills">Skills</a>
+      <a href="index.html#featured" data-i18n="nav_work">Work</a>
+      <a href="projects.html">Projects</a>
+      <a href="../vertex-corp/">Vertex Corp</a>
+      <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">●</button>
+      <div class="lang-switch">
+        <button aria-label="Change language"><span class="lang-current">EN</span></button>
+        <div class="lang-menu">
+          <button data-lang-option="en">English <span>EN</span></button>
+          <button data-lang-option="fr">Français <span>FR</span></button>
+          <button data-lang-option="ar">العربية <span>AR</span></button>
+        </div>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="project-hero">
+    <div class="container">
+      <a href="projects.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Projects</a>
+      <div class="project-hero-inner">
+        <div class="project-hero-logo">
+          <img class="logo-light" src="../vertex-corp/assets/vertex-white.png" alt="Vertex AI">
+          <img class="logo-dark" src="../vertex-corp/assets/vertex-black.png" alt="Vertex AI">
+        </div>
+        <div class="project-hero-info">
+          <h1>Vertex AI Platform</h1>
+          <div class="version">MVP 1.0 · Web + Desktop + Android</div>
+        </div>
+      </div>
+      <p class="project-hero-desc">An independent AI workspace that combines conversational AI with multi-provider routing, persistent memory, agent orchestration, file knowledge, web search, projects and a modern interface — designed to stay useful on realistic hardware and networks.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Flask</span>
+        <span class="tech-tag">AI/LLM</span>
+        <span class="tech-tag">Multi-Provider</span>
+        <span class="tech-tag">Agents</span>
+        <span class="tech-tag">RAG</span>
+      </div>
+      <div class="project-hero-actions">
+        <a class="btn btn-primary" href="https://vertex-ai-platform-1-0-e97b.onbelmo.uk/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Try Online</a>
+        <a class="btn" href="../vertex-corp/download.html"><i class="fa-solid fa-download"></i> Download</a>
+        <a class="btn" href="../vertex-corp/"><i class="fa-solid fa-building"></i> Company</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card"><i class="fa-solid fa-comment-dots"></i><h3>AI Chat Assistant</h3><p>Conversational AI with context awareness, streaming responses, and multi-turn memory.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-cloud"></i><h3>Multiple AI Providers</h3><p>Route requests across OpenAI, Google Gemini, Anthropic Claude, Groq, and more — with automatic fallback.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-brain"></i><h3>AI Memory &amp; RAG</h3><p>Persistent memory with retrieval-augmented generation. Upload files, create knowledge bases, and let the AI recall context across sessions.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-layer-group"></i><h3>Agent Orchestration</h3><p>Multi-step AI agents that can plan, reason, use tools, and execute complex tasks autonomously.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-globe"></i><h3>Real-Time Web Search</h3><p>AI-powered web search with automatic source citation and content extraction.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-file-lines"></i><h3>Smart File Analysis</h3><p>Upload documents, images, or code files. The AI reads, analyzes, and answers questions about your content.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-code"></i><h3>Code Generation</h3><p>Generate, explain, and debug code across multiple programming languages with context-aware suggestions.</p></div>
+        <div class="feature-card"><i class="fa-solid fa-book"></i><h3>Prompt Library</h3><p>Save, organize, and reuse your best prompts. Share templates and build a personal prompt collection.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img id="theme-logo-footer" src="images/logo-light.png" alt="Shelby__x1"></a>
+        <p data-i18n="footer_desc">A passionate technology creator building his future through creativity, learning, and innovation.</p>
+        <div class="footer-social">
+          <a href="https://github.com/vertexcorp101-AI" class="icon-btn" aria-label="Github" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.instagram.com/vertexcorp101/" class="icon-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+          <button class="icon-btn" aria-label="WhatsApp" data-whatsapp><i class="fa-brands fa-whatsapp"></i></button>
+          <a href="https://discord.gg/pg3gpRtGs" class="icon-btn" aria-label="Discord" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.youtube.com/@SHELBY__X1-qqaz" class="icon-btn" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4 data-i18n="footer_links">Links</h4><ul><li><a href="index.html" data-i18n="nav_home">Home</a></li><li><a href="index.html#about" data-i18n="nav_about">About</a></li><li><a href="index.html#featured" data-i18n="nav_work">Work</a></li><li><a href="projects.html">Projects</a></li><li><a href="../vertex-corp/">Vertex Corp</a></li></ul></div>
+      <div class="footer-col"><h4 data-i18n="footer_connect">Connect</h4><ul><li><a href="https://github.com/vertexcorp101-AI" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Github</a></li><li><a href="https://www.instagram.com/vertexcorp101/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Instagram</a></li><li><button data-whatsapp><i class="fa-brands fa-whatsapp"></i> WhatsApp</button></li><li><a href="https://discord.gg/pg3gpRtGs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a></li><li><a href="https://www.youtube.com/@SHELBY__X1-qqaz" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a></li></ul></div>
+      <div class="footer-col"><h4 data-i18n="footer_legal">Legal</h4><ul><li><a href="privacy-policy.html" data-i18n="privacy">Privacy</a></li><li><a href="terms.html" data-i18n="terms">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Bakre Lamcharki &middot; Shelby__x1</span><span>Independent developer &middot; designer &middot; AI builder</span></div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">&uarr;</button>
+<div id="toast"></div>
+<script src="translations.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
