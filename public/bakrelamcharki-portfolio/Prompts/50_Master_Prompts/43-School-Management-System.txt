@@ -1,0 +1,148 @@
+# MASTER PROMPT: School Management System
+
+## Project Overview
+Build a comprehensive school management system with student enrollment, class management, attendance, grades, timetables, communication, fee management, and parent portal.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, TanStack Table, Recharts, Framer Motion, Zustand, React Query, FullCalendar
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL + Redis
+- **Auth:** NextAuth.js + JWT + RBAC
+- **Storage:** S3-compatible (student docs, assignments)
+- **Notifications:** Resend (email), Twilio (SMS), FCM (push)
+- **Infrastructure:** Docker, GitHub Actions, Railway
+
+## Detailed Requirements
+
+### User Roles
+- Super Admin (manages whole system)
+- School Admin (manages school)
+- Principal
+- Vice Principal
+- Head of Department
+- Teacher
+- Student
+- Parent
+- Librarian
+- Accountant
+- Transport Manager
+- Counselor
+
+### Student Management
+- Student registration (personal info, parent/guardian, previous school, medical info, documents)
+- Student profile: photo, ID number, class, section, roll number, blood group, emergency contacts
+- Enroll/transfer/graduate/dropout workflow
+- Student documents: birth certificate, report cards, transfer certificate, ID card, photos
+- Student search with filters
+- Alumni management
+- Bulk student import (CSV/Excel)
+- Student ID card generation (PDF download)
+
+### Academics
+- Academic year management (terms, semesters, grading periods)
+- Class/Section management
+- Subject management (with subject code, teacher assignment)
+- Timetable: visual grid (FullCalendar), conflict detection, substitute teacher, period management
+- Lesson planning (teachers create lesson plans, share with department)
+- Syllabus management (topics per subject per term)
+- Assignment homework: create, submit (file upload), grade, feedback
+- Exam management: exam schedule, hall tickets, seating arrangement
+- Grades: grading scale, marks entry, report card generation (PDF), report card comments
+
+### Attendance
+- Daily attendance: mark present/absent/late/holiday (per class period or daily)
+- Bulk attendance entry
+- Teacher attendance
+- Attendance report: monthly, term, yearly, class-wise, student-wise
+- Attendance notifications (absent SMS/email to parents)
+- Late comer tracking
+- Leave management: student leave application, teacher leave, approval workflow, leave balance
+
+### Fee Management
+- Fee structure: tuition, transport, lab, sports, library, development, late fee
+- Fee group and fee assignment per class
+- Fee collection: cash, check, bank transfer, online payment (Stripe/Razorpay)
+- Fee receipt generation (PDF)
+- Fee defaulters report
+- Due fee notifications
+- Concession/discount management
+- Scholarship management
+- Payment history per student
+- Monthly/term/yearly fee reports
+
+### Examinations
+- Exam types: unit test, mid-term, final, practical, viva
+- Exam schedule with room and invigilator assignment
+- Mark entry: subject-wise, student-wise, grade-wise
+- Report card: term marks, cumulative, percentage, grade, rank
+- Rank card generation
+- Progress report (graphical: subject wise performance, term comparison, class average comparison)
+- Online exam integration (if applicable)
+
+### Communication
+- Notice board: school-wide, class-specific, teacher-only
+- Announcements with priority (urgent, important, normal)
+- In-app messaging (teacher ↔ teacher, teacher ↔ parent, admin ↔ staff)
+- Email notifications (fee due, attendance, exam result, events, holidays)
+- SMS notifications (fee due, attendance, urgent notices)
+- Push notifications (mobile app)
+- Parent-teacher meeting scheduling (calendar integration)
+- Circulars and documents
+
+### Library Management
+- Book catalog: title, author, ISBN, publisher, year, category, quantity, rack number
+- Book issue/return with barcode scanning simulation
+- Due date and fine calculation
+- Book reservation
+- Library member management (students + staff)
+- Library reports: issued books, overdue books, popular books, lost books
+
+### Transport Management
+- Route management (stops, distance, driver, vehicle)
+- Vehicle management (registration, capacity, insurance, maintenance)
+- Driver management (license, contact, assigned route)
+- Student route assignment
+- GPS tracking simulation (real-time bus location)
+- Transport fee calculation
+- Transport reports
+
+### Hostel Management
+- Hostel/dormitory management
+- Room types: single, double, triple, dorm
+- Room allocation
+- Student check-in/check-out
+- Hostel attendance
+- Mess menu
+- Hostel fee
+- Complaint management
+
+### Admin Dashboard
+- School overview: total students, teachers, classes, revenue today, attendance today
+- Charts: enrollment trend, fee collection, attendance rate, examination results
+- Recent activities
+- Upcoming events calendar
+- Pending tasks
+- Staff birthday/anniversary
+
+### Parent Portal
+- Child's profile: attendance, grades, timetable, homework, fee status
+- Fee payment online
+- Leave application for child
+- Teacher communication
+- Report card download
+- Notice board
+- Transport tracking
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, roles, student management, class/subject setup
+Phase 2: Academics (Week 2-4) - Timetable, homework, exams, grades, report cards
+Phase 3: Attendance (Week 4-5) - Daily attendance, reports, notifications
+Phase 4: Fees (Week 5-7) - Fee structure, collection, online payment, receipts, reports
+Phase 5: Communication (Week 7-8) - Notices, messaging, notifications, PTM scheduling
+Phase 6: Library & Transport (Week 8-9) - Book management, transport, GPS tracking
+Phase 7: Hostel & Parent Portal (Week 9-10) - Hostel management, parent dashboard
+Phase 8: Polish (Week 10-12) - Admin dashboard, reports, bulk operations, testing
+
+## Final Instructions
+Build a comprehensive school management system with student management, academics (timetable, exams, grades, report cards), attendance tracking with notifications, fee management with online payment (Stripe), communication (notices, messaging, email/SMS), library/transport/hostel management, and parent portal. The system must support multiple user roles (admin, teacher, student, parent, accountant, librarian, transport manager). Report cards must be generated as PDF with graphical performance analysis. Parent portal must provide real-time access to child's attendance, grades, timetable, homework, and fee status. Design a clean, education-friendly UI with calming blue/green color scheme.

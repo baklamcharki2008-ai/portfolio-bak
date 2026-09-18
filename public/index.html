@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex Web Platform</title>
+<style>
+  :root { --bg: #0b0d12; --card: #141821; --text: #e8ecf4; --muted: #9aa4b8; --accent: #6ea8ff; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  }
+  .wrap { max-width: 820px; width: 100%; padding: 40px 24px; text-align: center; }
+  .logo { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  h1 { font-size: 42px; font-weight: 700; margin-bottom: 10px; }
+  h1 span { color: var(--accent); }
+  p.sub { color: var(--muted); margin-bottom: 40px; font-size: 16px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .card {
+    display: block; text-align: left; text-decoration: none; color: var(--text);
+    background: var(--card); border: 1px solid #232838; border-radius: 14px;
+    padding: 24px; transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 12px 32px rgba(110,168,255,0.12); }
+  .card .tag { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .card h2 { font-size: 22px; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .url { margin-top: 38px; color: var(--muted); font-size: 13px; }
+  .url code { color: var(--text); background: #1a1f2b; padding: 2px 8px; border-radius: 6px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 32px; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">Vertex Web Platform</div>
+    <h1>Pick a <span>site</span></h1>
+    <p class="sub">Two projects, one workspace.</p>
+    <div class="grid">
+      <a class="card" href="bakrelamcharki-portfolio/">
+        <div class="tag">Portfolio</div>
+        <h2>Bakrel Amcharki</h2>
+        <p>Personal portfolio, projects, promos and contact.</p>
+      </a>
+      <a class="card" href="vertex-corp/">
+        <div class="tag">Company</div>
+        <h2>Vertex Corp</h2>
+        <p>Vertex — independent AI systems, software and experiments.</p>
+      </a>
+    </div>
+    <div class="url">Served from <code>/website</code></div>
+  </div>
+</body>
+</html>

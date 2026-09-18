@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Shelby__x1</title>
+<meta name="description" content="A showcase of web, AI, design, 3D and music projects built by Shelby__x1.">
+<meta name="keywords" content="Shelby__x1 projects, web development portfolio, FL Studio projects">
+<meta name="author" content="Shelby__x1">
+<link rel="canonical" href="https://shelbyx1.example.com/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects — Shelby__x1">
+<meta property="og:description" content="A showcase of web, AI, design, 3D and music projects.">
+<meta property="og:image" content="images/og-cover.png">
+<meta property="og:url" content="https://shelbyx1.example.com/projects.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projects — Shelby__x1">
+<meta name="twitter:description" content="A showcase of web, AI, design, 3D and music projects.">
+<meta name="twitter:image" content="images/og-cover.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div id="noise"></div>
+<div class="vignette"></div>
+
+<div id="loader"><div class="loader-inner"><div class="loader-ring"></div><div class="loader-text">Loading</div></div></div>
+<div id="scroll-progress"></div>
+
+<div id="cookie-banner" role="dialog" aria-label="Cookie consent">
+  <p>This site uses local storage to remember your preferences. <a href="privacy-policy.html">Learn more</a></p>
+  <button id="cookie-accept" class="btn btn-sm btn-primary">Accept</button>
+</div>
+
+<header>
+  <div class="navbar">
+    <a href="index.html" class="logo">
+      <img id="theme-logo" src="images/logo-light.png" alt="Shelby__x1">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="index.html#about" data-i18n="nav_about">About</a>
+      <a href="index.html#skills" data-i18n="nav_skills">Skills</a>
+      <a href="projects.html" class="active" data-i18n="nav_projects">Projects</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger" data-i18n="nav_services">Services</a>
+        <div class="nav-dropdown-menu">
+          <a href="service-detail.html?id=web_dev">Web Development</a>
+          <a href="service-detail.html?id=ui_ux">UI / UX Design</a>
+          <a href="service-detail.html?id=mobile">Mobile Development</a>
+          <a href="service-detail.html?id=ai_automation">AI Automation</a>
+          <a href="service-detail.html?id=api">API Development</a>
+          <a href="service-detail.html?id=database">Database Design</a>
+          <a href="service-detail.html?id=cybersecurity">Cybersecurity</a>
+          <a href="service-detail.html?id=graphic">Graphic Design</a>
+          <a href="service-detail.html?id=motion">Motion Graphics</a>
+        </div>
+      </div>
+      <a href="downloads.html" data-i18n="nav_downloads">Downloads</a>
+      <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">●</button>
+      <div class="lang-switch">
+        <button aria-label="Change language"><span class="lang-current">EN</span></button>
+        <div class="lang-menu">
+          <button data-lang-option="en">English <span>EN</span></button>
+          <button data-lang-option="fr">Français <span>FR</span></button>
+          <button data-lang-option="ar">العربية <span>AR</span></button>
+        </div>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="section" style="padding-top:100px;">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="label" data-i18n="projects_eyebrow">Selected work</div>
+        <h2 data-i18n="projects_page_title">Projects</h2>
+        <p data-i18n="projects_page_desc">Everything I've built, broken, and rebuilt.</p>
+      </div>
+
+      <div class="filter-bar reveal">
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="web">Web</button>
+          <button class="chip" data-filter="music">Music</button>
+          <button class="chip" data-filter="design">Design</button>
+          <button class="chip" data-filter="3d">3D</button>
+        </div>
+        <div class="search-input">
+          <input type="text" id="project-search" placeholder="Search...">
+        </div>
+      </div>
+
+      <div class="grid" id="projects-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr));"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img id="theme-logo-footer" src="images/logo-light.png" alt="Shelby__x1">
+        </a>
+        <p data-i18n="footer_desc">A passionate technology creator building his future through creativity, learning, and innovation.</p>
+        <div class="footer-social">
+          <a href="https://github.com/RichardRamirez333" class="icon-btn" aria-label="Github" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.instagram.com/shelby__x1/" class="icon-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+          <button class="icon-btn" aria-label="WhatsApp" data-whatsapp><i class="fa-brands fa-whatsapp"></i></button>
+          <a href="https://discord.gg/pg3gpRtGs" class="icon-btn" aria-label="Discord" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.youtube.com/@SHELBY__X1-qqaz" class="icon-btn" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_links">Links</h4>
+        <ul>
+          <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+          <li><a href="index.html#about" data-i18n="nav_about">About</a></li>
+          <li><a href="projects.html" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+          <li><a href="downloads.html" data-i18n="nav_downloads">Downloads</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_connect">Connect</h4>
+        <ul>
+          <li><a href="https://github.com/RichardRamirez333" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Github</a></li>
+          <li><a href="https://www.instagram.com/shelby__x1/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+          <li><button data-whatsapp><i class="fa-brands fa-whatsapp"></i> WhatsApp</button></li>
+          <li><a href="https://discord.gg/pg3gpRtGs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a></li>
+          <li><a href="https://www.youtube.com/@SHELBY__X1-qqaz" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_legal">Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html" data-i18n="privacy">Privacy</a></li>
+          <li><a href="terms.html" data-i18n="terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Shelby__x1. <span data-i18n="rights">All rights reserved.</span></span>
+      <span>Built with HTML, CSS & JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<div id="toast"></div>
+
+<script src="translations.js"></script>
+<script src="main.js"></script>
+<script>
+const PROJECTS = [
+  { name:'?К0NΣX... Jumpstyle DrumKit V1', cat:'music', tag:'FL Studio', image:'images/drumkit-jumpstyle-kit.png', desc:'A collection of Jumpstyle, Hardstyle and Hardtekk sounds.', stack:['FL Studio','Music'], buttons:[{ text:'YouTube', icon:'fa-brands fa-youtube', url:'https://www.youtube.com/@SHELBY__X1-qqaz', cls:'btn-outline' },{ text:'Download', icon:'fa-solid fa-download', url:'https://drive.google.com/file/d/1T3RHpylxwhP10QvirLsjMm-_Ksaz20gY/view?usp=sharing', cls:'btn-primary' }] },
+  { name:'Portfolio Design System', cat:'web', tag:'Web', desc:'The component system powering this site — dark mode, i18n, motion.', stack:['HTML','CSS','JS'], buttons:[{ text:'Live', icon:'fa-solid fa-arrow-up-right-from-square', url:'index.html', cls:'btn-primary' }] },
+  { name:'OGs Community', cat:'web', tag:'Discord', desc:'A growing community where members learn, share, and build together.', image:'images/discord-community.png', stack:['Community'], buttons:[{ text:'Join', icon:'fa-brands fa-discord', url:'https://discord.gg/pg3gpRtGs', cls:'btn-primary' }] },
+  { name:'YouTube Channel', cat:'web', tag:'YouTube', desc:'Music, beats, tutorials, and creative content.', image:'images/youtube-channel.png', stack:['Content','Music'], buttons:[{ text:'Channel', icon:'fa-brands fa-youtube', url:'https://www.youtube.com/@SHELBY__X1-qqaz', cls:'btn-primary' }] },
+  { name:'Beat Pack Vol. 1', cat:'music', tag:'Music', desc:'An original sample pack produced in FL Studio.', stack:['FL Studio'], image:'images/drumkit-jumpstyle-kit.png', buttons:[{ text:'Download', icon:'fa-solid fa-download', url:'https://drive.google.com/file/d/1T3RHpylxwhP10QvirLsjMm-_Ksaz20gY/view?usp=sharing', cls:'btn-primary' }] },
+  { name:'Brand Identity Concept', cat:'design', tag:'Design', desc:'Full visual identity — logo, palette, typography system.', stack:['Figma'], buttons:[{ text:'Instagram', icon:'fa-brands fa-instagram', url:'https://www.instagram.com/shelby__x1/', cls:'btn-outline' }] },
+  { name:'Motion Reel', cat:'3d', tag:'Motion', desc:'Short motion reel combining Blender with 2D compositing.', stack:['Blender','AE'], buttons:[{ text:'Watch', icon:'fa-brands fa-youtube', url:'https://www.youtube.com/@SHELBY__X1-qqaz', cls:'btn-primary' }] },
+  { name:'Lo-fi Study Mix', cat:'music', tag:'Music', desc:'A short lo-fi track as a sound-design exercise.', stack:['FL Studio'], buttons:[{ text:'Listen', icon:'fa-brands fa-youtube', url:'https://www.youtube.com/@SHELBY__X1-qqaz', cls:'btn-primary' }] },
+];
+const PH = {
+  web:{ icon:'fa-solid fa-code' },
+  music:{ icon:'fa-solid fa-music' },
+  design:{ icon:'fa-solid fa-pen-ruler' },
+  '3d':{ icon:'fa-solid fa-cube' },
+};
+const grid = document.getElementById('projects-grid');
+grid.innerHTML = PROJECTS.map(p => {
+  const ph = PH[p.cat] || PH.web;
+  const thumb = p.image
+    ? `<div class="product-thumb"><img src="${p.image}" alt="${p.name}" loading="lazy"><div class="product-overlay"></div><span class="product-badge">${p.tag}</span></div>`
+    : `<div class="product-thumb" style="background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;"><i class="${ph.icon}" style="font-size:1.6rem;color:var(--text-faint)"></i></div>`;
+  const links = p.buttons && p.buttons.length
+    ? p.buttons.map(btn => `<a href="${btn.url}" class="btn btn-sm ${btn.cls || 'btn-outline'}" target="_blank" rel="noopener noreferrer"><i class="${btn.icon}"></i> ${btn.text}</a>`).join('')
+    : `<span class="btn btn-sm btn-outline btn-disabled">Coming soon</span>`;
+  return `<div class="card product-card" data-category="${p.cat}" data-name="${p.name}">${thumb}<div class="product-info"><h3>${p.name}</h3><p class="product-desc">${p.desc}</p><div class="product-techs">${p.stack.map(s=>`<span class="skill-tag">${s}</span>`).join('')}</div><div class="product-actions">${links}</div></div></div>`;
+}).join('');
+</script>
+</body>
+</html>

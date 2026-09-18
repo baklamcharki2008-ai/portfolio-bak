@@ -1,0 +1,127 @@
+# MASTER PROMPT: Social Media Platform
+
+## Project Overview
+Build a complete social media platform with profiles, posts, feed, stories, messaging, groups, events, notifications, and moderation.
+
+## Tech Stack
+- **Frontend:** Next.js 14 (web) + React Native (mobile), TypeScript, Tailwind CSS, Framer Motion, Zustand, React Query
+- **Backend:** Node.js + Express + TypeScript, GraphQL
+- **Database:** PostgreSQL + Redis + ScyllaDB (feeds) + Elasticsearch (search)
+- **Auth:** JWT + OAuth (Google, Facebook, Apple)
+- **Real-time:** WebSocket (Socket.io) + Redis Pub/Sub
+- **Media:** S3 + CDN + FFmpeg (video processing)
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+
+## Detailed Requirements
+
+### User Profiles
+- Profile: photo, cover photo, bio, location, website, birthday, relationship status
+- Profile customization: theme color, profile layout
+- About section: work, education, places lived, contact info
+- Profile privacy settings
+- Friend list (public/friends only/private)
+- Profile visitors
+- Profile completion score
+
+### Posts & Feed
+- Post types: text, photo, video, link, poll, live video, check-in, life event
+- Post creation: rich text, emoji, GIF, tags, location, privacy
+- Feed: algorithmic (trending, relevant) and chronological
+- Reactions: like, love, care, haha, wow, sad, angry (animated)
+- Comments: nested, photo/video in comments, reactions on comments
+- Share post (with add comment)
+- Save post
+- Report post
+- Hide post / snooze user
+- Post scheduling
+
+### Stories
+- Photo/video stories (24h expiry)
+- Story reactions and replies
+- Story viewer list
+- Story music, text, stickers, drawing
+- Story highlights (permanent collections)
+- Close friends stories
+- Story archive
+
+### Friends & Following
+- Friend request: send, accept, reject, block
+- Following/followers model (optional)
+- Friend suggestions
+- Mutual friends
+- Follow hashtags
+- Follow topics
+- Unfollow / unfriend
+- Friend lists (close friends, acquaintances, restricted)
+
+### Groups
+- Group types: public, closed, secret
+- Group creation: name, description, cover, privacy
+- Group settings: approval required, member roles
+- Group feed, announcements, files, events
+- Group member management
+- Group rules
+- Reported posts in group
+- Group insights
+
+### Events
+- Event creation: name, description, date/time, location, cover
+- Event types: in-person, online, recurring
+- RSVP: going, maybe, not going, invited
+- Event feed, photos, discussion
+- Event reminders
+- Host management
+- Ticket/registration integration
+
+### Messaging
+- One-on-one and group messaging
+- Message types: text, image, video, audio, file, sticker, GIF
+- Message reactions
+- Reply, forward, delete
+- Read receipts
+- Typing indicators
+- Message requests
+- End-to-end encryption (optional)
+- Video/audio calling (WebRTC)
+
+### Notifications
+- Push, email, in-app notifications
+- Types: friend request, like, comment, share, event invite, group invite, birthday
+- Notification grouping
+- Notification preferences
+- Do not disturb mode
+
+### Search
+- Search people, posts, groups, events, pages, hashtags
+- Search filters
+- Trending topics
+- Search suggestions
+- Search history
+
+### Trending & Explore
+- Trending hashtags and topics
+- Explore page with algorithmically selected content
+- Suggested users, groups, pages
+- Popular posts
+
+### Admin Dashboard
+- User management (suspend, ban, verify)
+- Content moderation (reported posts, comments)
+- Analytics (DAU, MAU, retention, growth)
+- Report management
+- Spam detection
+- Policy enforcement
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, profiles, basic post CRUD
+Phase 2: Feed (Week 2-4) - News feed, reactions, comments, share
+Phase 3: Friends (Week 4-5) - Friend system, suggestions, lists
+Phase 4: Stories (Week 5-6) - Stories, highlights, reactions
+Phase 5: Groups & Events (Week 6-8) - Group creation, management, events
+Phase 6: Messaging (Week 8-9) - Real-time messaging, calls
+Phase 7: Notifications & Search (Week 9-10) - Notification system, search
+Phase 8: Admin & Polish (Week 10-12) - Moderation, trending, analytics, scaling
+
+## Final Instructions
+Build a complete social media platform with profiles, posts with rich reactions (7 types), stories, friend system, groups, events, real-time messaging with video calls, notifications, search, trending topics, and admin moderation. The feed must support both algorithmic and chronological views. Stories must have 24h expiry with highlights. Groups must support public/closed/secret privacy. Events must support RSVP and recurring schedules. Messaging must support E2E encryption option. Design a clean, modern social media UI with blue accent colors. Support mobile and web platforms.

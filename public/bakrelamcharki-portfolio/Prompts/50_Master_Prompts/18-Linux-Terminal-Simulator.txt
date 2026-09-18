@@ -1,0 +1,175 @@
+# MASTER PROMPT: Linux Terminal Simulator
+
+## Project Overview
+Build a fully functional Linux terminal emulator in the browser with 300+ commands, file system simulation, shell scripting, process management, networking tools, and system administration features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, xterm.js (terminal), WebContainer or WASM (process execution)
+- **Backend:** Node.js + Express + TypeScript, WebSocket (terminal stream)
+- **Database:** None (filesystem simulated in-memory + persisted to S3)
+- **Auth:** JWT (optional, for saving sessions)
+- **Infrastructure:** Docker, GitHub Actions
+- **Storage:** S3-compatible (save terminal sessions, file system snapshots)
+
+## Detailed Requirements
+
+### Terminal Emulator (xterm.js)
+- Full VT100/xterm escape sequence support
+- True color (24-bit) support
+- Unicode/UTF-8 character support
+- Terminal resize (row/column responsive)
+- Copy/paste (Ctrl+Shift+C/V)
+- Custom font, theme, cursor style
+- Multiple tabs (parallel terminal sessions)
+- Terminal scrolling with buffer management (10000+ lines)
+- Bracketed paste mode
+- Mouse reporting for terminal applications
+- Hyperlinks (OSC 8 escape sequence)
+
+### File System Simulation
+- Full Linux FHS (Filesystem Hierarchy Standard)
+- Exec /boot /dev /etc /home /lib /media /mnt /opt /proc /root /run /sbin /srv /sys /tmp /usr /var
+- Virtual file systems: /proc (process info), /sys (system info), /dev (devices)
+- File types: regular, directory, symlink, socket, pipe, block/char device
+- File permissions: rwx for owner/group/others, sticky bit, setuid, setgid
+- File ownership (user:group hierarchy)
+- Extended attributes (xattr)
+- Symbolic and hard links
+- File size limits and disk quota simulation
+- Inode simulation (limited inode count)
+
+### Command System (300+ commands)
+Core commands: ls, cd, pwd, cp, mv, rm, mkdir, rmdir, touch, cat, less, more, head, tail, sort, uniq, wc, cut, paste, join, grep, sed, awk, find, locate, which, whereis, chmod, chown, chgrp, ln, stat, du, df, mount, umount
+
+Text editors: vim, nano, emacs (simplified), ed
+
+Process commands: ps, top, htop, kill, pkill, nice, renice, nohup, disown, bg, fg, jobs, screen, tmux
+
+Network commands: ping, curl, wget, ssh, scp, netstat, ss, ifconfig, ip, traceroute, nslookup, dig, nc (netcat), nmap (limited), arp, route, iptables
+
+Package management: apt, apt-get, dpkg, yum, dnf, pacman, snap, flatpak
+
+System commands: systemctl, journalctl, service, dmesg, uname, hostname, whoami, id, useradd, usermod, userdel, groupadd, groupmod, groupdel, passwd, su, sudo, visudo, crontab, at
+
+Development: gcc, g++, make, cmake, python, python3, node, npm, git, docker, docker-compose, curl, jq, yq
+
+Shell scripting: bash scripting with shebang (#!), variables, functions, control flow (if, for, while, case), arrays, process substitution, command substitution, I/O redirection, pipes, job control
+
+### Shell Features
+- Bash shell prompt with PS1 customization
+- Command history (up/down arrows, Ctrl+R search)
+- Tab completion (files, commands, paths)
+- Auto-suggestion (based on history)
+- Command aliasing (alias, unalias)
+- Shell variables and environment variables
+- Export to subprocesses
+- Source files (.bashrc, .bash_profile, .profile, .bash_logout)
+- I/O redirection: > >> 2> &> < << (here document) <<< (here string)
+- Pipes: | (unlimited pipe chain)
+- Command chaining: ; && ||
+- Background processes (&)
+- Job control: jobs, fg, bg, Ctrl+Z, Ctrl+C
+- Shell expansion: brace, tilde, parameter, command, arithmetic, pathname (globbing)
+- Readline keybindings (Emacs mode, optional Vi mode)
+- Environment modules system
+
+### System Administration
+- User management: adduser, userdel, usermod, passwd, chage, groups
+- Process management: nice, renice, ulimit, nohup, disown
+- Disk management: fdisk, parted, mkfs, mount, umount, fsck
+- System monitoring: top, htop, iotop, iostat, vmstat, free, uptime
+- Log management: journalctl, tail -f /var/log/*
+- Cron scheduler: crontab -e, systemd timers
+- Systemd service management: systemctl start/stop/enable/disable/status
+- Security: iptables, ufw, fail2ban, selinux, apparmor
+
+### File System Hierarchy
+```
+/bin  - Essential user commands (ls, cp, mv)
+/boot - Bootloader files (grub, kernels)
+/dev  - Device files (/dev/null, /dev/random, /dev/sda)
+/etc  - Configuration files (passwd, fstab, ssh/sshd_config)
+/home - User home directories (/home/user1, /home/user2)
+/lib  - Shared libraries (.so files)
+/media - Removable media mount points
+/mnt  - Temporary mount points
+/opt  - Optional third-party software
+/proc - Process and kernel virtual filesystem
+/root - Root user home directory
+/run  - Runtime variable data
+/sbin - System administration binaries
+/srv  - Service data
+/sys  - Kernel and device virtual filesystem
+/tmp  - Temporary files (cleared on boot)
+/usr  - User system resources (bin, lib, share, include, src)
+/var  - Variable data (log, spool, tmp, cache, www, lib)
+```
+
+### Networking Simulation
+- Local network simulation (127.0.0.1, localhost)
+- DNS resolution (from /etc/hosts + simulated DNS)
+- HTTP server simulation (curl/wget to local servers)
+- SSH server simulation (connect to simulated SSH daemon)
+- Docker/container simulation (docker ps, run, exec, build)
+- Git operations with simulated remote repos
+- TCP/UDP port simulation
+- Packet filtering (iptables simulation)
+- Virtual network interfaces
+
+### Visual & Themes
+- Multiple terminal color schemes: built-in (Monokai, Solarized, Dracula, Nord, Gruvbox, One Dark, Ayu)
+- Custom theme builder
+- Font selection (monospace fonts: Fira Code, JetBrains Mono, Hack, IBM Plex Mono)
+- Font ligatures support
+- Cursor style: block, underline, bar (steady or blink)
+- Window transparency/blur effect (optional)
+- Full-screen mode
+
+### User Experience
+- Startup message (/etc/motd, /etc/issue)
+- Login screen with user prompt
+- Whoami, hostname in prompt
+- File system changes persist via localStorage/IndexedDB
+- Export/import terminal session (as script file)
+- Session save and restore (bookmark tabs)
+- Share terminal session (read-only link)
+- Command output search (Ctrl+F within terminal)
+- Command explorer (click command for help)
+
+### Advanced Features
+- Docker container mode (isolated file system per user)
+- Multiple language runtimes (Python, Node.js, Go, Rust, Java)
+- Compile and run C/C++/Go/Rust code
+- Run Jupyter notebook in terminal
+- API for external tool integration
+- File upload/download to simulated filesystem
+- Mount cloud storage (S3 bucket as /mnt/cloud)
+- Collaborative terminal sessions (pair programming)
+
+### Accessibility
+- Screen reader support (ARIA labels for terminal)
+- Keyboard navigation
+- High contrast mode
+- Font size adjustment (Ctrl+/Ctrl-)
+- Color blind friendly themes
+
+### Performance
+- Efficient terminal buffer (canvas rendering)
+- Command execution in Web Worker (non-blocking)
+- Lazy command loading (load commands on first use)
+- File system persisted to IndexedDB
+- Session snapshots for crash recovery
+
+### Implementation Plan
+
+Phase 1: Terminal Core (Week 1) - xterm.js setup, basic shell prompt, command parsing
+Phase 2: File System (Week 2-3) - Virtual FHS, file operations (ls, cd, cp, mv, rm, mkdir)
+Phase 3: Core Commands (Week 3-5) - 100 essential commands (cat, grep, find, chmod, ps, kill, etc.)
+Phase 4: Shell Features (Week 5-6) - Pipes, redirection, variables, scripting, history, tab completion
+Phase 5: Text Editors & Scripting (Week 6-7) - Vim/nano simulation, bash scripting engine
+Phase 6: Networking (Week 7-8) - curl, wget, ssh, ping, netstat simulation
+Phase 7: System Admin (Week 8-9) - User management, process management, systemd, package manager
+Phase 8: Polish (Week 9-10) - Themes, persistence, Docker mode, export/import, performance
+
+## Final Instructions
+Build a complete Linux terminal simulator with 300+ commands, full file system, shell scripting, networking, and system administration capabilities. The terminal must accurately simulate bash behavior including pipes, redirections, variables, job control, and tab completion. Implement a virtual FHS file system with permissions, ownership, and symlinks. Include core text editors (vim/nano), package manager (apt), Docker, Git, and development tools (gcc, python, node). Support multiple terminal tabs, themes, session persistence, and export. Design the UI to look and feel like a real Linux terminal.

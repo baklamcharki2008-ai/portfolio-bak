@@ -1,0 +1,155 @@
+# MASTER PROMPT: Figma Clone
+
+## Project Overview
+Build a browser-based collaborative design tool with vector editing, prototyping, component system, real-time collaboration, and design system management.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Pixi.js/Canvas 2D (canvas rendering), Zustand, Framer Motion, Web Workers
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Real-time:** WebSocket + WebRTC DataChannel, CRDT (for conflict resolution)
+- **Database:** PostgreSQL (metadata), Redis (presence + cache), ScyllaDB (version history)
+- **Storage:** S3-compatible for images, assets, fonts
+- **Auth:** JWT + OAuth (Google, GitHub)
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+- **Monitoring:** Sentry, DataDog, Grafana
+
+## Detailed Requirements
+
+### Canvas Engine
+- Custom WebGL/Canvas2D rendering engine (or Pixi.js)
+- Vector path editing (Bezier curves, pen tool)
+- Boolean operations (union, subtract, intersect, exclude)
+- Shape tools: rectangle, ellipse, line, arrow, polygon, star
+- Text tool with system fonts + custom fonts
+- Image placement with cropping and masks
+- Zoom: 1% - 80000% with smooth zoom to cursor
+- Pan: middle mouse, space + drag, trackpad gestures
+- Infinite canvas with grid snapping
+- Pixel-perfect rendering at any zoom level
+- Frame/Artboard system with device presets (iPhone, iPad, Web, etc.)
+
+### Layer Management
+- Layers panel with tree hierarchy
+- Layer grouping and ungrouping
+- Layer naming, reordering, locking, visibility toggle
+- Multi-select (Shift+click, marquee selection)
+- Layer blending modes (16+ blend modes)
+- Layer opacity
+- Layer effects: drop shadow, inner shadow, blur, background blur
+- Layer masks and clipping masks
+- Auto-layout (flexbox-like automatic arrangement)
+- Constraints (pin to edges, scale, stretch)
+
+### Vector Editing
+- Pen tool for bezier curves and paths
+- Pencil tool for freehand drawing
+- Boolean operations on paths
+- Path editing (points: move, add, delete, convert)
+- Stroke settings: weight, dash array, cap type, join type
+- Arrowheads on paths
+- Vector networks (Figma-like multi-point paths)
+- Outline stroke (convert stroke to fill)
+- Flatten and union selections
+- SVG import and export
+
+### Component System
+- Create components from layers
+- Component instances with overrides
+- Nested components
+- Component properties: text, boolean, instance swap, variant
+- Component variants (button primary, secondary, disabled, etc.)
+- Component library publishing
+- Team component libraries
+- Component swap (replace instance with component)
+- Detach instance (break component link)
+- Component states: main, local, remote
+- Design tokens (colors, spacing, typography) as components
+
+### Prototyping
+- Link frames with interactions
+- Transition types: dissolve, move in/out, push, slide, smart animate
+- Trigger: on click, on hover, while pressing, drag, after delay
+- Overlay and bottom sheet interactions
+- Fixed position elements in scroll
+- Scrollable areas
+- Prototype preview (presentation mode)
+- Hotspot areas
+- Conditional flows (based on variable state)
+- Prototype sharing with comment
+
+### Real-Time Collaboration
+- Multiple cursors (show other users' cursors)
+- Live layer selection updates
+- CRDT-based conflict resolution for vector edits
+- Presence indicator (who's viewing/editing)
+- Chat in document
+- Comment on canvas (pin comments to layers)
+- Comment threads with replies and resolution
+- Edit lock per layer (who's editing what)
+
+### Design System & Variables
+- Color styles (solid, gradient, image)
+- Text styles (font, size, weight, line height, letter spacing)
+- Effect styles (shadow, blur)
+- Grid styles (row, column, uniform)
+- Variables: primitive (color values) → alias (semantic)
+- Variable modes (light/dark, desktop/mobile)
+- Apply variables to any property
+- Library sync across files
+
+### Import/Export
+- SVG import and export
+- PNG, JPG, WebP export (selection, frame, page)
+- PDF export
+- Figma file format (.fig) import
+- Sketch file import
+- CSS export (auto-layout, styles)
+- Properties panel: exact values, copy CSS/values
+- Plugin API for custom exporters
+
+### Version History
+- Auto-save on every change (with debounce)
+- Version history timeline
+- Version naming and descriptions
+- Branching from version history
+- Restore to any version
+- Diff view between versions
+- Branching: create branch, merge, compare
+
+### Font & Media Management
+- Google Fonts integration (1000+ fonts)
+- Custom font upload (TTF, OTF, WOFF, WOFF2)
+- Image upload with optimization
+- Image fill on shapes
+- Vector/graphic import
+- Team font library
+- Font licensing and usage tracking
+
+### Performance
+- Canvas rendering with Web Worker for offload
+- Tile-based canvas rendering for infinite canvas
+- Layer culling (hide off-screen layers)
+- Resource pooling for image textures
+- Incremental save (CRDT oplog)
+- WebGL for hardware-accelerated rendering
+- Memory management for large files
+
+### Testing
+- Unit: Vitest (geometry, vector math, CRDT)
+- Integration: API tests
+- E2E: Playwright for canvas interactions
+- Visual: Pixel-by-pixel canvas comparison
+- Performance: Frame rate measurement, memory profiling
+
+### Implementation Plan
+
+Phase 1: Canvas Engine (Week 1-4) - WebGL rendering, basic shapes, selection, transform
+Phase 2: Vector Tools (Week 3-6) - Pen tool, boolean operations, paths, strokes
+Phase 3: Text & Images (Week 5-7) - Text engine, image handling, masks
+Phase 4: Components (Week 7-9) - Component system, variants, instances
+Phase 5: Prototyping (Week 9-11) - Interactions, transitions, preview
+Phase 6: Collaboration (Week 11-14) - Real-time sync, comments, history
+Phase 7: Polish (Week 14-16) - Performance, design systems, import/export
+
+## Final Instructions
+Build a complete Figma clone with vector editing, prototyping, real-time collaboration, and component system. The canvas engine must support 60fps rendering with infinite zoom. Implement full vector path editing with bezier curves and boolean operations. Component system must support variants, instances, and property overrides. Prototyping must include 10+ transition types. Real-time collaboration must use CRDT for conflict-free editing. Support design variables with mode switching (light/dark). Import/export SVG, PNG, PDF, and CSS. Design a clean UI matching Figma's professional design tool interface.

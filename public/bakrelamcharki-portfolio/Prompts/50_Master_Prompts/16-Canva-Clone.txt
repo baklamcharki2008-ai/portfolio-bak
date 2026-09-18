@@ -1,0 +1,147 @@
+# MASTER PROMPT: Canva Clone
+
+## Project Overview
+Build a browser-based graphic design platform with drag-and-drop editor, templates, photo editing, team collaboration, publishing, print service integration, and asset marketplace.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Pixi.js/Fabric.js (canvas), Zustand, React Query, Framer Motion
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL (metadata), MongoDB (design files), Redis (cache)
+- **Storage:** AWS S3 + CloudFront for assets, images, exports
+- **Image Processing:** Sharp, FFmpeg, ImageMagick
+- **AI:** TensorFlow.js, OpenCV (background removal, upscaling)
+- **Auth:** JWT + OAuth (Google, Facebook, Apple, Microsoft)
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+
+## Detailed Requirements
+
+### Canvas Editor
+- Drag-and-drop elements: text, image, shape, line, chart, grid, video, audio
+- Resize, rotate, flip, lock, arrange layers
+- Alignment guides (smart snapping)
+- Grid and ruler display
+- Zoom (25% - 400%)
+- Responsive design presets: Instagram, Facebook, Twitter, YouTube, LinkedIn, Pinterest, flyer, poster, business card, resume, presentation
+- Custom dimensions input
+- Pages support (multi-page designs)
+- Background color, gradient, image
+- Undo/redo (100+ steps)
+
+### Design Elements
+- Text: 800+ fonts (Google Fonts + custom upload), text effects (shadow, outline, curved, neon), text on path, text resize, letter spacing, line height, text alignment
+- Shapes: rectangles, circles, lines, arrows, callouts, hearts, stars, ribbons (100+ shapes)
+- Images: upload, drag from library, crop, resize, filters (30+), adjust (brightness, contrast, saturation, blur, vignette), background remover (AI), magic eraser
+- Video: upload, trim, playback controls, filters, speed adjust
+- Audio: upload, trim, volume, fade in/out
+- Grids: photo grids (50+ layouts), custom grid
+- Charts: bar, line, pie, doughnut, area, scatter with data import from CSV
+- Frames: 100+ frame shapes for image/video masking
+- Elements library: 5000+ icons, stickers, shapes, illustrations
+- Uploaded assets management
+
+### Templates
+- 500+ professional templates across categories
+- Template categories: social media, marketing, print, presentation, education, event, personal
+- Template preview before use
+- Template customization on open
+- Custom template creation
+- Brand templates (for teams)
+
+### Photo Editing
+- Crop: freeform, preset, circular, custom
+- Resize: preset dimensions, magic resize (AI canvas fill)
+- Adjust: brightness, contrast, saturation, warmth, tint, highlights, shadows, fade, sharpen, vignette
+- Filters: 50+ Instagram-style filters
+- Effects: background remover, magic eraser, image shadow, reflection, duotone, gradient map, glitch, pixelate, blur
+- Retouch: blemish removal (AI), teeth whitening, red eye, skin smoothing
+- Object removal (AI)
+
+### Text Effects
+- Curved text
+- Text shadow (multiple layers)
+- Text outline
+- Text background
+- Neon glow text
+- Gradient text
+- Letter spacing and kerning
+- Text on path (circle, arc, custom path)
+- Text bubble and callout styles
+- Animated text (typewriter, fade, slide, bounce, pop)
+
+### AI Features
+- AI image generation (text-to-image via Stable Diffusion/DALL-E)
+- AI background remover
+- AI magic eraser (remove object)
+- AI image upscaler (2x, 4x)
+- AI image expand (outpainting)
+- AI text to design (generate design from prompt)
+- AI photo colorization
+- AI face enhancement
+- AI magic resize (adapt design to different formats)
+- AI content suggestions (design improvement)
+
+### Brand Kit
+- Brand colors (with hex codes)
+- Brand fonts (upload or select)
+- Brand logo
+- Brand templates
+- Brand voice and guidelines
+- One-click brand apply to design
+- Brand consistency checker
+
+### Team Collaboration
+- Team workspaces
+- Real-time co-editing (multiple users on same design)
+- Comments on design elements
+- Design approval workflow (request, review, approve)
+- Role-based permissions (admin, editor, viewer)
+- Shared asset libraries
+- Team usage analytics
+
+### Export & Publishing
+- Export formats: PNG (transparent), JPG, PDF (standard/print), SVG, GIF, MP4, PPTX
+- Export quality: low, medium, high, print
+- Direct social media publishing: Instagram, Facebook, Twitter, LinkedIn, Pinterest, YouTube
+- Print order service integration (posters, flyers, cards, books, mugs, t-shirts)
+- Transparent background export
+- Resize for export (magic resize)
+- Batch export
+
+### Asset Marketplace
+- Free and premium assets
+- Asset categories: photos, illustrations, icons, fonts, videos, audio, templates
+- Premium asset licensing (standard, extended)
+- Creator marketplace (upload and sell assets)
+- Asset filters by style, color, orientation
+- Asset preview before purchase
+- Shopping cart and checkout (Stripe)
+
+### Admin Dashboard
+- User management
+- Team management
+- Premium subscription management
+- Asset approval system
+- Revenue analytics
+- Content moderation
+- System health monitoring
+
+### Performance
+- Canvas rendering with WebGL
+- Asset lazy loading
+- Image compression on upload
+- CDN for all assets
+- Design file optimizations (binary format)
+- Undo/redo stack with memory limits
+
+### Implementation Plan
+
+Phase 1: Canvas Foundation (Week 1-3) - Basic canvas, shapes, text, image placement
+Phase 2: Design Elements (Week 4-6) - Full element library, grids, charts, frames
+Phase 3: Photo & Text Effects (Week 7-9) - Filters, adjustments, text effects, AI tools
+Phase 4: Templates & Brand Kit (Week 10-11) - Template system, brand kit, design presets
+Phase 5: Team & Publishing (Week 12-14) - Collaboration, export, social publishing
+Phase 6: Marketplace & Admin (Week 15-16) - Asset marketplace, subscriptions, admin
+
+## Final Instructions
+Build a complete Canva clone with drag-and-drop editor, photo editing, text effects, AI tools, templates, and team collaboration. The canvas editor must support drag-drop, resize, rotate, and snap-to-grid. Include 500+ fonts, 50+ photo filters, AI background removal, and text effects. Implement brand kit with colors, fonts, and logos. Support real-time team collaboration with comments and approval workflow. Export to PNG, JPG, PDF, SVG, MP4, PPTX. Include direct social media publishing. Design a clean, intuitive UI matching Canva's user-friendly interface.

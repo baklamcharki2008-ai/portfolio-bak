@@ -1,0 +1,130 @@
+# MASTER PROMPT: Banking Dashboard
+
+## Project Overview
+Build a comprehensive banking dashboard with account management, transaction history, fund transfers, bill payments, budgeting, investments, and admin features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Recharts, Zustand, React Query, TanStack Table
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL + TimescaleDB (time-series for transactions)
+- **Auth:** JWT + OAuth + MFA (TOTP, SMS)
+- **Payments:** Stripe, Plaid (banking API), ACH simulation
+- **Infrastructure:** Docker, GitHub Actions, Railway
+
+## Detailed Requirements
+
+### Authentication & Security
+- Email/password + biometric (fingerprint/Face ID)
+- MFA: TOTP authenticator app, SMS backup codes
+- Device management (trusted devices)
+- Session timeout and auto-logout
+- Transaction notifications (push, email, SMS)
+- Login alerts (new device, location, IP)
+- Card lock/unlock from dashboard
+- Credit freeze request
+
+### Account Overview
+- Account types: Checking, Savings, Credit Card, Investment, Loan
+- Account cards: balance, account number (masked), type, status
+- Net worth tracker (all accounts combined)
+- Recent transactions list
+- Quick actions: Transfer, Pay Bills, Deposit Check, Send Money
+- Spending breakdown by category (pie chart)
+- Monthly income vs expenses (bar chart)
+- Cash flow forecast
+- Budget progress bars
+
+### Transactions
+- Transaction table with infinite scroll
+- Transaction detail: date, description, amount, category, merchant, status, receipt
+- Transaction categories: Food, Transport, Shopping, Bills, Entertainment, Health, Education, Travel, Income, Transfer, Others
+- Search and filter: date range, category, amount, merchant, status
+- Export: CSV, PDF, QFX (Quicken), OFX
+- Recurring transaction detection
+- Transaction tagging
+- Split transaction
+- Add receipt/image to transaction
+- Dispute a transaction
+- Transaction notes
+
+### Fund Transfers
+- Between own accounts (instant)
+- To other bank accounts (ACH, 1-3 business days)
+- Wire transfer (same day, with fee)
+- International transfer (SWIFT simulation)
+- Scheduled/recurring transfers
+- Transfer templates (save recipient)
+- Transfer confirmation with 2FA for large amounts
+- Transfer limits display
+
+### Bill Pay
+- Add payee (company, account number)
+- Schedule one-time or recurring payments
+- Auto-pay setup
+- Payment calendar
+- Upcoming bills dashboard
+- Pay from any account
+- Payment confirmation and receipts
+- eBills (electronic bill delivery)
+
+### Budgeting
+- Monthly budget by category
+- Budget vs actual (progress bars)
+- Rollover budgets (unused rolls to next month)
+- Budget alerts (approaching limit, exceeded)
+- Annual budget planner
+- Envelope budgeting method
+- Savings goals (set target, track progress)
+- Spending insights (trends, anomalies)
+
+### Credit Cards
+- Card list: card type, last 4 digits, credit limit, available credit
+- Current balance, minimum payment, due date, APR
+- Recent transactions on card
+- Pay card balance (full, minimum, custom)
+- Set up auto-pay
+- Card rewards points tracker
+- Card benefits overview
+- Request credit limit increase
+- Freeze/unfreeze card
+- Replace card
+
+### Investments
+- Portfolio overview: total value, gain/loss, allocation
+- Holdings: symbol, shares, price, value, day change, total return
+- Transaction history (buys, sells, dividends)
+- Dividend tracker
+- Watchlist
+- Market news feed
+- Investment performance chart (1m, 3m, 1y, 5y, all)
+- Asset allocation pie chart
+
+### Admin Dashboard
+- Customer management (approve accounts, review applications)
+- Transaction monitoring (fraud detection alerts)
+- Account management (freeze, close, overdraft settings)
+- Fee configuration
+- Interest rate management
+- Loan approval workflow
+- Compliance reporting
+- System health monitoring
+
+### Notifications
+- Push, email, SMS notifications
+- Preferences per notification type (login, transfer, bill due, low balance, large transaction)
+- Quiet hours
+- Notification history
+
+### Implementation Plan
+
+Phase 1: Auth & Security (Week 1-2) - Login, MFA, session management, account creation
+Phase 2: Dashboard (Week 2-3) - Account overview, net worth, charts, spending breakdown
+Phase 3: Transactions (Week 3-5) - Transaction table, search, filters, export, categorization
+Phase 4: Transfers & Bills (Week 5-6) - Fund transfers, bill pay, scheduling, recipients
+Phase 5: Budgeting (Week 6-7) - Budget setup, tracking, alerts, savings goals
+Phase 6: Credit Cards (Week 7-8) - Card management, payments, rewards
+Phase 7: Investments (Week 8-9) - Portfolio, holdings, watchlist, performance
+Phase 8: Admin & Polish (Week 9-11) - Admin dashboard, security features, notifications, testing
+
+## Final Instructions
+Build a comprehensive banking dashboard with account management, transactions, transfers, bill pay, budgeting, credit cards, and investment tracking. The dashboard must provide real-time balance updates, categorized spending breakdown, budget tracking with alerts, fund transfer with 2FA for large amounts, and investment portfolio performance. Include fraud detection alerts in the admin panel. The UI must have a professional, trust-building design with blue/white color scheme, secure lock icons, and clear financial data visualization. Implement MFA and transaction notifications for security.

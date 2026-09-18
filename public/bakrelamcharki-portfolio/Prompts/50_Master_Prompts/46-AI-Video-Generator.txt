@@ -1,0 +1,124 @@
+# MASTER PROMPT: AI Video Generator
+
+## Project Overview
+Build a production-ready AI video generation platform with text-to-video, image-to-video, video editing, AI effects, music generation, voiceover, and publishing features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Remotion (video preview), Zustand, React Query
+- **Backend:** Node.js + Express + TypeScript, Python FastAPI (ML), Celery (queue)
+- **AI Models:** Runway Gen-3, Pika, Stable Video Diffusion, ElevenLabs TTS, MusicGen, Whisper
+- **Database:** PostgreSQL + Redis + S3 (videos)
+- **Auth:** JWT + OAuth
+- **Billing:** Stripe
+- **Video Processing:** FFmpeg, GPU-accelerated encoding
+- **Infrastructure:** Docker, Kubernetes (GPU), GitHub Actions
+
+## Detailed Requirements
+
+### Video Generation
+- Text-to-Video: prompt → AI generates video clip (4s, 8s, 16s)
+- Image-to-Video: uploaded image → AI animates it
+- Video styles: cinematic, anime, 3D animation, stop motion, watercolor, pixel art, realistic, claymation, lego, origami, retro VHS, glitch art
+- Resolution: 720p, 1080p, 4K
+- Duration: up to 60 seconds
+- Frame rate: 24fps, 30fps, 60fps
+- Camera motion: pan, zoom, tilt, orbit, dolly, truck
+- Video extend: extend existing video clip
+- Interpolation: add frames between existing frames (smooth slow motion)
+- Batch generation: multiple variations from same prompt
+
+### Video Editor
+- Timeline editor: trim, cut, merge clips
+- Transition effects: dissolve, wipe, slide, zoom, fade, page turn, glitch
+- Text overlay: title, subtitle, caption (with fonts, animation)
+- AI text effects: text-to-video (generate video from text words)
+- Audio: add background music, sound effects, voiceover
+- AI voiceover: text-to-speech (ElevenLabs, 100+ voices)
+- AI music generation: describe mood → generate background track
+- Subtitles: auto-generate from audio (Whisper), manual edit, style customization
+- Filters: apply visual style filters to entire video
+- Speed: slow motion, fast motion, time remapping
+- Keyframing: animate position, scale, rotation, opacity over time
+- Green screen / chroma key
+- AI background replacement
+- Aspect ratio: 16:9, 9:16, 1:1, 4:5, 2:3 (all social media formats)
+- Smart crop: auto-reframe for different aspect ratios
+
+### Templates
+- Template library: social media ads, YouTube intros, Instagram stories, TikTok videos, product demos, slideshows, lyric videos, countdown, memes
+- Template customization: replace text, images, colors
+- Saved templates
+- Template categories: business, education, entertainment, music, sports, travel, events
+
+### AI Features
+- AI script writing: describe video idea → AI writes script
+- AI storyboard: script → generate scene descriptions
+- AI scene generation: each storyboard scene → generate video clip
+- AI voice cloning: upload voice sample → generate custom voice (ethical controls)
+- AI lip sync: video + audio → sync lips to audio
+- AI video upscaling: enhance resolution, remove noise, fix lighting
+- AI object removal: select object in video → remove
+- AI video stabilization
+- AI color grading: apply cinematic color palette
+- AI background music generation (MusicGen): mood, genre, duration
+
+### Project Management
+- Projects: title, description, thumbnail, status (draft, generating, ready, failed)
+- Project dashboard: list/grid view, search, filter by status
+- Version history (save different versions of same project)
+- Collaboration: share project with team members, comments on timeline
+- Asset library: uploaded images, videos, audio, fonts (reusable across projects)
+- Project export: MP4, GIF, MOV, AVI, WebM (with H.264, H.265, VP9 codecs)
+- Direct social media publishing: TikTok, Instagram Reels, YouTube Shorts, LinkedIn, Twitter/X
+
+### Gallery & Portfolio
+- User's generated videos gallery
+- Video detail: prompt, model, settings, duration, resolution, date
+- Like/favorite
+- Share: download, copy link, embed code, social share
+- Public portfolio page
+
+### Community
+- Community feed: trending, recent, top
+- Like, comment, share community videos
+- Follow creators
+- Challenge/hashtag campaigns ("#madeWithAI")
+- Featured creators
+
+### Credits & Billing
+- Credit cost per video: based on model, duration, resolution
+- Free tier: limited generations/day
+- Subscription: Pro (more credits), Business (team, priority), Enterprise (API access, custom models)
+- Pay-as-you-go credit packs
+- Stripe billing
+- Usage analytics
+
+### Admin Dashboard
+- User management (credits, suspend)
+- Video moderation (review flagged content)
+- Model management (enable/disable, cost per model)
+- System metrics: GPU utilization, generation queue, jobs per hour, average generation time
+- Cost tracking (AI API costs, GPU compute costs)
+- Content policy management
+
+### Performance
+- Async generation with real-time progress (WebSocket)
+- Job queue with priority (paid users)
+- GPU auto-scaling (Kubernetes)
+- Video caching (CDN for generated videos)
+- Background rendering (don't block user)
+- Batch video processing pipeline
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, projects, basic text-to-video generation
+Phase 2: Video Editor (Week 3-5) - Timeline editor, trim/cut/merge, transitions, text overlay
+Phase 3: AI Features (Week 5-7) - Voiceover, music gen, subtitles, AI script, storyboard, lip sync
+Phase 4: Templates (Week 7-8) - Template system, template library, customization
+Phase 5: Effects (Week 8-9) - Filters, green screen, keyframing, speed control, AI effects
+Phase 6: Export & Publish (Week 9-10) - Export formats, social media publishing, embed
+Phase 7: Community (Week 10-11) - Gallery, community feed, likes, comments
+Phase 8: Admin & Polish (Week 11-13) - Credit system, admin dashboard, GPU monitoring, testing
+
+## Final Instructions
+Build a production-ready AI video generation platform with text-to-video, image-to-video, full timeline video editor, AI voiceover and music generation, subtitle auto-generation, templates, AI effects (green screen, stabilization, upscaling), social media publishing, and credit-based billing. The video editor must support trim/cut/merge, transitions, text overlay, keyframing, speed control, and filters. Support 10+ video models and 20+ visual styles. Generate videos for all social media formats. Include community features for sharing and discovering AI-generated videos. Design a professional, dark-themed creative studio interface.

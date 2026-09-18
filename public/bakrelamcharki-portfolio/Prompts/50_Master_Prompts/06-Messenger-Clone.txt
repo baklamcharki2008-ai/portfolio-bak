@@ -1,0 +1,306 @@
+# MASTER PROMPT: Messenger Clone
+
+## Project Overview
+Build a feature-rich instant messaging platform with real-time chat, groups, media sharing, voice/video calls, stories, games, and integrations. Designed for billions-scale traffic.
+
+## Tech Stack
+- **Frontend:** React Native (mobile) + Next.js 14 (web), TypeScript, Tailwind CSS, Framer Motion, React Native Reanimated, Zustand
+- **Backend:** Erlang/Elixir (Phoenix) + Node.js (BFF layer)
+- **Database:** PostgreSQL (profiles/metadata), ScyllaDB (messages), Redis (presence/sessions)
+- **Real-time:** WebSocket + Phoenix Channels (Elixir) + MQTT for IoT
+- **Voice/Video:** WebRTC with LiveKit (SFU)
+- **Auth:** Facebook/Google OAuth + email + phone
+- **Storage:** S3-compatible + CDN
+- **Search:** Elasticsearch
+- **AI:** ML models for smart replies, translation, content moderation
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry, CloudWatch
+
+## Detailed Requirements
+
+### Authentication & Login
+- Facebook OAuth (primary), Google, Apple, email/password
+- Phone number verification (SMS/WhatsApp)
+- Passwordless login (magic link)
+- Device cookies for persistent sessions
+- Saved devices management
+- Secret question backup
+- Biometric unlock (mobile)
+- Trusted device recognition
+
+### Messaging Features
+- Read receipts (double blue ticks)
+- Typing indicators with profile pictures
+- Message reactions (all emoji + custom reactions)
+- Message reply, forward, copy, share
+- Message scheduling (send later)
+- Message undo (within 10 minutes)
+- Message translation (ML-powered, 30+ languages)
+- Smart replies and suggested responses
+- Message effects (fireworks, confetti, hearts)
+- Vanish mode (disappearing messages)
+- Unsent message detection
+- Message reporting and spam
+
+### Group Chats
+- Group creation with naming and photo
+- Group admin and moderator roles
+- Group invite links with expiry
+- Join requests and approval
+- Group categories and channels
+- Group event scheduling with RSVP
+- Group polls and voting
+- Group announcements (admin only)
+- Group content moderation
+- Member removal and reporting
+
+### Media & Attachments
+- Photo sharing with editing (filters, crop, text)
+- Video sharing with trim and effects
+- Album creation within chats
+- GIF support with search (GIPHY/Tenor)
+- Sticker shop with categories
+- File sharing (all formats up to 100MB)
+- Collaborative photo albums (event photos)
+- Cloud backup of shared media
+- Smart media carousel view
+- Automatic media download preferences
+
+### Voice & Video Calls
+- One-on-one voice/video calls
+- Group video calls (up to 50 participants)
+- Call effects (AR masks, backgrounds)
+- Screen sharing with annotation
+- Call recording (cloud, with consent)
+- Raise hand feature
+- Background blur and replacement
+- Noise suppression and audio enhancement
+- Bandwidth management for poor connections
+- Call waiting and call merge
+
+### Stories (Messenger Day)
+- Photo/video stories with editing
+- Story reactions and replies
+- Story viewing privacy (custom lists)
+- Story highlights and archive
+- Story music with licensing
+- Story location tagging
+- Story product tagging (commerce)
+- Stories from Instagram cross-post
+
+### Bots & Integrations
+- Bot API for third-party developers
+- Games within Messenger (Instant Games)
+- Payment integration (send/receive money)
+- Shopping and marketplace integration
+- Business messaging platform
+- Calendar and event integration
+- Spotify listening party
+- YouTube watch together
+- Weather, news, sports bots
+
+### Conversations Management
+- Chat list with preview and status
+- Conversation categories (General, Unread, Favorites)
+- Chat folders and custom labels
+- Message search across all conversations
+- Archive and mute conversations
+- Custom conversation themes (colors, gradients, emoji)
+- Nicknames per conversation
+- Emoji-only reactions bar
+- Chat head overlay (Android)
+
+### Privacy & Safety
+- Block and report users
+- Message requests (filtered by type)
+- Privacy settings: last seen, profile photo, story
+- Activity status controls
+- Read receipts toggle
+- Screenshot detection for vanish mode
+- End-to-end encryption (Secret Conversations)
+- Message filtering (spam, phishing detection)
+- Safety notices and warnings
+- Self-harm detection and resources
+
+### Database Design
+
+Core tables:
+- users, user_devices, user_contacts
+- conversations, conversation_participants
+- messages (id, conversation_id, sender_id, content_type, encrypted_payload, created_at)
+- message_status (message_id, user_id, status enum: sent/delivered/read/played)
+- message_reactions, message_replies
+- groups, group_members, group_roles
+- calls, call_participants
+- stories, story_views, story_reactions
+- payments, payment_methods
+- bots, bot_commands
+- blocked_users, reported_content
+
+### Real-time Protocol
+
+```
+Phoenix Channels (WebSocket):
+  Topic structure: "conversation:{id}"
+  
+  Events:
+    "new_message"         - Incoming message
+    "message_ack"         - Delivery/read receipt
+    "typing_indicator"    - Typing state
+    "presence_update"     - Online/offline/active
+    "reaction"           - New message reaction
+    "call_signal"        - WebRTC signaling
+    "user_presence"      - User presence change
+```
+
+### API Structure
+
+```
+GraphQL (primary):
+  Query {
+    conversations(first: Int, after: String): ConversationConnection!
+    conversation(id: ID!): Conversation
+    messages(conversationId: ID!, first: Int, after: String): MessageConnection!
+    user(username: String!): User
+    search(query: String!, type: SearchType): SearchResult!
+  }
+  Mutation {
+    sendMessage(conversationId: ID!, input: MessageInput!): Message!
+    createGroup(input: GroupInput!): Group!
+    addReaction(messageId: ID!, emoji: String!): Boolean!
+    startCall(conversationId: ID!, type: CallType!): Call!
+    uploadMedia(file: Upload!): Media!
+    createStory(input: StoryInput!): Story!
+  }
+  Subscription {
+    messageReceived(conversationId: ID!): Message!
+    typingIndicator(conversationId: ID!): TypingEvent!
+    presenceChanged(userIds: [ID!]!): PresenceEvent!
+    callEvent(conversationId: ID!): CallEvent!
+  }
+```
+
+### Admin Dashboard
+- User growth and engagement analytics
+- Message volume and delivery metrics
+- Call quality dashboard (MOS, latency)
+- Content moderation queue (AI + human review)
+- Bot and integration approval system
+- Spam detection and prevention stats
+- Report and appeal management
+- System health and uptime monitoring
+
+### Performance Optimization
+- Message batch reconciliation (fetch gaps on reconnect)
+- Connection pooling with multiplexing
+- Edge caching for user profiles and media
+- Database read replicas for feed queries
+- ScyllaDB partition optimization by time + conversation
+- Blazing fast message search with Elasticsearch
+- Code splitting and dynamic imports
+- Virtual scrolling for message lists
+- Prefetching conversation list data
+- IndexedDB for offline message caching
+
+### Security
+- End-to-end encryption for secret conversations
+- TLS 1.3 for all connections
+- Certificate pinning for mobile apps
+- Rate limiting (per user, per IP, per conversation)
+- API abuse detection (ML-based)
+- Content scanning for malware and phishing
+- Account takeover protection
+- Login alerts for new devices
+- Automated abuse reporting
+
+### Testing
+- Unit: Vitest + Elixir ExUnit
+- Integration: API integration test suite
+- E2E: Playwright (web), Detox (mobile)
+- Performance: k6 for messaging throughput
+- Security: OWASP ZAP scanning
+- Call: WebRTC quality benchmarks
+
+### Docker & CI/CD
+- Docker Compose with PostgreSQL, Redis, ScyllaDB
+- Helm charts for K8s deployment
+- GitHub Actions: test, build, security scan
+- Rolling update for zero-downtime deploys
+- Feature flags for gradual rollout
+- Canary releases for mobile apps
+
+### Monitoring & Analytics
+- Real-time message delivery dashboards
+- Active users and sessions (DAU/MAU)
+- Call quality metrics (jitter, packet loss, MOS)
+- Push notification delivery rates
+- Crash reporting (Sentry/Crashlytics)
+- Business analytics (engagement, retention, growth)
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Monorepo setup with Phoenix + Next.js
+2. Database schema design
+3. OAuth authentication system
+4. WebSocket channels with Phoenix
+5. Basic message CRUD
+
+### Phase 2: Messaging Core (Week 3-4)
+6. Real-time messaging with presence
+7. Read receipts and typing indicators
+8. Media upload and preview
+9. Group chat features
+10. Message reactions and replies
+
+### Phase 3: Calls & Stories (Week 5-6)
+11. WebRTC calls with LiveKit
+12. Group video calls
+13. Stories feature
+14. Message effects and vanish mode
+15. Translation and smart replies
+
+### Phase 4: Advanced Features (Week 7-8)
+16. Bot API and integrations
+17. Payment system
+18. Games and activities
+19. Business messaging
+20. Custom themes and personalization
+
+### Phase 5: Admin & Safety (Week 9-10)
+21. Content moderation system
+22. Admin dashboard
+23. Privacy and security features
+24. End-to-end encryption
+25. Analytics and monitoring
+
+### Phase 6: Polish (Week 11-12)
+26. Performance optimization
+27. Global infrastructure setup
+28. Testing and quality assurance
+29. Deployment and scaling
+30. Documentation
+
+## Folder Structure
+```
+apps/
+├── mobile/                  # React Native
+├── web/                     # Next.js
+├── server/                  # Phoenix (Elixir)
+│   ├── lib/
+│   │   ├── messenger/
+│   │   │   ├── accounts/
+│   │   │   ├── conversations/
+│   │   │   ├── messages/
+│   │   │   └── calls/
+│   │   └── messenger_web/
+│   │       ├── channels/
+│   │       └── resolvers/
+│   └── mix.exs
+├── bff/                     # Node.js BFF layer
+├── worker/                  # Background jobs
+└── shared/                  # Types and utilities
+```
+
+## Final Instructions
+Build a complete Messenger-like platform with every feature working at production scale. The Phoenix channels must handle 10M+ concurrent WebSocket connections. Implement all Facebook Messenger features: reactions, replies, typing indicators, read receipts, presence, vanish mode, stories, calls, games, payments, and bots. Ensure the UI matches Messenger's polished design with smooth animations. Implement proper moderation and safety features. Support mobile, web, and desktop platforms seamlessly.

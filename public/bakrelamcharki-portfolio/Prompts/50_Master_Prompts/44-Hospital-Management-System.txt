@@ -1,0 +1,159 @@
+# MASTER PROMPT: Hospital Management System
+
+## Project Overview
+Build a comprehensive hospital management system with patient registration, appointments, EHR, prescriptions, billing, pharmacy, lab, radiology, and staff management.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, TanStack Table, Recharts, Zustand, React Query, FullCalendar
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL + Redis
+- **Auth:** NextAuth.js + JWT + RBAC
+- **Storage:** S3-compatible (medical records, images, reports)
+- **Notifications:** Resend (email), Twilio (SMS)
+- **Infrastructure:** Docker, GitHub Actions, Railway
+
+## Detailed Requirements
+
+### User Roles
+- Super Admin, Hospital Admin, Doctor, Nurse, Receptionist, Pharmacist, Lab Technician, Radiologist, Accountant, Patient
+
+### Patient Management
+- Registration: name, DOB, gender, blood group, address, phone, email, emergency contact, insurance info, medical history summary
+- Unique patient ID (MRN - Medical Record Number)
+- Patient search: by name, MRN, phone, national ID
+- Patient timeline: visits, admissions, surgeries, immunizations, allergies, medications
+- Documents upload: ID, insurance card, previous reports, consent forms
+- Patient portal: view appointments, medical records, prescriptions, lab results, bills
+
+### Appointment Scheduling
+- Calendar view (FullCalendar): doctor schedule, room availability
+- Appointment types: consultation, follow-up, emergency, procedure, surgery, telemedicine
+- Book appointment: patient search → select doctor → select date/time → confirm
+- Walk-in appointment
+- Online appointment booking (patient portal)
+- Appointment reminders (SMS/email 24h before)
+- Appointment status: scheduled, confirmed, checked-in, in-progress, completed, cancelled, no-show
+- Cancellation and rescheduling
+- Waitlist management
+
+### Electronic Health Records (EHR)
+- Medical history: past illnesses, surgeries, hospitalizations, family history, social history
+- Allergies: drug, food, environmental (with severity)
+- Medications: current, past, discontinued (with dosage, frequency, prescribing doctor)
+- Immunizations: vaccine name, date, administered by, next due
+- Vitals: BP, heart rate, temperature, respiratory rate, oxygen saturation, height, weight, BMI (recorded per visit)
+- Clinical notes: SOAP format (Subjective, Objective, Assessment, Plan)
+- Diagnosis: ICD-10 codes, primary, secondary
+- Procedures: CPT codes, date, surgeon, notes
+- Document imaging: X-rays, MRI, CT scans, ultrasound (DICOM viewer simulation)
+- Lab results: test name, result, reference range, flag (abnormal/high/low), date
+- Growth charts (pediatrics)
+- Pregnancy history (OB/GYN)
+- Visit history: chronological list of all encounters
+
+### Doctor Dashboard
+- Today's appointments list with patient info
+- Patient search and quick access
+- Consultation workflow: view vitals → review history → examine → add diagnosis → prescribe → order labs → add notes → complete visit
+- Prescription writing: drug search (database), dosage, frequency, duration, notes
+- Lab order: select tests, send to lab, view results when ready
+- Referral to other doctor/department
+- Telemedicine: video call integrated (WebRTC)
+- Practice analytics: patients seen, revenue generated, common diagnoses
+
+### Prescriptions
+- Drug database: name, generic name, brand, manufacturer, strength, form, category, price
+- Prescription: drug, dosage, route, frequency (OD, BID, TID, QID, PRN), duration, quantity, refills, instructions, substitutions allowed?
+- E-Prescription: digital signature, QR code, print, send to pharmacy
+- Prescription history per patient
+- Drug interaction checker (basic: check against current medications)
+- Antibiotic stewardship (duration warnings)
+- Controlled substance tracking
+
+### Billing & Insurance
+- Billing items: consultation fee, procedure fee, medicine, lab tests, room charges, misc
+- Generate bill: select patient → add charges → apply discounts → insurance claim → generate invoice
+- Payment modes: cash, card, UPI, insurance, credit, online
+- Partial payment and credit
+- Insurance claim processing: verify coverage, submit claim, track status, follow up
+- TPA (Third Party Administrator) integration
+- Generate receipts: bill receipt, payment receipt, insurance receipt
+- Daily/ monthly/ yearly revenue reports
+- Outstanding payments report
+- Price list management
+
+### Pharmacy Management
+- Inventory: drug name, category, manufacturer, supplier, batch no, expiry date, purchase price, selling price, quantity, reorder level
+- Purchase order management
+- Stock inward: add stock (batch, expiry, mrp)
+- Stock outward: issue to patient (against prescription)
+- Expiry tracking and alerts
+- Low stock alerts
+- Pharmacy sales report
+- Supplier management
+- Drug dispense workflow: pharmacist views prescription → dispense → update inventory
+
+### Lab Management
+- Test catalog: test name, code, category, sample type (blood, urine, stool, tissue), price, turnaround time, reference ranges
+- Lab order: doctor orders → sample collected → sample received in lab → test performed → result entered → result verified → result published
+- Barcode generation for sample tracking
+- Automated result entry (connected to analyzers, simulated)
+- Manual result entry
+- Abnormal flagging (high/low out of reference range)
+- Report generation (PDF with letterhead)
+- Lab dashboard: pending samples, in-progress tests, completed, quality control
+
+### Radiology
+- Imaging modalities: X-ray, MRI, CT, Ultrasound, Mammography, PET scan, DEXA
+- Order imaging: doctor orders → schedule → perform → radiologist reads → report
+- DICOM viewer (simplified: show radiology images with zoom, pan, window/level)
+- Radiology report: findings, impression, recommendation
+- Report template management (normal reports with auto-fill)
+- Comparison with previous studies
+
+### Ward & Bed Management
+- Ward types: General, Semi-Private, Private, ICU, NICU, PICU, CCU, Isolation
+- Bed management: bed number, ward, room, status (available, occupied, reserved, maintenance)
+- Admission workflow: patient → admission type (emergency/elective) → ward allocation → bed assignment → admission notes
+- Discharge workflow: discharge summary → billing clearance → bed release
+- Bed occupancy report
+- Average length of stay report
+
+### Operation Theatre
+- OT scheduling: date, time, surgeon, anesthetist, OT room, procedure
+- Pre-op checklist
+- Intra-op notes
+- Post-op instructions
+- OT inventory: equipment, instruments, consumables
+- OT utilization report
+
+### Staff Management
+- Staff types: doctors, nurses, technicians, admin, support
+- Staff profile: photo, name, department, designation, qualification, specialization, experience, license number, contact, emergency contact
+- Duty roster (shift scheduling)
+- Attendance tracking
+- Leave management
+- Payroll (salary, deductions, advances)
+- Staff performance metrics
+
+### Admin Dashboard
+- Hospital overview: total beds, occupied, available, today's appointments, today's admissions, today's discharges, today's revenue, pending lab reports
+- Charts: revenue trend, patient volume, bed occupancy, department performance, doctor performance
+- Recent activities
+- Alerts: low stock, expiring drugs, pending lab reports, insurance claims pending
+- System health monitoring
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, roles, patient registration, doctor profiles
+Phase 2: Appointments (Week 2-3) - Scheduling, calendar, check-in, notifications
+Phase 3: EHR (Week 3-5) - Medical records, vitals, clinical notes, diagnosis, ICD-10
+Phase 4: Prescriptions (Week 5-6) - Drug DB, e-prescription, drug interaction, printing
+Phase 5: Billing (Week 6-7) - Billing items, invoice, payment, insurance, reports
+Phase 6: Pharmacy (Week 7-8) - Inventory, purchase, dispensing, supplier management
+Phase 7: Lab & Radiology (Week 8-10) - Test catalog, order workflow, results, DICOM viewer
+Phase 8: Ward, OT & Staff (Week 10-11) - Bed management, OT scheduling, staff management
+Phase 9: Polish (Week 11-13) - Admin dashboard, reports, patient portal, testing
+
+## Final Instructions
+Build a comprehensive hospital management system with patient registration, appointment scheduling, electronic health records (EHR), e-prescriptions, billing/insurance, pharmacy inventory, lab management with results, radiology with DICOM viewer, ward/bed management, operation theatre scheduling, and staff management. The EHR must include SOAP notes, ICD-10 codes, vitals, allergies, immunizations, medications, and visit history. Include a patient portal for viewing records and booking appointments. Support multiple user roles with granular permissions. Design a clean, medical-themed UI with calming blues and accessibility-focused design.

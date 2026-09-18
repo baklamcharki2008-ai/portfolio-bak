@@ -1,0 +1,121 @@
+# MASTER PROMPT: Cyber Security Lab
+
+## Project Overview
+Build a browser-based cybersecurity lab environment with vulnerable machines, network simulation, attack tools, defensive tools, monitoring, and learning curriculum.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, xterm.js, Framer Motion, React Flow (network topology)
+- **Backend:** Node.js + Express + TypeScript, WebSocket, Docker (containerized labs)
+- **Database:** PostgreSQL (user progress, scores, lab state)
+- **Auth:** JWT
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+
+## Detailed Requirements
+
+### Lab Environment
+- Virtual machine templates: Kali Linux (attacker), Metasploitable (vulnerable), DVWA, VulnHub machines, OWASP WebGoat, OWASP Juice Shop, HackTheBox-like machines
+- Network topology builder (React Flow): drag routers, switches, firewalls, hosts
+- Subnet and IP configuration
+- NAT/DMZ network segments
+- Machine start/stop/reset
+- Snapshot and restore
+- Time-limited lab sessions
+
+### Interactive Terminal
+- Full Linux terminal for each VM
+- Kali tools: nmap, Metasploit, hydra, sqlmap, burpsuite, wireshark, aircrack-ng
+- Multiple terminal tabs (one per machine)
+- Split terminal view (attacker + target side-by-side)
+- Terminal recording (asciinema)
+- Copy/paste between terminals
+
+### Vulnerable Machines
+Pre-configured machines with vulnerabilities:
+- OWASP Top 10: SQLi, XSS, CSRF, SSRF, RCE, File upload, IDOR, XXE
+- Authentication: Brute force, session hijacking, JWT attacks
+- Network: SMB relay, ARP spoofing, DNS poisoning
+- Web: LFI/RFI, SSTI, command injection, SSRF, deserialization
+- Wireless: WEP cracking, WPA handshake capture
+- Privilege escalation: SUID, sudo, cron, kernel exploits
+
+### Attack Scenarios
+Guided scenarios with step-by-step:
+- Phase 1: Reconnaissance (nmap, dirb, gobuster, enum4linux)
+- Phase 2: Vulnerability Discovery (nikto, wpscan, sqlmap, Burp Suite)
+- Phase 3: Exploitation (Metasploit, manual exploit, SQLi, XSS)
+- Phase 4: Post Exploitation (mimikatz, privilege escalation, persistence)
+- Phase 5: Reporting (document findings, remediation)
+
+### Defensive Tools
+- Wireshark/TShark: traffic capture and analysis
+- Snort/Suricata: IDS/IPS rule writing
+- Fail2ban: brute force prevention
+- ModSecurity: WAF rule configuration
+- ClamAV: malware detection
+- Tripwire/AIDE: file integrity monitoring
+- Osquery: endpoint visibility
+- ELK Stack: log management (simplified Kibana)
+
+### Skill Trees
+- Curriculum paths: Web Security, Network Security, Cryptography, Forensics, Reverse Engineering, Malware Analysis, Cloud Security, Mobile Security
+- Skill levels: Beginner → Intermediate → Advanced → Expert
+- Prerequisites and dependencies between skills
+- Hands-on labs per skill
+- Knowledge checks (quizzes)
+- Capstone projects
+
+### CTF Challenges
+- 100+ challenges across categories
+- Auto-scoring with dynamic point decay
+- Hints system (point penalty)
+- First blood bonus
+- Category-based leaderboard
+- Challenge series (progressive difficulty)
+- User-writeup submission and upvoting
+
+### Monitoring Lab
+- Simulated SIEM (Security Information and Event Management)
+- Dashboard with real-time alerts
+- Log correlation rules
+- Incident response workflow
+- Threat hunting queries
+- Compliance monitoring
+
+### Cryptography Lab
+- Cipher tools: Caesar, Vigenère, XOR, AES, RSA, ECC
+- Hash visualizer (MD5, SHA1, SHA256, bcrypt, scrypt)
+- Digital signature creation/verification
+- SSL/TLS handshake visualization
+- Diffie-Hellman key exchange simulation
+- Password cracking lab (John, hashcat)
+
+### Forensics Lab
+- Disk image analysis (Autopsy simulation)
+- Memory forensics (Volatility)
+- Network packet analysis (PCAP)
+- File carving (Foremost, Scalpel)
+- Registry analysis (Windows)
+- Steganography detection tools
+- Timeline analysis
+
+### Scoring & Badges
+- Points per completed lab, challenge, scenario
+- Badges: Recon Specialist, Exploit Master, Forensic Analyst, Crypto Breaker, Web Hacker, Network Ninja, Red Teamer, Blue Teamer, OSCP Ready
+- Experience points (XP) and levels
+- Weekly challenges
+- Streak bonuses
+- Certification paths
+
+### Implementation Plan
+
+Phase 1: Platform (Week 1-2) - Auth, lab management, machine templates, terminal
+Phase 2: Lab Engine (Week 3-4) - Network simulation, VM orchestration, snapshots
+Phase 3: Vulnerable Machines (Week 5-7) - 20+ VM templates with vulnerabilities
+Phase 4: Attack Scenarios (Week 7-9) - Guided scenarios, walkthroughs, tool integration
+Phase 5: Defensive Tools (Week 9-10) - Wireshark, Snort, ELK, fail2ban
+Phase 6: Cryptography & Forensics (Week 10-11) - Crypto lab, forensics lab
+Phase 7: CTF & Skills (Week 11-13) - CTF platform, skill trees, challenges, scoring
+Phase 8: Polish (Week 13-14) - SIEM, badges, performance, content expansion
+
+## Final Instructions
+Build a complete browser-based cybersecurity lab with vulnerable machines, attack/defend tools, guided scenarios, CTF platform, and learning curriculum. The lab must run containers for each machine with real vulnerabilities. Include terminal access with all Kali tools. Implement 20+ vulnerable machine types covering OWASP Top 10, network attacks, web attacks, privilege escalation, and wireless attacks. Add defensive tools: Wireshark, Snort, fail2ban, and ELK stack. Build cryptograph lab with cipher tools and visualizations. Include forensics lab with disk/memory analysis. Add skill trees with 200+ labs and 100+ CTF challenges. Design a dark terminal-themed UI.

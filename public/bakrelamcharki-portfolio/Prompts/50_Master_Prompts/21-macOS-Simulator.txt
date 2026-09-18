@@ -1,0 +1,167 @@
+# MASTER PROMPT: macOS Simulator
+
+## Project Overview
+Build a fully interactive macOS desktop simulator in the browser with Finder, Dock, Menu Bar, Launchpad, System Preferences, Spotlight, and built-in apps.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion, Zustand, react-window
+- **Backend:** Node.js + Express (for persistence)
+- **Database:** IndexedDB/localStorage
+- **Auth:** Optional (iCloud sync simulation)
+
+## Detailed Requirements
+
+### Desktop Environment
+- macOS Sequoia/Ventura style desktop
+- Desktop icons with staggered arrangement
+- Desktop picture/wallpaper (preloaded + custom)
+- Hot corners configuration
+- Desktop stacks (auto-organize by type)
+- Quick Look (spacebar preview)
+
+### Dock
+- 3D parallax dock with magnification
+- Left side: Finder, Launchpad, Safari, Messages, Mail, Maps, Photos, Calendar, Notes, Music, App Store
+- Right side: Downloads stack (fan, grid, list), Documents stack, Trash
+- Recently used apps section (right side of divider)
+- Dock position: bottom, left, right
+- Dock auto-hide/show
+- Icon bounce when app opens
+- Right-click context menu (Options, Quit, Show in Finder)
+- Drag apps to/from dock
+
+### Menu Bar
+- Apple menu: About This Mac, System Settings, App Store, Recent Items, Force Quit, Sleep, Restart, Shut Down, Lock Screen, Log Out
+- App-specific menus (when app focused): File, Edit, View, Window, Help
+- Menu extras (right side): Spotlight, Siri, Control Center, Wi-Fi, Bluetooth, Battery, Time Machine, Clock, Notification Center
+- Menu bar auto-hide
+- Keyboard shortcut indicators in menus
+
+### Finder
+- Finder windows with toolbar (Back, Forward, View, Arrange, Share, Edit, Tags, Search)
+- Sidebar: Favorites (AirDrop, Recents, Applications, Desktop, Documents, Downloads), iCloud, Locations, Tags
+- View modes: Icon, List, Column, Gallery
+- Column view with preview
+- Quick Look (spacebar preview for files)
+- File tags with colors
+- Smart folders
+- Context menu (Get Info, Quick Look, Share, Copy, Move, Delete, New Folder)
+- AirDrop simulation (nearby devices)
+- Icon preview for images, videos, documents
+
+### Launchpad
+- iOS-style app grid
+- Multiple pages with dot indicators
+- Search bar at top
+- Drag apps to rearrange
+- Folder creation (drag app on app)
+- Download animation when "installing" apps
+
+### Spotlight Search
+- Cmd+Space hotkey
+- Search files, apps, documents, contacts, mail, messages, web search (simulated)
+- Top hit, suggestion, file results, app results
+- Preview on hover
+- Open file/launch app on click
+- Search categories
+
+### Control Center
+- Slide-out panel from menu bar
+- Music Now Playing widget
+- Quick controls: Wi-Fi, Bluetooth, AirDrop, Do Not Disturb, Keyboard Brightness, Screen Mirroring, Display, Sound, Focus
+- Accessibility shortcuts
+- Now Playing: music controls, volume, output device
+
+### Notification Center
+- Slide-out from right side (date click)
+- Notification list with grouping
+- Today View: Weather, Calendar, Reminders, Stocks, World Clock
+- Widget gallery (add/rearrange widgets)
+- Clear all notifications
+- Interactive notifications (reply, snooze)
+
+### Mission Control
+- F3 or swipe up gesture
+- Virtual desktops (Spaces) at top
+- App Exposé (show all windows of app)
+- Drag windows between spaces
+- Create/delete desktops
+- Dashboard (widget screen, if included)
+
+### Built-in Apps
+
+Safari: Tab bar, address bar, bookmarks, history, reader mode, privacy report, developer tools
+Mail: IMAP mail, mailbox list, message list, message preview, compose, search, folders, rules
+Messages: iMessage style, conversation list, rich messages, photos, emoji reactions, Tapback
+Calendar: Day, week, month, year views, event creation, calendar colors, reminders sync
+Notes: Rich text, checklists, tables, images, scan document, folders, tags, attachments, Quick Notes
+Reminders: Lists, smart lists, sections, subtasks, priority, due date, location reminders, tags
+Music: Apple Music style, library, playlists, now playing, browse, search, radio
+Photos: Library, moments, albums, search, edit (crop, filters, adjust), slideshow
+Maps: Apple Maps style, search, directions, transit, satellite, 3D flyover, pin drop
+Contacts: Card view, list view, groups, vCard import/export, smart groups
+FaceTime: Video call simulation, contacts, recent calls, link generation
+App Store: Browse, search, featured, categories, app detail view, download simulation
+Calculator: Basic, scientific, programmer, RPN mode, tape
+Voice Memos: Record, play, edit, share, folder organization
+Preview: PDF viewer, image viewer, annotation tools, signature
+Stickies: Sticky notes on desktop, customization, font options
+
+### System Settings
+- Apple ID / iCloud (simulated)
+- General: About, Software Update, Storage, Language & Region, Date & Time
+- Appearance: Light, Dark, Auto, Accent color, Highlight color
+- Accessibility: VoiceOver, Zoom, Display, Audio, Keyboard, Mouse, Switch Control, Siri
+- Control Center: Menu bar extras, Control Center modules
+- Desktop & Dock: Dock settings, desktop stacks, hot corners, Stage Manager
+- Displays: Resolution, brightness, Night Shift, True Tone, color profile
+- Wallpaper: Dynamic, light/dark, desktop pictures, colors
+- Screen Saver: Options, start time, shuffle, hot corner
+- Battery: Battery health, low power mode, battery percentage
+- Privacy & Security: Location, contacts, calendars, reminders, photos, microphone, camera, analytics
+- Network: Wi-Fi, Ethernet, VPN, firewall, DNS
+- Sound: Output, input, sound effects, alert volume, output device
+- Keyboard: Input sources, keyboard shortcuts, dictation, text replacements, function keys
+- Trackpad: Point & click, scroll & zoom, more gestures
+- Mouse: Tracking speed, scroll direction, secondary click
+
+### Stage Manager
+- Window group management (left side)
+- Drag windows to create groups
+- Recent apps at left side
+- Click group to switch focus
+
+### Continuity & Handoff
+- Handoff between "devices" (simulated)
+- Universal Clipboard (copy from one app, paste to another)
+- AirDrop between simulated devices
+- iPhone/iPad device simulation (photo screen selection)
+
+### Accessibility
+- VoiceOver (basic screen reader)
+- Zoom (Cmd+Opt+8 toggle, Cmd+Opt+= to zoom in)
+- Display: Reduce motion, reduce transparency, differentiate without color, increase contrast, on/off labels
+- Audio: Flash screen for alerts, stereo as mono
+- Keyboard: Sticky keys, slow keys, full keyboard access, shortcut navigation
+
+### Performance
+- Smooth 60fps animations (window animations, dock magnification, Mission Control)
+- App launch animation (icon bounce + window fade)
+- Window resize with smooth rendering
+- Virtual memory management
+- App background/foreground state
+- Force quit dialog (Cmd+Opt+Esc)
+
+### Implementation Plan
+
+Phase 1: Desktop Core (Week 1) - Desktop, wallpaper, menu bar, clock, dock
+Phase 2: Window Manager (Week 2) - Window system, mission control, spaces, hot corners
+Phase 3: Finder (Week 3) - File system, folder views, Quick Look, preview, tags
+Phase 4: Spotlight & Launchpad (Week 4) - Search, app grid, Launchpad organization
+Phase 5: System Settings (Week 5) - Full settings app, personalization, hardware settings
+Phase 6: Built-in Apps I (Week 6-7) - Safari, Mail, Messages, Calendar, Notes, Reminders
+Phase 7: Built-in Apps II (Week 7-8) - Music, Photos, Maps, App Store, Calculator, Preview, Stickies
+Phase 8: Polish (Week 9-10) - Control Center, Notification Center, Stage Manager, accessibility, performance
+
+## Final Instructions
+Build a complete macOS desktop simulator in the browser. Implement the full macOS experience: Dock with magnification, Menu Bar with Apple menu, Finder with multiple view modes, Launchpad, Spotlight search, Mission Control with Spaces, Control Center, Notification Center with Today View, and Stage Manager. Include 15+ built-in apps: Safari, Mail, Messages, Calendar, Notes, Reminders, Music, Photos, Maps, Contacts, FaceTime, App Store, Calculator, Preview, Stickies. System Settings must have all macOS preference panes. The UI must be pixel-perfect to macOS design with smooth 60fps animations.

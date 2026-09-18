@@ -1,0 +1,153 @@
+# MASTER PROMPT: Kali Linux Simulator
+
+## Project Overview
+Build a browser-based Kali Linux desktop simulator with cybersecurity tools, terminal, file system, network scanning, penetration testing tools, and security labs.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, xterm.js (terminal), Framer Motion, Zustand
+- **Backend:** Node.js + Express + TypeScript, WebSocket
+- **Database:** None (file system simulation in memory)
+- **Auth:** Optional
+- **Infrastructure:** Docker (optional for tool execution)
+
+## Detailed Requirements
+
+### Desktop Environment
+- Kali Linux themed desktop (green theme, dragon logo)
+- XFCE-style desktop layout
+- Desktop icons: Terminal, File Manager, Browser, Tools folder, Trash
+- Right-click desktop menu
+- Kali Linux wallpaper and branding
+- Application menu (XFCE whisker menu style)
+- Panel/taskbar with app launcher, workspace switcher, system tray
+- Multiple workspaces
+
+### Kali Terminal
+- xterm.js with Kali green-on-black theme
+- Root shell (default: # prompt)
+- Full bash with scripting, pipes, redirection
+- Tab completion with Kali tool names
+- Command history
+- Zsh with Oh-My-Zsh theme (optional)
+
+### File System (Kali Linux FHS)
+Standard Linux FHS with Kali-specific directories:
+- /usr/share/wordlists/ (rockyou.txt, dirb common.txt, etc.)
+- /usr/share/exploitdb/ (exploit database)
+- /usr/share/metasploit-framework/
+- /usr/share/seclists/
+- /usr/share/nmap/scripts/
+- /etc/ettercap/, /etc/sqlmap/, /etc/hydra/
+- /root/ with .bashrc, .vimrc, Desktop/
+
+### Cybersecurity Tools (Simulated)
+
+#### Information Gathering
+- nmap: port scanning, OS detection, service version, NSE scripts
+- netdiscover: ARP scanner
+- zenmap: nmap GUI
+- dnsrecon, dnsenum: DNS enumeration
+- theHarvester: email/subdomain gathering
+- whois, dig, nslookup
+
+#### Vulnerability Assessment
+- nikto: web server scanner
+- wpscan: WordPress vulnerability scanner
+- openvas: vulnerability scanner (simplified)
+- sqlmap: SQL injection automation
+- dirb, gobuster: directory/file brute forcing
+
+#### Exploitation Tools
+- Metasploit Framework: msfconsole, search, use exploit, set payload, run
+- searchsploit: exploit database search
+- BeEF: browser exploitation framework
+- Social Engineering Toolkit (setoolkit)
+
+#### Password Attacks
+- hydra: online password cracking (SSH, FTP, HTTP, MySQL, etc.)
+- john: offline password cracking (John the Ripper)
+- hashcat: GPU-accelerated password cracking
+- crunch: wordlist generator
+- hash-identifier: hash type identification
+- wordlists: rockyou, common passwords, SecLists
+
+#### Wireless Attacks
+- aircrack-ng: WEP/WPA cracking (simulated)
+- reaver: WPS attack (simulated)
+- kismet: wireless network detector
+- wifite: automated wireless attack tool
+
+#### Web Application Tools
+- burpsuite: proxy, repeater, intruder, decoder (simplified)
+- owasp-zap: automated scanner
+- dirb: directory scanner
+- whatweb: web technology identifier
+- wig: web app info gatherer
+
+#### Sniffing & Spoofing
+- wireshark: packet capture and analysis (simulated pcap)
+- tcpdump: CLI packet capture
+- ettercap: MITM framework
+- bettercap: modern MITM framework
+- driftnet: image capture from network
+
+#### Post Exploitation
+- mimikatz: credential extraction (simulated)
+- powershell empire
+- bloodhound: Active Directory analysis
+- linpeas/winpeas: privilege escalation checkers
+
+#### Forensics
+- autopsy: digital forensics platform
+- foremost: file carving
+- binwalk: firmware analysis
+- volatility: memory forensics
+- sleuthkit: disk forensics
+
+#### Reporting
+- dradis: collaboration and reporting
+- faraday: pentest management
+- cherrytree: note-taking with markdown
+
+### Scenarios & Labs
+- Simulated vulnerable targets (DVWA, Metasploitable, VulnHub-like)
+- Capture The Flag (CTF) challenges (10+ challenges)
+- Walkthrough mode (step-by-step guidance)
+- Timed challenges
+- Score tracking and leaderboard
+
+### Network Simulation
+- Virtual network with multiple hosts
+- Target machines with known vulnerabilities
+- Service simulation (HTTP, SSH, FTP, SMB, MySQL)
+- Packet capture (PCAP) generation and analysis
+- Traffic generation for sniffing exercises
+
+### Browser (Kali Firefox)
+- Built-in browser with HSTS, HTTPS everywhere
+- Developer tools
+- Proxy configuration (burp integration)
+- Cookie manager
+- User-Agent switcher
+
+### Documentation & Learning
+- Integrated Kali Linux documentation
+- Man pages for all tools
+- Tool usage examples
+- Cheatsheets for common tools
+- Video tutorials (embeded)
+- Certification practice (OSCP, GPEN, CEH)
+
+### Implementation Plan
+
+Phase 1: Desktop & Terminal (Week 1) - Kali desktop, terminal with bash, basic Linux commands
+Phase 2: File System (Week 2) - FHS, wordlists, tool directories
+Phase 3: Core Tools (Week 3-5) - nmap, hydra, sqlmap, nikto, dirb, gobuster
+Phase 4: Exploitation (Week 5-7) - Metasploit, searchsploit, BeEF, SET
+Phase 5: Wireless & Sniffing (Week 7-8) - aircrack, wireshark, ettercap, tcpdump
+Phase 6: Forensics & Reporting (Week 8-9) - Autopsy, foremost, volatility, dradis
+Phase 7: Scenarios & Labs (Week 9-10) - CTF challenges, vulnerable targets, scoring
+Phase 8: Polish (Week 10-11) - Documentation, learning resources, performance
+
+## Final Instructions
+Build a complete Kali Linux desktop simulator with 50+ cybersecurity tools, terminal, file system, network scanning, exploitation framework, and CTF labs. The environment must accurately simulate Kali Linux's tool ecosystem with nmap, Metasploit, hydra, sqlmap, burpsuite, wireshark, aircrack-ng, and other tools. Include a simulated network with vulnerable targets for penetration testing practice. Implement scoring, walkthroughs, and learning resources. Design the UI with Kali's dark green theme. Include CTF challenges (beginner to advanced). All tools must be functional simulations with realistic output.

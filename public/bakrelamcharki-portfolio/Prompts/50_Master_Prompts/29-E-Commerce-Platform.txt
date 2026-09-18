@@ -1,0 +1,181 @@
+# MASTER PROMPT: E-Commerce Platform
+
+## Project Overview
+Build a full-featured e-commerce platform with product catalog, shopping cart, checkout, payment processing, order management, inventory tracking, admin dashboard, and multi-vendor support.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query
+- **Backend:** Next.js API routes + Stripe/PostgreSQL
+- **Database:** PostgreSQL (primary), Redis (cart + sessions + cache), Elasticsearch (search)
+- **Auth:** NextAuth.js v5, JWT
+- **Payments:** Stripe, PayPal, Apple Pay, Google Pay
+- **Storage:** S3-compatible (product images, assets)
+- **Email:** Resend / SendGrid
+- **Search:** Elasticsearch or MeiliSearch
+- **Infrastructure:** Docker, GitHub Actions, Vercel + Railway
+
+## Detailed Requirements
+
+### Product Catalog
+- Product categories (hierarchical, infinite nesting)
+- Product attributes: name, description, price, compare-at price, SKU, barcode, weight, dimensions
+- Product variants: size, color, material (with inventory per variant)
+- Product images: gallery with zoom, video thumbnails
+- Product tags and labels (new, sale, bestseller, limited)
+- Product reviews and ratings (with verified purchase badge)
+- Related products, upsells, cross-sells
+- Product FAQ
+- Digital products (downloadable files, license keys)
+- Product bundles
+
+### Shopping Cart
+- Add to cart with variant selection
+- Cart drawer (slide-out) and full cart page
+- Quantity adjustment with stock validation
+- Coupon/gift card entry
+- Estimated shipping (based on location)
+- Tax estimation
+- Save for later
+- Cart persistence (localStorage for guests, DB for logged-in)
+- Multi-currency display
+- Real-time stock check during checkout
+
+### Checkout
+- Guest checkout + account checkout
+- Shipping address: multi-address support
+- Billing address (same as shipping toggle)
+- Shipping method selection (standard, express, next day)
+- Payment methods: credit card (Stripe), PayPal, Apple Pay, Google Pay, bank transfer, COD
+- Order summary with itemized costs
+- Coupon/discount application
+- Tax calculation (automatic based on location)
+- Checkout progress indicator
+- Express checkout (Shop Pay, PayPal One Touch)
+- Mobile-optimized checkout
+
+### Order Management
+- Order status: pending, confirmed, processing, shipped, delivered, cancelled, returned
+- Order detail: items, pricing, shipping, tracking, timeline
+- Order history with search and filters
+- Order cancellation and modification
+- Returns and refunds (with RMA number)
+- Invoice download (PDF)
+- Reorder (one-click)
+- Tracking integration (UPS, FedEx, USPS, DHL)
+
+### User Account
+- Profile management
+- Address book (multiple addresses)
+- Order history
+- Wishlist
+- Saved payment methods
+- Recently viewed products
+- Product reviews written
+- Newsletter preferences
+- Referral program
+
+### Inventory Management
+- Real-time inventory tracking
+- Low stock alerts
+- Inventory by warehouse/location
+- Backorder management
+- Stock updates via CSV import
+- Inventory history log
+- Supplier management
+
+### Admin Dashboard
+- Dashboard: sales today, orders, revenue, visitors, conversion rate
+- Order management: view, update status, print packing slip/label
+- Product management: add/edit, bulk import/export, categories, attributes
+- Inventory management: stock levels, adjustments, transfers
+- Customer management: orders, reviews, details
+- Discount/coupon management
+- Content management: pages, banners, announcements
+- Analytics: sales reports, product performance, customer insights
+- Shipping configuration: zones, rates, carriers
+- Tax configuration: rules, rates, zones
+- Team management: staff accounts, permissions
+
+### Search & Navigation
+- Elasticsearch-powered search
+- Autocomplete suggestions
+- Search filters: category, price range, brand, rating, attributes
+- Search sorting: relevance, price (low-high, high-low), newest, best selling, rating
+- Faceted navigation
+- Breadcrumb navigation
+- Mega menu (with categories, images)
+- Voice search
+
+### Marketing Features
+- Discount/coupon system: fixed amount, percentage, free shipping, BOGO
+- Promotional banners and popups
+- Email marketing integration (Mailchimp, Klaviyo)
+- SMS marketing integration (Twilio)
+- Abandoned cart recovery (email + SMS)
+- Back-in-stock notifications
+- Price drop alerts
+- Referral program
+- Loyalty/rewards program (points system)
+
+### Multi-Vendor (Marketplace)
+- Vendor registration and dashboard
+- Vendor product management
+- Commission structure (percentage, flat fee)
+- Vendor payout system (Stripe Connect)
+- Vendor performance metrics
+- Product approval workflow
+- Vendor communication system
+- Marketplace admin: vendor management, dispute resolution
+
+### Performance & SEO
+- 90+ Lighthouse score
+- SSR for product pages (SEO)
+- ISR for catalog pages (fast updates)
+- Image optimization (next/image, WebP, AVIF, responsive)
+- Structured data: Product, Offer, Review, Organization, BreadcrumbList, FAQPage
+- Dynamic sitemap
+- robots.txt
+- Canonical URLs
+- hreflang for multi-language
+- Core Web Vitals optimization
+
+### Security
+- PCI-DSS compliance (via Stripe)
+- SSL/TLS everywhere with HSTS
+- CSP headers
+- Rate limiting on checkout/auth endpoints
+- Fraud detection (velocity checks, IP geolocation)
+- Secure checkout (3D Secure)
+- CSRF protection
+- SQL injection prevention
+
+### Database Design
+
+Tables:
+- users, addresses, user_payment_methods
+- categories, products, product_variants, product_images
+- inventory, inventory_transactions
+- carts, cart_items
+- orders, order_items, order_status_history
+- payments, refunds, chargebacks
+- shipments, tracking_events
+- reviews, review_images
+- wishlist_items, recently_viewed
+- coupons, coupon_usage
+- vendors, vendor_products, vendor_payouts
+- tax_rates, shipping_zones, shipping_rates
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, product catalog, categories, basic product page
+Phase 2: Cart & Checkout (Week 3-4) - Shopping cart, checkout flow, Stripe payment
+Phase 3: Orders (Week 4-5) - Order management, admin order view, status updates
+Phase 4: User Account (Week 5-6) - Profile, address book, order history, wishlist
+Phase 5: Inventory & Admin (Week 6-8) - Inventory management, full admin dashboard, analytics
+Phase 6: Marketing (Week 8-9) - Coupons, abandoned cart, email integration, reviews
+Phase 7: Search & SEO (Week 9-10) - Elasticsearch, faceted search, structured data, sitemaps
+Phase 8: Multi-Vendor (Week 10-12) - Vendor system, commissions, payouts
+Phase 9: Polish (Week 12-13) - Performance, security, testing, multi-language, deployment
+
+## Final Instructions
+Build a complete e-commerce platform with product catalog, cart, checkout (Stripe + PayPal), order management, inventory, admin dashboard, and multi-vendor marketplace support. The checkout must support guest and account users with multiple payment methods. Include Elasticsearch-powered search with faceted navigation. Implement coupon/discount system, abandoned cart recovery, and email marketing integration. Support multi-vendor with commission management and Stripe Connect payouts. Optimize for SEO with structured data and SSR. Design a clean, conversion-optimized UI with dark mode.

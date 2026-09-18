@@ -1,0 +1,115 @@
+# MASTER PROMPT: Apple Store Clone
+
+## Project Overview
+Build a premium Apple Store clone with product pages, shopping experience, trade-in, financing (Apple Card), customization (configurator), and integration with Apple services.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Framer Motion, Three.js (3D product viewer), GSAP (scroll animations)
+- **Backend:** Node.js + Express + TypeScript
+- **Database:** PostgreSQL + Redis
+- **Payments:** Stripe + Apple Pay
+- **Auth:** Apple ID sign-in + email
+- **Storage:** S3-compatible
+- **Infrastructure:** Vercel + Cloudflare
+
+## Detailed Requirements
+
+### Apple Design Language
+- Minimalist white/gray design with San Francisco typography
+- Large product hero images with gradient backgrounds
+- Product navigation bar (sticky, product name + buy button)
+- Parallax scrolling sections
+- Grid system and consistent spacing
+- Smooth page transitions
+
+### Product Pages
+- Product navigation bar: Overview, Tech Specs, Compare, Buy
+- Hero section: product name, tagline, price, CTA
+- Product images: gallery with zoom, 360° rotation
+- Configurator: color, storage, size, connectivity, accessories
+- Price summary with trade-in value
+- Finance options: Apple Card Monthly Installments, carrier deals
+- Tech specs comparison table
+- What's in the box
+- Accessories section (cross-sell)
+- Customer reviews
+
+### Product Configurator
+- Select options: color, storage, size, connectivity
+- Visual preview updates on selection (3D model or image swap)
+- Price updates in real-time
+- Trade-in value estimate
+- AppleCare+ add-on
+- Accessory add-ons (case, charger, AirPods)
+- In-store pickup vs delivery
+- Summary sidebar with add to bag
+
+### Shopping Bag & Checkout
+- Bag icon with item count (badge animation)
+- Bag overlay: item list, price, estimated delivery, edit/remove
+- Express checkout: Apple Pay (default)
+- Full checkout: guest or sign in
+- Delivery options: standard, express, in-store pickup
+- Same-day delivery in select areas
+- Gift options: gift wrap, gift message, gift receipt
+- Order confirmation with delivery tracking
+
+### Apple Trade In
+- Device selector (iPhone, iPad, Mac, Watch, Android)
+- Device condition assessment (series of questions)
+- Trade-in value estimate (real-time)
+- How to send device (kit shipping or in-store drop-off)
+- Apply trade-in value to new purchase
+
+### Apple Card Financing
+- Monthly installment calculator
+- Apply for Apple Card (simulated)
+- 3% Daily Cash back on purchase
+- Financing term options: 6, 12, 18, 24 months
+- Interest rate display
+
+### Store & Pickup
+- Store locator with map
+- In-store availability checker
+- Reserve for pickup
+- Personal setup appointment booking
+- Today at Apple (in-store sessions)
+
+### Account & Services
+- Apple ID sign-in
+- Order tracking
+- Saved payment methods
+- Address book
+- Recently viewed
+- AppleCare+ coverage dashboard
+- My Support history
+
+### Admin Dashboard
+- Product management (models, colors, storage, pricing)
+- Inventory management (by store, warehouse)
+- Order management
+- Customer management
+- Trade-in management
+- Promotions management
+- Analytics dashboard
+
+### Performance
+- 95+ Lighthouse on product pages
+- Image optimization (Apple uses HEIC/AVIF)
+- SSR for product pages
+- Component lazy loading
+- Smooth 60fps scroll animations
+
+### Implementation Plan
+
+Phase 1: Design Foundation (Week 1) - Apple design system, typography, colors, components
+Phase 2: Product Pages (Week 2-3) - Product hero, gallery, configurator, specs
+Phase 3: Configurator (Week 3-4) - Full product builder with real-time pricing
+Phase 4: Cart & Checkout (Week 4-5) - Shopping bag, Apple Pay, checkout flow
+Phase 5: Trade-In & Financing (Week 5-6) - Trade-in assessment, Apple Card financing
+Phase 6: Store & Pickup (Week 6-7) - Store locator, availability, in-store pickup
+Phase 7: Account (Week 7-8) - Apple ID, order tracking, saved items
+Phase 8: Polish (Week 8-9) - Admin, performance, SEO, testing
+
+## Final Instructions
+Build a premium Apple Store clone with Apple's exact design language, product configurator, Apple Pay checkout, trade-in system, and Apple Card financing. Product pages must have the sticky navigation bar with buy button, parallax scrolling, 3D product viewer, and real-time configurator pricing. Checkout must prioritize Apple Pay with guest sign-in. Include trade-in with condition assessment. Design must be pixel-perfect to Apple.com with smooth animations and transitions.

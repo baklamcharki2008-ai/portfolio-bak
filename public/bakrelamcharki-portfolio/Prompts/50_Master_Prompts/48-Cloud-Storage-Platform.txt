@@ -1,0 +1,95 @@
+# MASTER PROMPT: Cloud Storage Platform
+
+## Project Overview
+Build a comprehensive cloud storage platform with file sync, sharing, versioning, team folders, smart sync, backup, and enterprise admin features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query, React Dropzone
+- **Backend:** Node.js + Express + TypeScript, Go (sync engine)
+- **Database:** PostgreSQL + Redis + ScyllaDB (file events)
+- **Storage:** S3-compatible (hot) + Glacier (archive)
+- **Auth:** JWT + OAuth (Google Workspace, Microsoft 365, Apple)
+- **Sync:** Custom WebSocket + HTTP/2 sync protocol
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions
+
+## Detailed Requirements
+
+### File Management
+- Upload: drag-drop, click, URL import, mobile camera upload
+- Multi-file and folder upload
+- File tree with expand/collapse
+- Operations: rename, move, copy, delete, duplicate
+- Grid, list, compact views
+- Sort by name, date, size, type
+- File preview: images, videos, audio, PDF, Office docs, code
+- Favorites/starred
+- Recent files
+- Trash with 30-day retention
+- File/folder shortcuts (symlinks)
+- File description/comments
+
+### Smart Sync
+- Online-only files (metadata only, download on open)
+- Local files (fully synced)
+- On-demand hydration (open triggers download)
+- Smart cache management
+- Selective sync per folder
+- Sync status badges/icons
+- Bandwidth management (schedule, throttle)
+
+### Sharing & Permissions
+- Share link: view, comment, edit permissions
+- Password protection
+- Link expiry
+- Download disable
+- Granular folder permissions (can view, can edit, can share)
+- Team folders with inheritance
+- File request (receive files from anyone via link)
+- Transfer ownership
+- Shared with me view
+
+### Version History
+- Version history per file (100 versions)
+- Version comparison (side-by-side diff for text)
+- Named versions
+- Restore previous version
+- Storage accounting per version
+
+### Team Collaboration
+- Workspace/team folders
+- Real-time co-editing (Office documents via Collabora Online)
+- Comments on files with @mentions
+- Task assignment
+- Approval workflows
+- Activity feed
+
+### Backup
+- Automatic backup of designated folders
+- Continuous backup
+- Backup status dashboard
+- File restore from backup
+- External drive backup
+
+### Admin Dashboard
+- User and team management
+- Storage analytics (total, per user, per file type)
+- Sharing audit
+- Device management
+- Compliance (retention, legal hold, eDiscovery)
+- Security settings (2FA, password policy, IP allowlist)
+- Integration management
+- Branding (logo, colors, domain)
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, file upload, folder tree, basic preview
+Phase 2: Sync Engine (Week 3-4) - Go sync engine, block-level sync, conflict resolution
+Phase 3: Sharing (Week 4-5) - Share links, permissions, team folders
+Phase 4: Smart Sync (Week 5-6) - Online-only, on-demand hydration, selective sync
+Phase 5: Versioning & Backup (Week 6-7) - Version history, backup, restore
+Phase 6: Collaboration (Week 7-8) - Comments, co-editing, approvals, activity feed
+Phase 7: Admin (Week 8-9) - Admin dashboard, analytics, compliance, security
+Phase 8: Polish (Week 9-10) - Performance, CDN, testing, deployment
+
+## Final Instructions
+Build a comprehensive cloud storage platform with smart sync, file sharing, version history, team collaboration, backup, and enterprise admin controls. The sync engine must support real-time file monitoring with block-level differential sync for efficiency. Smart sync must support online-only files with on-demand hydration. Sharing must include granular permissions, password protection, and link expiry. Version history must keep up to 100 versions with side-by-side diff. Include team folders, real-time co-editing, and comments. Admin dashboard must provide full visibility and control. Design a clean, professional UI suitable for both individual and enterprise users.

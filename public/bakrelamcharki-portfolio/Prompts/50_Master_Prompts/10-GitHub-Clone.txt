@@ -1,0 +1,350 @@
+# MASTER PROMPT: GitHub Clone
+
+## Project Overview
+Build a complete Git repository hosting platform with repository management, pull requests, issues, actions (CI/CD), wikis, discussions, code review, and project management boards.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Monaco Editor (code viewer), Zustand, React Query
+- **Backend:** Ruby on Rails (or Node.js + Express + TypeScript), GraphQL + REST
+- **Database:** PostgreSQL (primary), Redis (cache + sidekiq queues), Elasticsearch (code search)
+- **Git Engine:** Go (git operations via libgit2/go-git), managed via Gitaly-like service
+- **Storage:** S3-compatible for LFS, git objects, attachments
+- **Auth:** JWT + OAuth (GitHub, GitLab, Google) + SSH key auth
+- **Real-time:** ActionCable / WebSocket for live updates
+- **CI/CD:** Kubernetes-native runner (custom or Knative)
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry, DataDog
+
+## Detailed Requirements
+
+### Authentication & Security
+- Email/password + OAuth (GitHub, GitLab, Google, Microsoft)
+- SSH key management for git operations
+- GPG key management for signed commits
+- Two-factor authentication (TOTP, SMS, WebAuthn)
+- Personal access tokens (with scopes)
+- OAuth application authorization for third-party apps
+- SAML SSO for enterprise
+- Session management (active sessions, revoke)
+- Security log (login history, devices)
+
+### Repository Management
+- Create, fork, clone, delete, transfer repositories
+- Repository visibility: public, private, internal (enterprise)
+- Repository topics and language detection
+- Repository description, website, README
+- Repository license selection
+- .gitignore templates
+- Repository statistics (stars, forks, watchers, issues)
+- Repository insights: graphs, traffic, community
+- Code owners and CODEOWNERS file
+- Repository templates
+
+### Git Operations
+- Git clone, push, pull via SSH and HTTPS
+- Smart HTTP protocol (Git HTTP backend)
+- Git LFS (Large File Storage) support
+- Partial clone and shallow clone
+- Reference discovery (advertisement)
+- Packfile generation (delta compression)
+- Git hooks (pre-receive, post-receive, update)
+- Protected branches (require PR, status checks, approvals)
+- Branch management and comparison
+- Tag management (release tags)
+
+### Code Viewing & Browsing
+- File tree navigation with keyboard shortcuts
+- Code syntax highlighting (Monaco Editor ~600 languages)
+- File blame view (git blame with UI)
+- Commit history for file
+- Raw file view and download
+- Code review: add line comments
+- Compare view (branches, tags, commits)
+- Repository file finder (t keyboard shortcut)
+- Go to definition (code intelligence)
+- Find references (code intelligence)
+- Repository download as ZIP
+- Git archive generation
+
+### Pull Requests
+- Pull request creation from branch comparison
+- PR description with markdown
+- PR review workflow: approve, request changes, comment
+- Review comments on code lines (inline review)
+- Review requests to specific users/teams
+- PR status checks and required checks
+- PR merge options: merge commit, squash merge, rebase merge
+- Auto-merge with status checks
+- Draft pull requests
+- Linked issues and closing keywords
+- PR template configuration
+- PR labels, milestones, assignees, projects
+- PR conversation threading
+- Suggested changes
+- Merge conflict resolution UI
+
+### Issues
+- Issue creation with markdown description
+- Issue templates (bug report, feature request, custom)
+- Labels: predefined + custom with colors
+- Milestones with due dates and progress
+- Issue assignment
+- Issue boards (Kanban-style project boards)
+- Cross-references between issues and PRs
+- Issue reactions (thumbs up/down, etc.)
+- Issue search with filters (is:open, label:bug, etc.)
+- Saved issue filters
+- Issue timeline (events, cross-references)
+
+### Actions / CI/CD
+- YAML-based workflow configuration (.github/workflows)
+- Workflow triggers: push, PR, schedule, webhook, manual
+- Matrix builds (multiple OS, versions)
+- Build artifacts and caching
+- Service containers in workflows (PostgreSQL, Redis, etc.)
+- Self-hosted runners management
+- Runner scaling with Kubernetes
+- Workflow visualization (graph view)
+- Re-run failed jobs
+- Workflow approval gates
+- Environment protection rules
+- Deployment tracking
+- Container registry (Docker image hosting)
+
+### Wiki
+- Wiki creation per repository
+- Markdown-based pages
+- Wiki sidebar customization
+- Wiki revision history
+- Wiki search
+- Wiki export
+
+### Discussions
+- Category-based discussions
+- Announcements, Q&A, ideas, general, polls
+- Discussion with markdown
+- Upvote/downvote on discussion comments
+- Best answer selection (Q&A)
+- Discussion pinning
+
+### Project Management (Boards)
+- Project boards (Kanban with columns)
+- Project v2 (table, board, roadmap views)
+- Custom fields and custom views
+- Automation rules (move card when PR merged)
+- Linked repositories
+- Insights and charts
+
+### Notifications
+- Notification center (web + email)
+- Notification filtering and grouping
+- Notification types: mentions, PR reviews, issues, commits
+- Custom notification preferences per repo
+- Watching/unwatching repos
+- Subscription management
+- Slack/Microsoft Teams/Discord webhook integration
+
+### Admin Dashboard
+- Site administration panel
+- User management (suspend, roles, quota)
+- Repository management (visibility, transfer, delete)
+- Organization management
+- Runner management
+- Audit log viewer
+- Feature flag management
+- Site analytics: users, repos, actions
+- Billing management (for enterprise/teams)
+- Abuse detection and spam management
+
+### Database Design
+
+Core tables:
+- users, user_emails, user_social_accounts
+- organizations, organization_members
+- repositories, repository_topics, repository_languages
+- branches, tags, protected_branches
+- commits, commit_comments
+- pull_requests, pull_request_reviews, pull_request_review_comments
+- issues, issue_comments, issue_labels, issue_assignees
+- labels, milestones
+- project_boards, board_columns, board_cards
+- releases, release_assets
+- ssh_keys, gpg_keys, access_tokens, oauth_applications
+- workflows, workflow_runs, workflow_jobs
+- webhooks, webhook_deliveries
+- notifications, notification_settings
+- audit_logs, security_events
+
+### API Structure
+
+```
+REST:
+  GET /repos/:owner/:repo          - Get repository
+  POST /repos/:owner/:repo/issues  - Create issue
+  GET /repos/:owner/:repo/pulls    - List PRs
+  POST /repos/:owner/:repo/pulls   - Create PR
+  POST /repos/:owner/:repo/dispatches - Trigger workflow
+
+GraphQL:
+  Query {
+    repository(name: String!, owner: String!): Repository!
+    pullRequest(number: Int!): PullRequest
+    issue(number: Int!): Issue
+    search(query: String!, type: SearchType!): SearchResult!
+    viewer: User!
+  }
+  Mutation {
+    createPullRequest(input: CreatePullRequestInput!): PullRequest!
+    mergePullRequest(input: MergePullRequestInput!): MergeResult!
+    addComment(input: AddCommentInput!): Comment!
+    createIssue(input: CreateIssueInput!): Issue!
+    addReaction(input: AddReactionInput!): Reaction!
+  }
+  Subscription {
+    issueUpdated(repoId: ID!): IssueUpdate!
+    pullRequestUpdated(repoId: ID!): PRUpdate!
+  }
+```
+
+### Git Service (Gitaly-like)
+Go service handling all Git operations:
+- Repository creation, replication, maintenance
+- Smart HTTP and SSH protocol handling
+- Packfile generation and caching
+- Reference transaction management
+- Object storage integration (S3)
+- Repository consistency checks
+- Quarantine for push verification
+- Hooks execution sandbox
+- Geo-replication for multi-region
+
+### Search System
+- Repository search with ranking
+- Code search across repositories (Elasticsearch)
+- Issue and PR search with complex filters
+- User/org search
+- Search suggestions and autocomplete
+- Code intelligence search (definition, references)
+- Experimental: AI-powered code search
+
+### Performance Optimization
+- Repository content caching (Redis)
+- Page caching for public repositories
+- CDN for static assets (avatar, images)
+- Git object caching
+- Database query optimization (cursors, pagination)
+- Background job processing (Sidekiq/Bull)
+- Incremental repository calculations (traffic, stats)
+
+### Security
+- Signed commits verification (GPG)
+- Secret scanning (commit content for API keys/tokens)
+- Dependabot-style dependency vulnerability alerts
+- Code scanning integration (CodeQL/SonarQube)
+- Rate limiting on API and Git operations
+- Abuse rate limiting
+- IP allow/deny list for enterprise
+- Audit logging for all sensitive operations
+- Container scanning for registry
+
+### Testing
+- Unit: Vitest/RSpec
+- Integration: Git operations test suite
+- E2E: Playwright for critical flows
+- Git protocol: Custom test harness for smart HTTP
+- Performance: Git clone benchmark suite
+- Security: OWASP + dependency scanning
+
+### Docker & CI/CD
+- Docker Compose for full local environment
+- K8s deployment with Helm charts
+- GitHub Actions pipeline (dogfooding)
+- Blue-green deployment for web
+- Rolling update for git service
+- Database migration automation
+
+### Monitoring & Analytics
+- Git operations throughput (pushes/clones per second)
+- CI/CD pipeline duration and success rate
+- Repository and user growth metrics
+- API response times and error rates
+- Search query performance
+- Storage usage monitoring
+- Real-time error tracking
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Monorepo setup with web + API + git service
+2. Database schema design
+3. Authentication system (OAuth + SSH keys)
+4. Basic repository creation and browsing
+5. Git protocol handler (smart HTTP)
+
+### Phase 2: Git Operations (Week 3-4)
+6. Git clone/fetch/push via HTTPS and SSH
+7. Branch and tag management
+8. File browsing with syntax highlight
+9. Commit history and blame view
+10. Compare view (branches, commits)
+
+### Phase 3: Collaboration (Week 5-6)
+11. Issue tracking system
+12. Pull request workflow
+13. Code review (inline comments)
+14. Merge strategies
+15. Labels, milestones, assignees
+
+### Phase 4: CI/CD (Week 7-8)
+16. Workflow YAML parser and executor
+17. Runner deployment (Kubernetes)
+18. Build artifacts and caching
+19. Matrix builds
+20. Container registry
+
+### Phase 5: Project Management (Week 9-10)
+21. Project boards (Kanban)
+22. Wiki and discussions
+23. Notifications (web + email)
+24. Webhooks and integrations
+25. Code search with Elasticsearch
+
+### Phase 6: Enterprise & Admin (Week 11-12)
+26. Organization management
+27. Admin dashboard
+28. Security features (secret scanning, Dependabot)
+29. Enterprise SAML SSO
+30. Performance optimization and scaling
+
+## Folder Structure
+```
+apps/
+├── web/                     # Next.js frontend
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   │   ├── repo/
+│   │   │   ├── issues/
+│   │   │   ├── pulls/
+│   │   │   └── admin/
+│   │   └── lib/
+├── api/                     # Rails/Node API
+│   ├── src/
+│   │   ├── graphql/
+│   │   ├── rest/
+│   │   └── services/
+│   └── prisma/
+├── git-service/             # Go Git service
+│   ├── internal/
+│   │   ├── git/
+│   │   ├── ssh/
+│   │   ├── http/
+│   │   └── storage/
+│   └── cmd/
+├── runner/                  # CI/CD runner
+├── worker/                  # Background job processor
+└── shared/                  # Common types
+```
+
+## Final Instructions
+Build a complete GitHub clone with all core features. The Git service must handle millions of pushes/clones with horizontal scaling. Implement the full pull request workflow with code review. Actions/CI must support complex workflow YAML with matrix builds. The code viewer must have syntax highlighting and code intelligence. Project boards should support both Kanban and table views. Implement search that indexes both repo metadata and code content. Ensure SSH and HTTPS Git protocols work correctly with authentication. Build proper moderation and abuse prevention tools. Design the UI to match GitHub's clean, functional aesthetic.

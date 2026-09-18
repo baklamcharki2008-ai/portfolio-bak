@@ -1,0 +1,155 @@
+# MASTER PROMPT: AI SaaS Platform
+
+## Project Overview
+Build a production-ready AI SaaS platform offering multiple AI services (text generation, image generation, speech, translation, analysis) with usage-based billing, model management, and API access.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query, SWR
+- **Backend:** Next.js API routes + Python FastAPI (ML inference), tRPC
+- **Database:** PostgreSQL (users, usage, billing), Redis (caching, rate limiting, queues)
+- **AI Models:** OpenAI SDK, Anthropic SDK, Hugging Face, Stable Diffusion, Whisper, TTS
+- **Auth:** NextAuth.js v5, JWT, API keys
+- **Billing:** Stripe, usage-based pricing
+- **Storage:** S3-compatible for generated images, audio, files
+- **Queue:** Bull + Redis for async AI jobs
+- **Infrastructure:** Docker, Kubernetes, GitHub Actions, Vercel + Railway
+
+## Detailed Requirements
+
+### Authentication & API Access
+- Email/password + OAuth (Google, GitHub, Microsoft, Apple)
+- Multi-factor authentication
+- API key management (create, revoke, permissions, usage limits)
+- Developer dashboard with API analytics
+- SDK generation (Python, Node.js, Go, curl examples)
+- Rate limiting per user/plan (RPM, TPM)
+
+### AI Services
+
+#### Text Generation
+- Models: GPT-4o, GPT-4, GPT-3.5, Claude 3, Gemini Pro, Llama 3, Mistral
+- Parameters: temperature, top_p, max_tokens, frequency_penalty, presence_penalty, stop sequences
+- System prompts, few-shot examples
+- Streaming response (Server-Sent Events)
+- Chat history management
+- Prompt templates
+- Markdown, code, JSON output modes
+
+#### Image Generation
+- Models: DALL-E 3, Stable Diffusion XL, Midjourney style (via API)
+- Parameters: prompt, negative prompt, size, quality, style, seed
+- Image editing (inpainting, outpainting)
+- Image variation
+- Upscaling (2x, 4x)
+- Background removal
+- Generated image gallery
+- Image-to-image
+
+#### Speech & Audio
+- Text-to-Speech: OpenAI TTS, ElevenLabs, Azure Speech
+- Speech-to-Text: Whisper, Deepgram
+- Voice cloning (limited)
+- Audio translation
+- Voice parameters: speed, pitch, voice selection
+
+#### Translation & Analysis
+- Text translation (100+ languages)
+- Sentiment analysis
+- Content moderation
+- Entity extraction
+- Summarization
+- Code explanation
+- Grammar correction
+
+### Usage Dashboard
+- Real-time usage metrics (requests today, tokens used, images generated)
+- Usage history (daily, weekly, monthly charts)
+- Cost breakdown by service and model
+- Remaining quota
+- Usage alerts (email when approaching limit)
+- Billing history
+
+### Subscription Plans
+- Free tier: limited requests/day, basic models
+- Pro: more requests, all models, faster queue
+- Business: high limits, priority, API access
+- Enterprise: custom limits, SLA, dedicated infra
+- Usage-based add-ons
+- Plan comparison page
+
+### Developer Hub
+- API reference documentation (OpenAPI/Swagger)
+- Interactive API playground
+- SDK examples in 5+ languages
+- Webhook documentation
+- Changelog
+- Status page (uptime, incidents)
+- Community forum
+
+### AI Model Management
+- Model selection per request
+- Fallback model configuration (if primary fails)
+- Custom fine-tuned models (upload data, train, deploy)
+- Model performance metrics (latency, success rate, cost)
+- Model versioning
+
+### Content Moderation
+- Input content filtering (prompt injection, toxic content)
+- Output content filtering (NSFW, harmful content)
+- Configurable moderation settings per API key
+- Moderation log and review queue
+
+### Real-time Features
+- Streaming response via SSE
+- Batch job processing with progress WebSocket
+- Real-time usage counter
+
+### Admin Dashboard
+- User management
+- Usage analytics (global)
+- Model performance monitoring
+- Cost management
+- Invoice management
+- API key management (global)
+- Rate limit configuration
+- Feature flags
+- System health dashboard
+
+### Database Design
+
+Tables:
+- users, api_keys, user_plans
+- usage_logs (user_id, service, model, tokens, cost, timestamp)
+- generated_content (user_id, service, input, output, timestamp)
+- models, model_pricing
+- subscription_plans, subscriptions, invoices
+- prompts_templates, prompt_categories
+- webhooks, webhook_logs
+
+### Queue & Async Processing
+- Bull queue for heavy AI jobs (image generation, video processing)
+- Priority queue (faster for paid plans)
+- Job status tracking: queued → processing → completed → failed
+- Webhook callback on job completion
+- Job retry with exponential backoff
+- Dead letter queue for failed jobs
+
+### Performance
+- AI response caching (for identical inputs)
+- Model warm-up (keep models loaded)
+- Request batching where possible
+- Edge caching for static assets
+- CDN for generated images
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, API keys, user management, basic text generation
+Phase 2: AI Services (Week 3-5) - Text, image, speech, translation, analysis APIs
+Phase 3: Usage & Billing (Week 5-7) - Usage tracking, Stripe integration, plan management
+Phase 4: Developer Hub (Week 7-8) - Documentation, playground, SDKs, webhooks
+Phase 5: Queue System (Week 8-9) - Async job processing, priority queues, webhooks
+Phase 6: Admin & Monitoring (Week 9-10) - Admin dashboard, model management, monitoring
+Phase 7: Polish (Week 10-11) - Content moderation, caching, performance, testing
+
+## Final Instructions
+Build a complete AI SaaS platform with multiple AI services (text, image, speech, translation), usage-based billing (Stripe), API key management, developer hub, and admin dashboard. Support streaming responses via SSE. Implement priority queue system for async jobs. Include content moderation for input/output. Support multiple AI providers (OpenAI, Anthropic, Hugging Face, Replicate). Provide SDKs in Python, Node.js, and Go. Design a clean, modern dashboard with dark mode. Track all usage for billing and analytics.

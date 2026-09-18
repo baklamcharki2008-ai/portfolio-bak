@@ -1,0 +1,177 @@
+# MASTER PROMPT: Login & Authentication System
+
+## Project Overview
+Build a comprehensive authentication system with login, registration, MFA, SSO, passwordless, session management, user profiles, and admin controls. Reusable across all projects.
+
+## Tech Stack
+- **Frontend:** React/Next.js + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL + Redis (sessions + rate limiting)
+- **Auth Libraries:** NextAuth.js v5 / Auth.js, Lucia Auth, Passport.js
+- **MFA:** otplib (TOTP), QRCode, speakeasy
+- **Email:** Resend
+- **SMS:** Twilio
+- **WebAuthn:** @simplewebauthn/server + browser
+- **SSO:** SAML (samlify), OIDC (openid-client)
+- **Infrastructure:** Docker, GitHub Actions
+
+## Detailed Requirements
+
+### Registration & Signup
+- Email/password registration with email verification
+- Magic link sent to email (passwordless)
+- OAuth: Google, GitHub, Apple, Microsoft, Twitter/X, LinkedIn, Discord, Facebook, GitLab, Bitbucket, Slack, Spotify, Amazon
+- Phone number registration with SMS OTP (Twilio)
+- Social account connection (link multiple providers)
+- Progressive profiling (ask for more info later)
+- Pre-filled fields from OAuth provider
+- Email domain allowlist/blocklist
+- Invite-only registration (invite codes)
+- Referral tracking on signup
+
+### Login
+- Email/password login with remember me
+- "Login with Google/Apple/GitHub" buttons
+- Magic link (send link via email, click to login)
+- Phone number + SMS OTP
+- QR code login (scan with mobile app)
+- Device fingerprint login (trusted device)
+- Biometric login (WebAuthn: fingerprint, Face ID, Windows Hello)
+- Passkeys (platform authenticator)
+- Emergency codes (one-time use, pre-generated)
+- Login with SSO (SAML/OIDC for enterprise)
+- Auto-detect user's preferred login method
+
+### Multi-Factor Authentication
+- TOTP setup: generate secret → display QR code → verify code → enable
+- Recovery codes: 10 single-use codes (download as PDF)
+- SMS backup: send code via Twilio
+- Email backup: send code via email
+- Hardware security key: WebAuthn (YubiKey, Google Titan)
+- Push notification: approve login from mobile app
+- Remember device for X days (skip MFA on trusted device)
+- MFA enforcement policy (optional, required, required for sensitive actions)
+- Backup method ordering
+- MFA recovery flow (lost device)
+
+### Password Management
+- Password strength indicator (zxcvbn)
+- Password policy configuration: min length, uppercase, lowercase, number, special, max age, history
+- Forgot password: email reset link
+- Reset password with token (time-limited, single-use)
+- Change password (require current password)
+- Passwordless (no password at all, only magic links + OAuth)
+- Breached password check (HaveIBeenPwned API integration)
+
+### Session Management
+- Active sessions list: device name, browser, OS, IP, location, last active, created date
+- Revoke individual session
+- Revoke all other sessions
+- Session timeout configuration (idle timeout, absolute timeout)
+- Concurrent session limit (configurable per plan)
+- Session fingerprint (prevent session hijacking)
+- Session data encryption
+
+### User Profile
+- Avatar upload (crop, resize, S3 storage)
+- Display name, username (unique), bio
+- Email management: primary email, verified/unverified, add/remove secondary emails
+- Phone number management
+- Connected social accounts (link/unlink)
+- Account deletion (with confirmation, data export, grace period)
+- Account recovery email
+- Preferred language, timezone, date format
+- Communication preferences (email types, frequency)
+
+### Security Dashboard
+- Security score (based on MFA, password strength, active sessions)
+- Login history: date, IP, device, location, success/failure
+- Recent security events (password change, email change, MFA setup, new device)
+- Active API keys (from other applications)
+- Authorized apps (OAuth tokens)
+- App passwords (for legacy apps)
+- Security recommendations (enable MFA, strong password, remove old sessions)
+
+### Admin Management
+- User list with search, filter, sort
+- User detail: profile, sessions, login history, roles, permissions
+- User actions: suspend, ban, verify email, reset MFA, impersonate
+- Role and permission management (RBAC)
+- IP allowlist/blocklist
+- Email domain policies
+- Password policy configuration
+- MFA enforcement rules
+- Session policy configuration
+- Audit log (all admin actions)
+- Bulk user operations (invite, suspend, export)
+
+### API & SDK
+- Authentication API: login, register, verify, reset password, refresh token
+- OAuth 2.0 server (authorization code, PKCE, client credentials, device code)
+- OpenID Connect discovery endpoint
+- API key authentication (for machine-to-machine)
+- SDKs: JavaScript/TypeScript, Python, Go, Rust, Java, Swift, Kotlin
+- Webhook events: user.created, user.deleted, user.verified, session.revoked
+
+### UI Components
+- Login page (with all provider buttons)
+- Registration page
+- MFA setup page (TOTP, SMS, backup codes)
+- MFA challenge page
+- Forgot password flow
+- Reset password page
+- Profile page (edit name, email, avatar, password)
+- Sessions page (manage active sessions)
+- Security page (login history, MFA, connected accounts)
+- Admin user management page
+- Email verification page
+- Magic link confirmation page
+
+### Security Best Practices
+- Argon2id for password hashing (or bcrypt)
+- Rate limiting: login attempts, registration, forgot password, OTP verify
+- Lockout policy: X failed attempts → temporary lock for Y minutes
+- Email verification required for sensitive actions
+- HTTPS only (HSTS, CSP headers)
+- CSRF protection (double-submit cookie pattern)
+- XSS prevention (input sanitization, output encoding)
+- Secure HTTP-only cookies
+- JWT with short expiry (15min) + refresh tokens (7 days)
+- Refresh token rotation (old tokens invalidated)
+- IP geolocation for fraud detection
+- Suspicious login detection (new device, unusual location, VPN detection)
+- Credential stuffing protection (rate limiting + CAPTCHA)
+- Account enumeration prevention (generic error messages)
+- Brute force protection
+
+### Database Schema
+
+Tables:
+- users (id, email, password_hash, name, username, avatar_url, phone, email_verified, phone_verified, locale, timezone, deleted_at, created_at, updated_at)
+- user_providers (user_id, provider, provider_id, created_at)
+- user_emails (user_id, email, verified, primary, created_at)
+- sessions (id, user_id, token_hash, ip, user_agent, device, location, expires_at, created_at)
+- verification_tokens (id, user_id, type, token_hash, expires_at, used_at, created_at)
+- totp_secrets (user_id, secret, verified, created_at)
+- backup_codes (user_id, code_hash, used, used_at)
+- webauthn_credentials (user_id, credential_id, public_key, counter, device_name, transports, created_at)
+- login_history (user_id, ip, user_agent, success, failure_reason, location, created_at)
+- security_events (user_id, event_type, ip, user_agent, metadata, created_at)
+- roles, permissions, user_roles
+- api_keys (id, user_id, name, key_hash, scopes, ip_whitelist, expires_at, last_used, created_at)
+- oauth_clients, oauth_authorization_codes, oauth_access_tokens, oauth_refresh_tokens
+- password_reset_tokens, email_verify_tokens, magic_link_tokens
+
+### Implementation Plan
+
+Phase 1: Basic Auth (Week 1) - Email/password registration, login, sessions, JWT
+Phase 2: OAuth (Week 2) - 5+ OAuth providers, account linking, profile data
+Phase 3: MFA (Week 3-4) - TOTP, SMS, backup codes, WebAuthn, remember device
+Phase 4: Passwordless (Week 4-5) - Magic link, phone OTP, passkeys
+Phase 5: Security (Week 5-6) - Rate limiting, lockout, fraud detection, audit log
+Phase 6: Admin (Week 6-7) - User management, roles/permissions, security dashboard
+Phase 7: OAuth Server (Week 7-8) - OAuth 2.0, OpenID Connect, API keys, SDKs
+Phase 8: Polish (Week 8-9) - UI components, email templates, testing, documentation
+
+## Final Instructions
+Build a comprehensive authentication system that can be used as a reusable module across all projects. Include email/password, OAuth (10+ providers), MFA (TOTP, SMS, WebAuthn, backup codes), passwordless (magic link, passkeys), session management, user profiles, admin user management, OAuth 2.0 server, API keys, and security features (rate limiting, brute force protection, fraud detection). The UI must be beautiful, accessible, and white-label ready. Include pre-built pages for login, register, MFA setup, profile, and security dashboard. All components must be fully typed and documented. Use Argon2id for password hashing and implement all security best practices.

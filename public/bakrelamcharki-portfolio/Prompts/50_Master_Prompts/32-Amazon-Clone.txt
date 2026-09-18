@@ -1,0 +1,149 @@
+# MASTER PROMPT: Amazon Clone
+
+## Project Overview
+Build a complete Amazon-style e-commerce marketplace with millions of products, seller marketplace, reviews, recommendations, warehouse/fulfillment, and Prime membership.
+
+## Tech Stack
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Zustand
+- **Backend:** Node.js + Express, GraphQL + REST, microservices
+- **Database:** PostgreSQL, DynamoDB (orders), Elasticsearch (search), Redis
+- **Auth:** JWT + OAuth (Google, Amazon, Apple)
+- **Payments:** Stripe, Amazon Pay equivalent
+- **Fulfillment:** Custom warehouse management system
+- **Infrastructure:** Docker, Kubernetes, AWS
+- **Monitoring:** CloudWatch, Sentry, Grafana
+
+## Detailed Requirements
+
+### Mega Menu Navigation
+- Department categories: Electronics, Clothing, Books, Home, Toys, Sports, etc.
+- Sub-categories with images
+- Mega menu with columns and featured items
+- Search bar with autocomplete (Elasticsearch)
+- Voice search
+- Cart with item count
+- User account dropdown (orders, account, lists, sign out)
+- Prime logo highlighting
+
+### Product Listing
+- Grid and list view toggle
+- Product card: image, title, rating, price, Prime badge, delivery date
+- Filter sidebar: category, price range, brand, color, size, customer rating, discount
+- Sort by: featured, price low-high, price high-low, avg rating, newest, best sellers
+- Pagination (traditional) + infinite scroll
+- Sponsored products
+- Deal/Badge overlays (Best Seller, Amazon's Choice, Limited Time Deal)
+
+### Product Detail Page
+- Image gallery: zoom, 360° view, video
+- Variant selector: color, size, quantity
+- Price with MRP cross-out and savings percentage
+- Coupon/clip coupon
+- EMI option display
+- Delivery date calculator (based on pincode)
+- Available offers section (bank offers, combo offers)
+- Product description, details, specifications
+- Product description: rich text, images, video
+- Customer reviews with photo/video, helpful votes, verified purchase badge
+- Customer Q&A
+- Related products: "Customers who bought this also bought"
+- Sponsored products
+- Buy Now + Add to Cart buttons
+- Wishlist / Add to List
+
+### Shopping Cart
+- Item list with quantity, price, savings
+- Save for later
+- Cart subtotal with delivery estimate
+- Proceed to Buy button
+- Coupon/gift card entry
+- Multi-item quantity adjustments
+
+### Checkout
+- Address selection (with add new)
+- Delivery option selection
+- Payment method: credit/debit card, net banking, UPI, EMI, gift card
+- Amazon Pay balance
+- Order review with itemized list
+- Place order with one-click (Amazon Pay)
+- Order confirmation screen
+
+### Seller Marketplace
+- Seller registration and verification
+- Seller dashboard: products, orders, inventory, payments, performance
+- Product listing management: add, edit, bulk upload
+- Inventory management
+- Order fulfillment: self-ship vs FBA (Fulfilled by Amazon)
+- FBA: send inventory to warehouses
+- Seller performance metrics: ODR (Order Defect Rate), late shipment, customer response
+- Seller payments: settlement reports, payment schedule
+
+### Fulfillment & Warehouse
+- Multiple warehouse locations
+- Inventory inbound (send to warehouse)
+- Pick, pack, ship workflow
+- Order routing to nearest warehouse
+- Delivery tracking with carrier integration
+- Returns processing (customer return → inspection → restock)
+
+### Customer Service
+- Order help: cancel, return, replacement, track
+- Return center: initiate return, print label, drop-off
+- A-to-Z Guarantee claims
+- Customer service chat/phone
+- FAQ
+
+### Prime Membership
+- Prime logo display on eligible products
+- Free delivery badge
+- Prime Video integration (links)
+- Prime Music integration
+- Prime Reading
+- Membership management
+
+### Account & Settings
+- Your Orders: all orders, buy again, returns
+- Your Account: login & security, payment, addresses, communication
+- Your Lists: wishlist, shopping lists
+- Your Recommendations
+- Recently viewed
+- Subscribe & Save
+- Gift card balance
+- Amazon Pay
+
+### Recommendations
+- Collaborative filtering: "Customers who bought..."
+- Frequently bought together
+- Compare with similar items
+- Sponsored products related to this item
+- Personalized recommendations on homepage
+
+### Admin Dashboard
+- Product moderation (new listings, reports)
+- Seller approval and management
+- Customer service queue
+- Fraud detection and prevention
+- Fulfillment monitoring
+- Sales and performance analytics
+- Promotions management
+
+### Performance & SEO
+- SSR for product pages and category pages
+- ISR for catalog updates
+- Fast page load with COW (content optimization)
+- Structured data for all products
+- Sitemap generation
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-3) - Auth, navigation, product catalog, categories
+Phase 2: Product Pages (Week 3-5) - PDP, image gallery, variants, reviews
+Phase 3: Cart & Checkout (Week 5-7) - Cart, checkout, payment, addresses
+Phase 4: Orders (Week 7-8) - Order management, tracking, returns
+Phase 5: Seller Marketplace (Week 8-10) - Seller registration, dashboard, inventory
+Phase 6: Fulfillment (Week 10-12) - Warehouse management, FBA, shipping
+Phase 7: Prime & Recommendations (Week 12-13) - Prime membership, recommendation engine
+Phase 8: Admin & Polish (Week 13-15) - Admin dashboard, fraud detection, performance
+
+## Final Instructions
+Build a complete Amazon clone with product catalog, shopping cart, checkout, seller marketplace with FBA fulfillment, Prime membership, and AI recommendations. The marketplace must support millions of products with filtering, sorting, and faceted search. Seller dashboard must include inventory, order, and performance management. Fulfillment system must route orders to nearest warehouse for delivery. Implement collaborative filtering recommendations. Design the UI to match Amazon's information-dense, conversion-optimized layout.

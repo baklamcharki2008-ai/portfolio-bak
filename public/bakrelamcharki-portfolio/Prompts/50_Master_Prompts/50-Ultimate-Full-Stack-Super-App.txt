@@ -1,0 +1,165 @@
+# MASTER PROMPT: Ultimate Full Stack Super App
+
+## Project Overview
+Build the ultimate full-stack super app combining social media, messaging, e-commerce, AI tools, project management, cloud storage, and analytics into one unified platform with a shared authentication system and integrated user experience.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Three.js, Zustand, React Query, TanStack Table, Recharts, TipTap, Monaco Editor, xterm.js, TradingView Lightweight Charts, react-dropzone, react-date-range, FullCalendar, Mapbox GL JS
+- **Backend:** Node.js + Express + TypeScript, tRPC, GraphQL (Apollo), Go (high-performance services), Python FastAPI (AI/ML)
+- **Database:** PostgreSQL (primary), Redis (cache + real-time + queues), ScyllaDB (high-scale event data), TimescaleDB (time-series), Elasticsearch (search), Neo4j (social graph)
+- **Real-time:** WebSocket (Socket.io), WebRTC (calls), SSE (streaming)
+- **Auth:** NextAuth.js v5 (30+ OAuth providers, MFA, WebAuthn, passkeys, SAML)
+- **Storage:** S3-compatible + CloudFront CDN + Glacier (archive)
+- **AI:** OpenAI, Anthropic, Stable Diffusion, Whisper, ElevenLabs, MusicGen
+- **Payments:** Stripe + PayPal
+- **Maps:** Mapbox GL JS
+- **Search:** Elasticsearch
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions, Vercel + Railway + AWS
+
+## Detailed Requirements
+
+### Unified Authentication (Shared Across All Modules)
+- 30+ OAuth providers (Google, Apple, Microsoft, Facebook, GitHub, Twitter, LinkedIn, Discord, Slack, Spotify, Amazon, etc.)
+- Email/password with Argon2id hashing
+- Phone + SMS OTP (Twilio)
+- Magic link (passwordless)
+- Passkeys and WebAuthn (biometric)
+- MFA: TOTP, SMS, backup codes, hardware key
+- SSO: SAML, OIDC (enterprise)
+- Session management across all modules
+- Single sign-on across all apps within the super app
+- Unified user profile across all features
+
+### Module 1: Social Media
+- Posts with rich text, images, video, polls, reactions (7 types)
+- Feed with algorithmic + chronological
+- Stories (24h with highlights)
+- Friend system, following, groups, events
+- User profiles with customization
+
+### Module 2: Real-Time Messaging
+- One-on-one and group messaging
+- Voice/video calls (WebRTC)
+- Screen sharing
+- Message reactions, reply, forward, delete
+- End-to-end encryption (Signal Protocol)
+- Message search
+- File sharing in chat
+- Chat bots
+
+### Module 3: E-Commerce
+- Product catalog with categories, variants, reviews
+- Shopping cart and checkout
+- Stripe + PayPal payments
+- Order management
+- Seller marketplace
+- Inventory management
+
+### Module 4: AI Tools Hub
+- AI Chat (multi-model: GPT-4, Claude, Gemini, Llama)
+- AI Image Generator (SDXL, DALL-E, FLUX)
+- AI Video Generator (text-to-video, editing)
+- AI Speech (TTS, STT, voice cloning)
+- AI Code Assistant
+- AI Document Analysis
+- AI Image Analysis
+
+### Module 5: Project Management
+- Kanban boards with drag-and-drop
+- Gantt/timeline view
+- Task management with assignments
+- Sprint planning
+- Time tracking
+- Team collaboration
+
+### Module 6: Cloud Storage
+- File upload/download (up to 100GB)
+- File preview (150+ file types)
+- Share links with permissions and expiry
+- Version history
+- Smart sync
+- Team folders
+
+### Module 7: Productivity Suite
+- Documents (rich text editor)
+- Spreadsheets (table/cell editor)
+- Presentations (slide editor)
+- Notes (with markdown and blocks)
+- Calendar with scheduling
+
+### Module 8: Developer Tools
+- Code editor (Monaco)
+- Terminal emulator
+- Git client
+- API playground
+- Database viewer
+
+### Module 9: Analytics Dashboard
+- User analytics
+- Business metrics
+- Custom reports
+- Real-time monitoring
+- Export (CSV, PDF, PNG)
+
+### Module 10: Admin Control Center
+- Unified admin panel for all modules
+- User management across modules
+- Content moderation
+- Billing and subscription management
+- System health monitoring
+- Audit logs
+- Feature flags
+
+### Unified Features
+- Global search across all modules (Elasticsearch)
+- Unified notification system (in-app + email + push)
+- Shared file picker (use files from storage in any module)
+- @mention users across any module
+- Unified settings page (profile, security, preferences)
+- Dark/light mode across all modules
+- Keyboard shortcuts (CMD+K global command palette)
+- Drag-and-drop between modules (e.g., drag email attachment to storage)
+
+### Database Design (Scalable Multi-Tenant)
+- Shared core tables: users, organizations, sessions, audit_logs, notifications, search_index
+- Module-specific schemas (social, messaging, commerce, etc.)
+
+### Performance & Scalability
+- Microservices architecture with shared API gateway
+- Horizontal scaling per module
+- CDN for static assets and media
+- Redis caching at multiple layers
+- Database read replicas
+- Message queue for async processing
+- Edge computing for real-time features
+
+### Security
+- Unified RBAC across all modules
+- API gateway with rate limiting
+- DDoS protection
+- Encryption at rest and in transit
+- Regular security audits
+- Bug bounty program
+
+### Deployment
+- Kubernetes cluster with namespace per module
+- CI/CD with GitHub Actions
+- Blue-green deployments
+- Feature flags for gradual rollout
+- Canary releases
+
+### Implementation Plan
+
+Phase 1: Platform Foundation (Week 1-3) - Auth system, unified layout, navigation, user profiles, shared services
+Phase 2: Social Media + Messaging (Week 3-6) - Posts, feed, stories, friends, real-time messaging, calls
+Phase 3: Cloud Storage (Week 5-8) - File upload, preview, sharing, versioning, sync
+Phase 4: Project Management (Week 7-10) - Boards, tasks, Gantt, collaboration
+Phase 5: E-Commerce (Week 9-12) - Products, cart, checkout, marketplace
+Phase 6: AI Tools Hub (Week 11-14) - AI chat, image gen, video gen, speech, code assistant
+Phase 7: Productivity Suite (Week 13-16) - Documents, spreadsheets, notes, calendar
+Phase 8: Developer Tools + Analytics (Week 15-18) - Code editor, terminal, API playground, analytics dashboard
+Phase 9: Admin + Integration (Week 17-20) - Admin control center, cross-module features, global search, unified notifications
+Phase 10: Polish + Scale (Week 19-22) - Performance optimization, security audit, load testing, documentation, deployment
+
+## Final Instructions
+Build the ultimate full-stack super app combining 10+ integrated modules: Social Media, Messaging, E-Commerce, AI Tools Hub, Project Management, Cloud Storage, Productivity Suite, Developer Tools, Analytics Dashboard, and Admin Control Center. All modules share a unified authentication system, global search, notification system, file picker, and user settings. The platform must use a microservices architecture with shared API gateway. AI tools must support multiple providers (OpenAI, Anthropic, Stable Diffusion, ElevenLabs). Include a command palette (CMD+K) for quick access to any feature across modules. Design a cohesive, modular UI with consistent design language across all apps. Dark/light mode throughout. Scale to support millions of users with horizontal scaling capabilities.

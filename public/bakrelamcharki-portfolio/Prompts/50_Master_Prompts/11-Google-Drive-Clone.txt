@@ -1,0 +1,271 @@
+# MASTER PROMPT: Google Drive Clone
+
+## Project Overview
+Build a complete cloud storage platform with file/folder management, real-time sync, sharing, permissions, version history, file preview, search, and team collaboration features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query, React Dropzone
+- **Backend:** Node.js + Express + TypeScript, tRPC
+- **Database:** PostgreSQL (metadata), ScyllaDB (file versions), Redis (cache + sessions)
+- **Storage:** AWS S3 + CloudFront CDN (or Cloudflare R2 for S3-compatible)
+- **File Processing:** FFmpeg (video thumbnails), LibreOffice (document preview), Sharp (image processing)
+- **Search:** Elasticsearch
+- **Real-time:** WebSocket (Socket.io) for sync events
+- **Auth:** JWT + OAuth (Google Workspace, Microsoft 365)
+- **Infrastructure:** Docker, Kubernetes, Terraform, GitHub Actions
+- **Monitoring:** Prometheus, Grafana, Sentry, DataDog
+
+## Detailed Requirements
+
+### Authentication & Access
+- Email/password + OAuth (Google, Microsoft, Apple)
+- Google Workspace / Microsoft 365 SSO
+- Two-factor authentication
+- Session management across devices
+- API key generation for developers
+- IP allowlisting for enterprise
+- Security dashboard (login history, connected apps)
+
+### File & Folder Management
+- Drag-and-drop upload with progress
+- Folder creation, rename, move, copy, delete
+- File/folder context menu (right-click)
+- Keyboard shortcuts (Ctrl+C/V/X, Del, F2, Ctrl+Z)
+- Multiple file selection (Ctrl+click, Shift+click)
+- File/folder star/favorite
+- File/folder color coding (for organization)
+- Recent files view
+- Trash with 30-day retention
+- Empty trash permanently
+- File preview for 150+ file types
+- Shortcuts (symlinks to files in multiple locations)
+- Version history per file (up to 100 versions)
+- File description/comments
+- Multiple view modes: grid, list, compact
+
+### File Preview & Viewer
+- Document viewer: PDF, DOCX, XLSX, PPTX, TXT
+- Image viewer: JPG, PNG, GIF, SVG, WEBP, HEIC, RAW
+- Video player: MP4, MOV, AVI, MKV, WebM
+- Audio player: MP3, WAV, FLAC, AAC
+- Code viewer: syntax highlighting for 100+ languages
+- 3D model viewer: STL, OBJ, GLTF
+- CAD viewer: DWG, DXF (limited support)
+- PSD/AI viewer (layer flattening)
+- Markdown renderer
+- Jupyter notebook viewer
+- Google Docs-like editor for documents (collaborative)
+- Side-by-side version comparison
+
+### Sharing & Permissions
+- Share via email link with permissions
+- Shareable link generation (anyone, company, restricted)
+- Permission levels: Viewer, Commenter, Editor, Owner
+- Expiration dates for shared links
+- Password protection for shared links
+- Download disable option for shared files
+- Shared with me view
+- Ownership transfer
+- Team drive / shared drive folders
+- Organizational sharing policies
+
+### Collaboration
+- Real-time co-editing on documents (Operational Transform / CRDT)
+- Comments and suggestions on files
+- @mention collaborators in comments
+- Task assignment in documents
+- Approval workflows (request/approve file)
+- Change notifications for collaborators
+- Activity feed per file/folder
+- File locking (prevent concurrent edits)
+
+### Sync & Backup
+- Desktop sync client architecture (separate from main app)
+- Selective sync (choose which folders sync)
+- Sync status indicators (synced, syncing, conflict)
+- Conflict resolution (keep both / overwrite)
+- Block-level sync (only upload changed parts)
+- LAN sync (peer-to-peer for local network)
+- Bandwidth throttling settings
+- Backup scheduling for folders
+- External backup integration (Time Machine support)
+
+### Search
+- Full-text search across files and documents
+- OCR search in images and scanned PDFs
+- Search filters: file type, owner, date range, size, location
+- Search operators (from:, type:, before:, after:)
+- Saved searches
+- Recent searches
+- Search suggestions with autocomplete
+- AI-powered natural language search
+- Search within documents (full content index)
+
+### Trash & Versioning
+- Trash with 30-day auto-delete
+- Version history (every save creates version)
+- View and restore previous versions
+- Named versions (v1.0, v1.1, draft-final)
+- Compare versions side-by-side
+- Storage accounting per version
+- Deleted file recovery from admin
+
+### Admin Dashboard
+- User management (add, suspend, storage quota)
+- Storage analytics (total used, by user, by file type)
+- File type distribution reports
+- Activity audit log (all events)
+- Sharing audit (external shares, downloads)
+- Security settings (password policy, 2FA enforcement)
+- Branding customization (logo, colors, domain)
+- Integration management (API apps, webhooks)
+- Data retention policies
+- Compliance exports (GDPR, eDiscovery)
+
+### Database Design
+
+Core tables:
+- users, user_settings, user_devices, user_quotas
+- files (id, name, mime_type, size, parent_id, owner_id, created_at, updated_at, trashed_at)
+- file_versions (id, file_id, version_number, size, storage_key, checksum, created_by)
+- folders (id, name, parent_id, owner_id, color, created_at, updated_at)
+- permissions (file_id, user_id/group_id, role, expiration)
+- share_links (id, file_id, token, permissions, password, expiration, created_by)
+- comments (file_id, user_id, text, created_at, resolved_at)
+- activities (file_id, user_id, action, details, timestamp)
+- stars (user_id, file_id)
+- recent_files (user_id, file_id, last_opened)
+- trash (file_id, deleted_by, deleted_at, original_path, expires_at)
+- audit_logs (actor, action, resource, details, ip_address, timestamp)
+
+### Storage Architecture
+Multi-tier:
+- Hot tier: S3 Standard / R2 (frequently accessed)
+- Warm tier: S3 Infrequent Access (30+ days no access)
+- Cold tier: S3 Glacier (90+ days no access)
+- Archive tier: S3 Glacier Deep Archive (1+ year)
+- Automatic lifecycle policies for tier transitions
+- Data deduplication (block-level, cross-user)
+- Compression for text files
+- Encryption: AES-256-GCM at rest + TLS in transit
+- Server-side encryption with customer keys (SSE-C)
+- Client-side encryption option
+
+### Security
+- Encryption at rest (AES-256) and in transit (TLS 1.3)
+- File scanning for malware (ClamAV + custom ML)
+- Access logging and monitoring
+- Suspicious activity detection (mass download, unusual IP)
+- Rate limiting (per user, per IP, per API endpoint)
+- File upload validation (magic bytes, extension mismatch)
+- DLP (Data Loss Prevention) rules
+- Watermarking for previewed documents
+- IRM (Information Rights Management)
+- Compliance certifications simulation
+
+### Performance
+- CDN caching for file downloads and previews
+- Chunked upload with resumable support (tus protocol)
+- Parallel chunk upload (multi-part S3)
+- File preview caching (generated thumbnails)
+- Load balancing across storage backends
+- Database read replicas
+- Connection pooling
+- Lazy loading for folder contents
+
+### Testing
+- Unit: Vitest for services
+- Integration: Supertest for API
+- E2E: Playwright for web
+- Storage: S3 mock (MinIO) for testing
+- Performance: k6 for upload/download
+- Sync: Conflict resolution test scenarios
+
+### Docker & CI/CD
+- Docker Compose with MinIO (S3 mock), PostgreSQL, Redis
+- K8s deployment manifests
+- GitHub Actions for CI/CD
+- Blue-green deployment
+- Storage migration automation
+- Database backup and restore testing
+
+### Monitoring
+- Storage usage and growth trends
+- Upload/download throughput
+- File operation latency
+- API error rates
+- Sync client connection status
+- Data transfer costs (by tier)
+- Real-time user activity dashboard
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+1. Project setup with monorepo
+2. Database schema design
+3. Authentication system
+4. File/folder CRUD operations
+5. Drag-and-drop upload to S3
+
+### Phase 2: File Management (Week 3-4)
+6. Folder tree and navigation
+7. Multiple view modes (grid, list)
+8. File operations (move, copy, rename, delete)
+9. Trash and version history
+10. Star/favorite system
+
+### Phase 3: Preview & Sharing (Week 5-6)
+11. File preview for documents, images, video
+12. Share link generation
+13. Permission management
+14. Search with Elasticsearch
+15. Comments and activity feed
+
+### Phase 4: Collaboration (Week 7-8)
+16. Real-time co-editing (CRDT)
+17. Collaborative comments
+18. Approval workflows
+19. File locking
+20. Notification system
+
+### Phase 5: Admin & Enterprise (Week 9-10)
+21. Admin dashboard
+22. Storage analytics
+23. Audit logging
+24. Security features (DLP, watermarking)
+25. API and webhook system
+
+### Phase 6: Polish (Week 11-12)
+26. Performance optimization
+27. Sync client architecture
+28. Compliance and security audit
+29. Deployment infrastructure
+30. Testing and documentation
+
+## Folder Structure
+```
+apps/
+├── web/                     # Next.js frontend
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   │   ├── file-browser/
+│   │   │   ├── preview/
+│   │   │   ├── share/
+│   │   │   └── admin/
+│   │   └── lib/
+├── server/                  # Node.js API
+│   ├── src/
+│   │   ├── services/
+│   │   │   ├── storage/
+│   │   │   ├── sync/
+│   │   │   └── search/
+│   │   └── workers/
+│   └── prisma/
+├── sync-engine/             # File sync service
+├── worker/                  # Background jobs
+└── shared/                  # Common types
+```
+
+## Final Instructions
+Build a complete Google Drive clone with all core features. The storage system must support files up to 5TB with resumable uploads. Implement folder-tree navigation with seamless performance even with 100K+ files. File preview must support 150+ file types with fast rendering. Sharing system must support granular permissions and link expiration. Real-time collaboration must use CRDT for conflict-free editing. Search must index both file names and content (including OCR in images). Admin dashboard must provide full visibility into storage and user activity. Design a clean, Google-like UI with responsive layout.

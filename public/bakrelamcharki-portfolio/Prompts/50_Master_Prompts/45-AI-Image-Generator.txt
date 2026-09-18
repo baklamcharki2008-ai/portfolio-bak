@@ -1,0 +1,107 @@
+# MASTER PROMPT: AI Image Generator
+
+## Project Overview
+Build a production-ready AI image generation platform with text-to-image, image-to-image, editing, inpainting, outpainting, upscaling, gallery, and community features.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Zustand, React Query
+- **Backend:** Next.js API routes + Python FastAPI (inference), Celery (queue)
+- **Models:** Stable Diffusion XL, DALL-E 3 (API), Midjourney (via API), FLUX, Imagen
+- **Database:** PostgreSQL (metadata), Redis (queue + cache), S3 (generated images)
+- **Auth:** JWT + OAuth (Google, GitHub, Discord)
+- **Billing:** Stripe (pay-per-image or subscription)
+- **Infrastructure:** Docker, Kubernetes (GPU nodes), GitHub Actions
+
+## Detailed Requirements
+
+### Image Generation
+- Text-to-Image: prompt, negative prompt, aspect ratio, style preset, seed, CFG scale
+- Image-to-Image: input image + prompt → generate variation
+- Inpainting: upload image, mask area, describe what to generate in masked area
+- Outpainting: extend image beyond original borders with AI
+- Image upscaling: 2x, 4x, 8x with AI enhancement
+- Style transfer: apply art style to image
+- Face restoration (GFPGAN/CodeFormer)
+- Background removal
+- AI image expansion (generate content outside frame)
+- Batch generation (multiple variations at once)
+- Model selection: SDXL, DALL-E 3, FLUX, Midjourney
+- Image size: square (1024x1024), portrait (1024x1536), landscape (1536x1024), custom
+
+### Image Editor
+- Edit generated image: crop, resize, rotate, flip
+- AI edit: select area → describe change → AI modifies
+- Add text overlay (AI removes background)
+- Image filters (30+ aesthetic filters)
+- Color adjustment: brightness, contrast, saturation, hue
+- Drawing tools: brush, eraser, shapes
+- Layers support for compositing
+
+### Gallery & Management
+- User gallery: grid/list view of generated images
+- Image detail: prompt, seed, model, settings, date, resolution
+- Like/favorite images
+- Collections/folders
+- Image sharing: download (PNG, JPG, WebP), copy link, share to social
+- Image metadata (EXIF-like: prompt, settings, model, seed)
+- Batch download
+- Delete/archive
+- Search gallery by prompt, model, date
+
+### Prompt Engineering Tools
+- Prompt builder: add subject, style, lighting, color, composition, mood, artist reference
+- Prompt templates (pre-written prompts by category: portrait, landscape, fantasy, sci-fi, anime, realistic, cinematic, oil painting, watercolor, 3D render, pixel art, minimalist, cyberpunk, steampunk)
+- Prompt history
+- Prompt sharing (community prompt library)
+- Negative prompt suggestions
+- Prompt enhancement (AI improves your prompt)
+- Prompt weighting ((keyword:1.2), [keyword:0.8])
+
+### Community Features
+- Community feed: latest public generations
+- Trending prompts
+- Top creators leaderboard
+- Follow creators
+- Like and comment on community images
+- Report inappropriate content
+- Moderation queue
+
+### Credits & Billing
+- Credit system: 1 generation = X credits (varies by model, size)
+- Free tier: 10 credits/day
+- Subscription plans: Starter (100/mo), Pro (500/mo), Unlimited ($XX/mo)
+- Pay-as-you-go: buy credit packs
+- Stripe integration
+- Credit usage history
+- Plan management portal
+
+### Admin Dashboard
+- User management (credits, suspend, ban)
+- Content moderation (review flagged images)
+- Model management (enable/disable models)
+- Usage analytics (generations, credits, revenue)
+- Server GPU utilization monitoring
+- Generation queue management
+- Cost tracking per model
+
+### Performance
+- Async generation queue (Celery/Bull)
+- WebSocket progress updates (step X of Y, estimated time)
+- Image caching (CDN)
+- Tile-based processing for large images
+- GPU queue prioritization (paid users get priority)
+- Pre-warm models (keep popular models loaded)
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, credits, image upload/store, basic generation
+Phase 2: Generation Engine (Week 2-4) - Text-to-image, image-to-image, SDXL integration, advanced settings
+Phase 3: Editing (Week 4-5) - Inpainting, outpainting, upscaling, image editor
+Phase 4: Gallery (Week 5-6) - User gallery, collections, search, download
+Phase 5: Prompt Tools (Week 6-7) - Prompt builder, templates, sharing, history
+Phase 6: Community (Week 7-8) - Community feed, likes, comments, following, moderation
+Phase 7: Billing (Week 8-9) - Credits system, Stripe subscriptions, usage tracking
+Phase 8: Admin & Polish (Week 9-10) - Admin dashboard, GPU monitoring, performance, testing
+
+## Final Instructions
+Build a production-ready AI image generation platform with multiple models (SDXL, DALL-E 3, FLUX), text-to-image, image-to-image, inpainting/outpainting, upscaling, editing tools, user gallery, prompt engineering tools, community feed, and credit-based billing (Stripe). The generation must show real-time progress via WebSocket. Support advanced generation parameters (seed, CFG, samplers, loras). Include community features with likes, comments, and following. Implement moderation for community content. Credit system with free tier and paid subscriptions. Design a beautiful, dark-themed creative UI that inspires artistic expression.

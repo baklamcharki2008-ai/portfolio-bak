@@ -1,0 +1,132 @@
+# MASTER PROMPT: Hacker Dashboard
+
+## Project Overview
+Build a professional cybersecurity command center dashboard with real-time threat monitoring, network scanning, vulnerability management, exploit tools, CTF challenges, and security analytics.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, Recharts (graphs), Framer Motion, Zustand, WebSocket
+- **Backend:** Node.js + Express + TypeScript, WebSocket, Python (simulated exploits)
+- **Database:** PostgreSQL (user data, challenges, scores), Redis (real-time)
+- **Auth:** JWT with MFA
+- **Infrastructure:** Docker, GitHub Actions
+
+## Detailed Requirements
+
+### Dashboard Overview
+- Real-time threat map (world map with attack origins)
+- Live network traffic visualizer
+- System health metrics (CPU, memory, disk, network)
+- Active sessions count
+- Recent alerts feed
+- Quick stats cards: threats blocked, vulnerabilities found, systems online, exploits attempted
+- Weather widget (hacker-themed)
+- Time with timezone selector
+- Matrix-style animated background (optional)
+
+### Threat Monitoring
+- Real-time intrusion detection feed
+- Attack source geolocation map
+- Threat severity timeline (graph)
+- Top attack vectors (pie chart)
+- Attack volume over time (area chart)
+- Recent alerts with severity (critical, high, medium, low)
+- Alert detail modal (source IP, target, method, timestamp, payload)
+- Alert filtering by severity, type, time range, source
+- Auto-refresh (5s, 10s, 30s, 60s)
+- Custom alert rules configuration
+
+### Network Scanner
+- Subnet/range input (CIDR notation)
+- Scan types: TCP SYN, TCP Connect, UDP, ICMP (Ping), ARP
+- Port ranges: common, full, custom
+- Service detection (banner grabbing)
+- OS fingerprinting (TTL analysis, TCP stack)
+- Scan results table: IP, hostname, open ports, service, version, OS
+- Scan export (CSV, JSON, PDF)
+- Scheduled scans
+- Scan history
+
+### Vulnerability Management
+- CVSS 3.1 scoring system
+- Vulnerability database (CVE lookup)
+- Vulnerability import (Nessus, OpenVAS, Qualys)
+- Asset inventory with vulnerabilities
+- Vulnerability severity breakdown (chart)
+- Remediation tracking (open, in progress, verified, closed)
+- SLA tracking (due dates, overdue alerts)
+- False positive management
+- Vulnerability timeline
+- CVE search with filters
+
+### Exploit Toolkit
+- Searchsploit integration (CVE → exploit mapping)
+- Metasploit console simulation
+- One-liner payloads generator (reverse shell, bind shell, web shell)
+- Payload encoding (base64, hex, URL, XOR)
+- Listener manager (start/stop netcat listeners)
+- Exploit categories: remote, local, web, wireless
+- CVE→POC database
+- Custom exploit upload
+
+### CTF Challenges
+- Challenge categories: Web, Crypto, Reverse, Pwn, Forensics, OSINT, Stego, Misc
+- Challenge difficulty: Easy, Medium, Hard, Insane
+- Challenge list with completion status, points, solves
+- Challenge detail: description, hints (with point penalty), flag submission
+- Scoreboard (global, daily, by category)
+- User profile: points rank, challenges solved, badges
+- Badge system: First Blood, Speed Demon, Challenge Series, Streak
+- Timer for timed challenges
+- Writeup submission
+
+### Command & Control
+- Active agents dashboard (connected backdoors)
+- Agent details: IP, OS, user, privilege, last seen
+- Remote command execution
+- File upload/download to agent
+- Screenshot capture (simulated)
+- Keylogger toggle (simulated)
+- Persistence mechanisms (registry, cron, launchd, systemd)
+- Agent beacon configuration
+
+### Log Analysis
+- Log viewer with tail -f simulation
+- Log sources: Syslog, Apache, Nginx, Windows Event, Firewall, IDS
+- Log search with grep integration
+- Log pattern detection (automated)
+- Timeline visualization (event correlation)
+- Log export (EVTX, JSON, CSV)
+- Custom parse rules
+- Alert from log patterns
+
+### Network Map
+- Interactive network topology map
+- Node types: router, firewall, server, workstation, printer, IoT
+- Connection lines with protocol labels
+- Node details: IP, MAC, OS, open ports, services
+- Network segmentation visualization
+- Zoom/Pan on map
+- Device discovery via ARP sweep
+
+### Reports
+- Executive summary report (PDF export)
+- Vulnerability report (by severity, asset)
+- Penetration test report template (with screenshots, findings, recommendations)
+- Compliance reports (PCI DSS, HIPAA, ISO 27001, SOC 2)
+- Custom report builder (drag-drop sections)
+- Scheduled report generation
+- Report branding customization
+
+### Implementation Plan
+
+Phase 1: Dashboard Core (Week 1-2) - Layout, stats cards, threat map, real-time feed
+Phase 2: Network Scanner (Week 3) - Scan engine, service detection, results management
+Phase 3: Vulnerability Mgmt (Week 4-5) - CVSS, CVE database, asset inventory, remediation
+Phase 4: Exploit Toolkit (Week 5-6) - Payloads, listener, searchsploit, Metasploit sim
+Phase 5: CTF Platform (Week 7-8) - Challenges, scoring, badges, leaderboard, writeups
+Phase 6: C2 & Logs (Week 8-9) - Agent management, remote execution, log viewer
+Phase 7: Reports (Week 9-10) - Report generator, export, compliance templates
+Phase 8: Polish (Week 10) - Network map, animations, performance, security
+
+## Final Instructions
+Build a professional hacker dashboard with real-time threat monitoring, network scanning, vulnerability management, exploit tools, and CTF platform. The threat map must show global attack origins with animation. Network scanner must simulate SYN/UDP scans with service detection. Vulnerability management must use CVSS 3.1 scoring with CVE integration. Exploit toolkit must include payload generator, Metasploit console simulation, and listener manager. CTF platform must have 50+ challenges across 8 categories with scoring, leaderboard, and badges. Design a dark cyberpunk/Matrix-inspired UI with neon green accents on black.

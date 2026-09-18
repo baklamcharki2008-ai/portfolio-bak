@@ -1,0 +1,125 @@
+# MASTER PROMPT: Stock Market Dashboard
+
+## Project Overview
+Build a professional stock market dashboard with real-time prices, portfolio tracking, watchlists, financial data, charts, news, and trading integration.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, TradingView Lightweight Charts, Recharts, Framer Motion, Zustand, React Query, WebSocket
+- **Backend:** Node.js + Express + TypeScript, Python (data analysis)
+- **Database:** PostgreSQL + InfluxDB (time-series), Redis (real-time)
+- **Auth:** JWT + OAuth (Google, Apple, brokerage API)
+- **Data:** Polygon.io / Alpha Vantage / Yahoo Finance (simulated), WebSocket streaming
+- **Infrastructure:** Docker, Vercel, Railway
+
+## Detailed Requirements
+
+### Market Overview
+- Major indices: S&P 500, NASDAQ, Dow Jones, Russell 2000, VIX
+- Market status (open/closed, pre-market, after-hours)
+- Market movers: top gainers, top losers, most active
+- Sector performance (ETF-based: XLK, XLF, XLV, XLE, XLI, XLY, XLP, XLU, XLB, XLRE)
+- Daily market summary: advancers/decliners, new highs/lows
+- Economic calendar (Fed meetings, earnings season, economic data releases)
+- Fear & Greed Index
+- Market breadth (advance-decline line)
+
+### Stock Detail
+- Company info: name, symbol, exchange, sector, industry, description, employees, headquarters
+- Price quote: current price, change, change%, open, high, low, close, volume, avg volume, market cap, PE ratio, EPS, dividend yield, beta, 52-week high/low
+- Price chart (TradingView Lightweight): 1m, 5m, 15m, 30m, 1h, 4h, 1d, 1w, 1M, 3M, 1Y, 5Y, MAX
+- Chart indicators: SMA, EMA, MACD, RSI, Bollinger Bands, Volume, VWAP, Stochastic, Ichimoku Cloud
+- Chart drawing tools: trendline, horizontal line, Fibonacci retracement, annotation
+- Financials: income statement, balance sheet, cash flow (quarterly + annual)
+- Key ratios: P/E, P/S, P/B, EV/EBITDA, debt/equity, ROE, ROA, current ratio, quick ratio
+- Earnings history and estimates
+- Dividend history and yield
+- Insider transactions
+- Institutional ownership
+- SEC filings (simulated)
+- News feed (filtered by stock)
+- Analyst ratings (buy, hold, sell targets)
+- Peer comparison table
+- Options chain (calls/puts by expiration)
+- Short interest data
+
+### Portfolio
+- Portfolio creation (name, description)
+- Add holdings: symbol, shares, average cost
+- Portfolio summary: total value, day change, total gain/loss, return %
+- Holdings table: symbol, shares, avg cost, current price, market value, day gain/loss, total gain/loss, allocation %
+- Performance chart (cumulative return vs S&P 500 benchmark)
+- Portfolio allocation pie chart (by stock, sector)
+- Dividend income tracker
+- Capital gains distribution
+- Rebalancing suggestions
+- Portfolio export (CSV, PDF)
+- Multiple portfolios
+
+### Watchlists
+- Create/rename/delete watchlists
+- Add/remove symbols
+- Watchlist columns: symbol, price, change, change%, volume, market cap, P/E ratio
+- Sort by any column
+- Price alerts per symbol (above, below, change %)
+- Watchlist import/export
+
+### Screener
+- Stock screener with filters: price, change%, volume, market cap, sector, industry, P/E, EPS growth, dividend yield, beta, 52-week range, RSI, SMA, earnings date, analyst rating
+- Save screener presets
+- Screener results table with sort and export
+
+### News & Research
+- Financial news feed from major sources (Bloomberg, Reuters, CNBC, Yahoo Finance, Seeking Alpha)
+- News categories: market, economy, tech, earnings, M&A, IPO, crypto, commodities
+- News sentiment (positive, negative, neutral)
+- Save favorite articles
+- Earnings calendar (company name, date, estimated EPS, actual EPS, surprise %)
+- IPO calendar
+- Dividend calendar
+- Economic calendar
+
+### Alerts & Notifications
+- Price alerts: above price, below price, change %, cross SMA, new 52-week high/low
+- Technical indicator alerts: RSI overbought/oversold, MACD crossover, Bollinger Band touch
+- News alerts (by keyword, symbol)
+- Earnings alerts
+- Dividend alerts
+- Push, email, in-app notifications
+- Alert history
+
+### Trading (Simulated)
+- Paper trading account (virtual money)
+- Buy/sell stocks (market, limit, stop)
+- Order types: market, limit, stop, stop-limit, trailing stop
+- Order book display (level 2 data - simulated)
+- Position tracking (open, closed)
+- Order history
+- Trade confirmation and settlement
+- Day trading rules (pattern day trader simulation)
+
+### Social Features
+- Follow other traders (public profiles)
+- Share portfolio (public/private)
+- Community watchlists
+- Leaderboard (best performing portfolios)
+- Comments/discussion on stocks
+
+### Admin Dashboard
+- User management
+- Market data connection monitoring
+- System health dashboard
+- Feature flags
+
+### Implementation Plan
+
+Phase 1: Foundation (Week 1-2) - Auth, market overview, indices, market movers
+Phase 2: Stock Detail (Week 3-4) - Quote, charts, indicators, financials, key ratios
+Phase 3: Portfolio (Week 4-6) - Portfolio CRUD, holdings, performance, allocation
+Phase 4: Watchlists & Screener (Week 6-7) - Watchlist management, stock screener
+Phase 5: News & Research (Week 7-8) - News feed, calendars, sentiment analysis
+Phase 6: Alerts (Week 8-9) - Price alerts, technical alerts, notification system
+Phase 7: Paper Trading (Week 9-10) - Virtual trading, order types, positions
+Phase 8: Polish (Week 10-12) - Social features, admin, performance, dark mode
+
+## Final Instructions
+Build a professional stock market dashboard with real-time prices, interactive charts with 20+ technical indicators, portfolio tracking, watchlists, stock screener, financial news, earnings calendar, paper trading, and price alerts. The charts must use TradingView Lightweight Charts with full drawing tools and technical indicators. Portfolio must show performance vs S&P 500 benchmark. Screener must support 20+ filter criteria. Implement paper trading with market/limit/stop orders. Include real-time WebSocket price streaming. The UI must have a professional Bloomberg-terminal-inspired dark design for active traders.

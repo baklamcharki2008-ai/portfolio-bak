@@ -1,0 +1,120 @@
+# MASTER PROMPT: Admin Panel
+
+## Project Overview
+Build a comprehensive admin panel with user management, content management, analytics, settings, role-based access, audit log, and dashboard. Reusable across all SaaS projects.
+
+## Tech Stack
+- **Frontend:** Next.js 14 + TypeScript, Tailwind CSS, Shadcn UI, TanStack Table, Recharts, Zustand, React Query, Framer Motion
+- **Backend:** Next.js API routes + tRPC
+- **Database:** PostgreSQL + Redis
+- **Auth:** NextAuth.js + JWT + RBAC
+- **File Upload:** UploadThing / S3
+- **Infrastructure:** Docker, Vercel, Railway
+
+## Detailed Requirements
+
+### Dashboard
+- KPI cards: total users, new users (today), active users, revenue, orders, growth rate, churn rate
+- Line/area charts: user growth, revenue trend, active users over time
+- Bar charts: signups by source, top countries, top pages, feature usage
+- Pie charts: user distribution by plan, role, device type
+- Real-time visit counter
+- Recent activities feed
+- Quick actions: add user, create post, send notification, export data
+- System status: uptime, response time, error rate
+- Progress charts towards monthly goals
+
+### User Management
+- Users table: avatar, name, email, role, status (active/suspended/banned), plan, last active, signup date, actions
+- Search: name, email, ID, IP
+- Filters: role, status, plan, signup date, last active, country
+- User detail: profile, activity log, sessions, orders/projects, login history
+- User actions: edit, suspend, ban, verify email, force logout, reset password, login as user (impersonate)
+- Bulk actions: suspend selected, export selected, send email, assign role
+- User import from CSV
+- User export to CSV/JSON
+- User groups/segments
+
+### Content Management
+- Content types: blog posts, pages, categories, tags, media
+- Rich text editor (TipTap/Editor.js): formatting, images, embeds, code blocks, tables, link, media
+- Media library: upload, grid/list view, search, filter by type, bulk delete
+- Content CRUD with draft/publish schedule
+- Content categories/taxonomy
+- Content revisions/history
+- SEO metadata editor (title, description, OG image, slug)
+- Content search
+
+### Role & Permission Management
+- Role list: name, description, user count, permissions
+- Permission matrix: resources (users, posts, settings, reports) x actions (create, read, update, delete)
+- Pre-defined roles: Super Admin, Admin, Editor, Moderator, Support, Viewer
+- Custom role creation
+- Per-user permission overrides
+- Permission inheritance
+
+### Settings
+- General: site name, logo, favicon, description, timezone, language, date format
+- Security: password policy, MFA enforcement, session timeout, login lockout, IP whitelist
+- Email: SMTP settings, email templates editor, test email
+- Auth: registration toggle, allowed OAuth providers, email verification, domain whitelist
+- API: rate limit, CORS origins, webhook URLs
+- Integrations: Slack, Discord, GitHub, Sentry, Google Analytics, Stripe, Mailchimp
+- Localization: supported languages, default language, RTL
+- Billing: currency, tax rate, payment methods, plans/pricing
+- Notification: email templates, push notification settings
+- Feature flags: toggle features on/off
+
+### Audit Log
+- Event list: timestamp, actor, action, resource, details, IP, user agent, location
+- Event categories: auth, user, content, settings, payment, security, system
+- Event severity: info, warning, error, critical
+- Search and filter: date range, actor, action, resource, severity
+- Event detail: full payload diff (before/after for updates)
+- Audit log export
+- Retention policy (auto-delete after X days)
+
+### Analytics
+- User analytics: signups, churn, retention cohorts, DAU/MAU, geographic distribution, device/browser, acquisition channels
+- Content analytics: page views, unique visitors, time on page, bounce rate, popular content
+- Business analytics: revenue, MRR, ARR, active subscriptions, churn rate, LTV, CAC
+- Custom date range comparison
+- Chart export (PNG, CSV)
+- Dashboard sharing (public link with auth)
+
+### Notifications
+- Send notification: in-app, email, push, SMS
+- Notification templates
+- Bulk notification (to all users, user segments)
+- Scheduled notifications
+- Notification history
+
+### System Health
+- Server metrics: CPU, memory, disk, load average
+- Database: connections, query performance, slow queries, replication lag
+- Cache: Redis memory, hit rate, keys count
+- Queue: job count, failed jobs, processing time
+- API: requests/min, response time (p50, p95, p99), error rate, endpoint breakdown
+- Background jobs: status, retry, failure reason
+- Log viewer (tail logs from dashboard)
+- Status page simulation
+
+### Mobile Responsiveness
+- Responsive sidebar (collapsed on mobile)
+- Touch-friendly tables
+- Swipe gestures on mobile
+- Bottom navigation on mobile
+
+### Implementation Plan
+
+Phase 1: Layout & Dashboard (Week 1) - Layout, sidebar, dashboard widgets
+Phase 2: User Management (Week 2-3) - Users table, detail, actions, bulk operations
+Phase 3: Content Management (Week 3-4) - CMS, rich text editor, media library
+Phase 4: Roles & Permissions (Week 4-5) - RBAC, permission matrix, role CRUD
+Phase 5: Settings (Week 5-6) - Settings sections, feature flags, integrations
+Phase 6: Audit Log (Week 6-7) - Event capture, viewer, export, retention
+Phase 7: Analytics (Week 7-8) - Charts, metrics, cohorts, exports
+Phase 8: Polish (Week 8-9) - Notifications, system health, responsive, testing
+
+## Final Instructions
+Build a comprehensive, reusable admin panel with user management, content management, RBAC, settings, audit log, analytics, and system health monitoring. The panel must be beautifully designed with Shadcn UI, fully responsive, and support dark/light mode. Include a permission matrix for granular access control. The audit log must capture all actions with before/after diffs. Analytics must include user, content, and business metrics with chart export. Design a professional, data-dense interface suitable for managing any SaaS product.
